@@ -4,7 +4,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import profile from "../../static/profile.jpg"
+import HeaderAside from "../components/header-aside"
 
 function ContentWithAside({ main, aside }) {
   return (
@@ -16,6 +16,7 @@ function ContentWithAside({ main, aside }) {
           height: "100%",
           // bg: "rgba(0,0,0,0.5)",
           right: "fullContentWidth",
+          color: "lightText",
         }}
       >
         {aside}
@@ -41,12 +42,7 @@ function Header() {
           </Styled.p>
         </>
       }
-      aside={
-        <div sx={{ height: "80%", borderRadius: "50%", float: "right" }}>
-          <img src={profile} sx={{ height: "80%", borderRadius: "50%" }} />
-          {/* <p>twitter, patreon, medium, github, producthunt, stackoverflow</p> */}
-        </div>
-      }
+      aside={<HeaderAside />}
     />
   )
 }

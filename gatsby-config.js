@@ -49,8 +49,15 @@ module.exports = {
   plugins: [
     "gatsby-plugin-theme-ui",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `assets`,
+        path: `${__dirname}/static/`,
+      },
+    },
   ],
 
   siteMetadata: {

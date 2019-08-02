@@ -21,7 +21,7 @@ function Layout({ children }) {
       <div sx={{ bg: "background", color: "text", width: ["100%", "50%"] }}>
         <main
           sx={{
-            pt: "topMargin",
+            pt: [5, "topMargin"],
             pl: [0, "innerMargin"],
             width: ["content", "content"],
             maxWidth: ["80%", "none"],

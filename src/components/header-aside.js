@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { jsx, Styled } from "theme-ui"
+import { jsx } from "theme-ui"
 import { Twitter, Medium, GitHub, Patreon } from "./social-icons"
-import profile from "../../static/profile.jpg"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
@@ -22,7 +21,7 @@ function HeaderAside() {
     }
   `)
   return (
-    <div sx={{ height: "100%", float: "right" }}>
+    <div sx={{ mb: [4, 0] }}>
       <Img
         fixed={data.file.childImageSharp.fixed}
         style={{
@@ -32,10 +31,7 @@ function HeaderAside() {
         }}
         alt="Rodrigo Pombo"
       />
-      {/* <img
-        src={profile}
-      /> */}
-      <div sx={{ pt: 2 }}>
+      <div sx={{ pt: 2, mx: ["auto", 0], textAlign: "center" }}>
         <Twitter />
         <GitHub />
         <Medium />

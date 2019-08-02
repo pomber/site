@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled } from "theme-ui"
 import React from "react"
-import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import HeaderAside from "../components/header-aside"
@@ -11,14 +10,21 @@ function ContentWithAside({ main, aside }) {
     <div sx={{ position: "relative" }}>
       <aside
         sx={{
-          position: "absolute",
+          position: ["static", "absolute"],
           width: "100%",
-          height: "100%",
-          right: "fullContentWidth",
-          color: "lightText",
+          height: ["auto", "100%"],
+          right: ["auto", "fullContentWidth"],
+          color: ["text", "lightText"],
         }}
       >
-        {aside}
+        <div
+          sx={{
+            float: ["none", "right"],
+            display: ["block", "inline-block"],
+          }}
+        >
+          {aside}
+        </div>
       </aside>
       <div>{main}</div>
     </div>
@@ -33,7 +39,9 @@ function Header() {
           <Styled.h1>I'm Rodrigo Pombo</Styled.h1>
           <Styled.p>
             Also known as pombo, pomber, pombus, pombex, pomberman, or just{" "}
-            <Styled.code>/pomb[a-z]+/</Styled.code>
+            <Styled.inlineCode sx={{ whiteSpace: "pre" }}>
+              /pomb[a-z]+/
+            </Styled.inlineCode>
           </Styled.p>
           <Styled.p>
             I write code, write about writing code, sometimes talk about it,

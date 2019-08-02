@@ -3,12 +3,12 @@ import { jsx } from "theme-ui"
 
 function Icon({ url, title, children }) {
   return (
-    <a href={url} sx={{ color: "inherit", px: 2, pt: 1 }}>
+    <a href={url} sx={{ color: "inherit", px: 2 }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        height="24"
-        width="24"
+        height="28"
+        width="28"
         fill="currentColor"
       >
         <title>{title}</title>

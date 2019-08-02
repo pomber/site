@@ -14,17 +14,18 @@ function Layout({ children }) {
         sx={{
           bg: "darkBackground",
           color: "lightText",
-          width: "50%",
+          width: [0, "50%"],
           minHeight: "100vh",
         }}
       />
-      <div sx={{ bg: "background", color: "text", width: "50%" }}>
+      <div sx={{ bg: "background", color: "text", width: ["100%", "50%"] }}>
         <main
           sx={{
-            width: "50%",
             pt: "topMargin",
-            pl: "innerMargin",
-            width: "content",
+            pl: [0, "innerMargin"],
+            width: ["content", "content"],
+            maxWidth: ["80%", "none"],
+            mx: ["auto", 0],
           }}
         >
           {children}

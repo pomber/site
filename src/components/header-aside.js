@@ -10,7 +10,7 @@ function HeaderAside() {
     query HeaderImage {
       file(relativePath: { eq: "profile.jpg" }) {
         childImageSharp {
-          fixed(width: 160) {
+          fixed(width: 150) {
             base64
             width
             height
@@ -28,14 +28,14 @@ function HeaderAside() {
         style={{
           borderRadius: "50%",
           display: "block",
-          margin: "7px auto",
+          margin: "5px auto",
         }}
         alt="Rodrigo Pombo"
       />
       {/* <img
         src={profile}
       /> */}
-      <div sx={{ pt: 3 }}>
+      <div sx={{ pt: 2 }}>
         <Twitter />
         <GitHub />
         <Medium />

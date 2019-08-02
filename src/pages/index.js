@@ -14,7 +14,6 @@ function ContentWithAside({ main, aside }) {
           position: "absolute",
           width: "100%",
           height: "100%",
-          // bg: "rgba(0,0,0,0.5)",
           right: "fullContentWidth",
           color: "lightText",
         }}
@@ -62,19 +61,9 @@ function Content() {
 export default ({ data }) => (
   <Layout>
     <SEO />
-    <Header data={data} />
-    <Styled.thematicBreak />
+    <Header />
+    {/* <Styled.thematicBreak />
     <Navigation />
-    <Content />
+    <Content /> */}
   </Layout>
 )
-
-export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`

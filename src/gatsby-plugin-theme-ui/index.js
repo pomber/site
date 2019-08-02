@@ -30,6 +30,8 @@ const theme = deepmerge(typographyTheme, {
   },
 })
 
-// console.log({ theme })
+theme.breakpoints = ["1000px"]
+
+console.log({ theme })
 
 export default theme

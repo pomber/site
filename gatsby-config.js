@@ -41,7 +41,7 @@ const content = [
 ]
 
 const description = `
-Rodrigo Pombo. Also known as pomber, pombus, pombex, pomberman... basically /pomb[a-z]+/.
+Rodrigo Pombo. Also known as pombo, pomber, pombus, pombex, pomberman, or any /pomb[a-z]+/ match.
 I write code, write about writing code, sometimes talk about it, usually tweet about it.
 `.trim()
 

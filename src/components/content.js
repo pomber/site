@@ -46,7 +46,7 @@ function Item({ title, date, url, type, description }) {
                 textTransform: "uppercase",
                 pb: 1,
                 pr: 1,
-                pt: 4,
+                pt: 2,
                 m: 0,
                 fontSize: 1,
                 borderRight: "1px solid",

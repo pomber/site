@@ -7,7 +7,7 @@ import ContentWithAside from "./content-with-aside"
 function Header() {
   return (
     <ContentWithAside
-      stx={{ pb: 5 }}
+      stx={{ pb: [3, 5] }}
       main={
         <>
           <Styled.h1>I'm Rodrigo Pombo</Styled.h1>

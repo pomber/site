@@ -31,7 +31,14 @@ function HeaderAside() {
         }}
         alt="Rodrigo Pombo"
       />
-      <div sx={{ pt: 2, mx: ["auto", 0], textAlign: "center" }}>
+      <div
+        sx={{
+          pt: 2,
+          mx: ["auto", 0],
+          textAlign: "center",
+          "& > :not(:last-child)": { pr: 3 },
+        }}
+      >
         <Twitter />
         <GitHub />
         <Medium />

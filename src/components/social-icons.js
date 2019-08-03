@@ -3,7 +3,7 @@ import { jsx } from "theme-ui"
 
 function Icon({ url, title, children }) {
   return (
-    <a href={url} sx={{ color: "inherit", px: 2 }}>
+    <a href={url} sx={{ color: "inherit" }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

@@ -7,7 +7,7 @@ function Layout({ children }) {
     <Styled.root sx={{ display: "flex", overflowX: "hidden", width: "100vw" }}>
       <Global
         styles={{
-          body: { margin: 0 },
+          body: { margin: 0, overflowX: "hidden" },
         }}
       />
       <aside
@@ -21,7 +21,7 @@ function Layout({ children }) {
       <div sx={{ bg: "background", color: "text", width: ["100%", "50%"] }}>
         <main
           sx={{
-            pt: [5, "topMargin"],
+            py: [5, "topMargin"],
             pl: [0, "innerMargin"],
             width: ["content", "content"],
             maxWidth: ["80%", "none"],

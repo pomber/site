@@ -10,10 +10,11 @@ const content = 420
 
 const theme = deepmerge(typographyTheme, {
   colors: {
-    background: "#fafafa",
+    background: "#FAF9F5",
     text: "rgb(51,51,51)",
     darkBackground: "#202226",
-    lightText: "#fafafa",
+    lightText: "#DFDDD9",
+    muted: "rgba(175, 173, 169, 0.5)",
   },
   space: {
     ...typographyTheme.space,

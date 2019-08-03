@@ -37,10 +37,10 @@ export default [
   },
   {
     type: "project",
-    title: "Hitchcock",
+    title: "Write Code Online",
     date: "2019/02/28",
-    description: "A debugging tool for React Suspense",
-    url: "https://github.com/pomber/hitchcock",
+    description: "A minimalist online code editor.",
+    url: "https://writecode.pomb.us/",
   },
   {
     type: "blog post",
@@ -61,6 +61,13 @@ export default [
     date: "2018/10/24",
     url:
       "https://blog.usejournal.com/classes-where-were-going-we-don-t-need-classes-react-16-6-e643ffc8c38d",
+  },
+  {
+    type: "project",
+    title: "Hitchcock",
+    date: "2018/10/20",
+    description: "A debugging tool for React Suspense",
+    url: "https://github.com/pomber/hitchcock",
   },
   {
     type: "talk",

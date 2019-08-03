@@ -6,16 +6,16 @@ export default [
     url: "https://waves.pomb.us/",
   },
   {
-    type: "project",
-    title: "Code Surfer",
-    date: "2019/05/06",
-    url: "https://github.com/pomber/code-surfer",
-  },
-  {
     type: "talk",
     title: "Build your own React - jsday 2019",
     date: "2019/05/09",
     url: "https://youtu.be/8Kc2REHdwnQ",
+  },
+  {
+    type: "project",
+    title: "Code Surfer",
+    date: "2019/05/06",
+    url: "https://github.com/pomber/code-surfer",
   },
   {
     type: "blog post",
@@ -86,6 +86,13 @@ export default [
     title: "JSX can do that?",
     date: "2018/05/06",
     url: "https://engineering.hexacta.com/jsx-can-do-that-1b2666c23a32",
+  },
+  {
+    type: "project",
+    title: "Escher Bot",
+    description: "Bot trying to tweet a self-linked tweet.",
+    date: "2018/05/01",
+    url: "https://twitter.com/mauritscorneIis",
   },
   {
     type: "blog post",

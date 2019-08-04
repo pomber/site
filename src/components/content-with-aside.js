@@ -17,6 +17,7 @@ function ContentWithAside({ main, aside, stx = {} }) {
           sx={{
             float: ["none", "right"],
             display: ["block", "inline-block"],
+            textAlign: ["left", "right"],
           }}
         >
           {aside}

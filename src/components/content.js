@@ -21,45 +21,46 @@ function Item({ title, date, url, type, description }) {
     day: "numeric",
   })
   return (
-    <a
+    <div
       sx={{
-        textDecoration: "none",
-        color: "inherit",
+        my: [4, 5],
       }}
-      href={url}
     >
       <ContentWithAside
-        stx={{
-          py: 4,
-          borderBottom: "1px solid #ddd",
-        }}
         main={
-          <React.Fragment>
-            <Styled.h3 sx={{ my: 2 }}>{title}</Styled.h3>
-            {/* {description && <p>{description}</p>} */}
+          <a
+            href={url}
+            sx={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <Styled.h3 sx={{ my: [1, 0] }}>{title}</Styled.h3>
+            {description && (
+              <p sx={{ fontSize: "16px", opacity: 0.8, m: 0, pt: [0, 1] }}>
+                {description}
+              </p>
+            )}
+          </a>
+        }
+        aside={
+          <div sx={{ verticalAlign: "bottom", opacity: [0.8, 1], pt: [0, 1] }}>
             <Styled.h4
               sx={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                color: "muted",
                 textTransform: "uppercase",
-                pb: 1,
-                pr: 1,
-                pt: 2,
                 m: 0,
-                fontSize: 1,
-                borderRight: "1px solid",
-                borderColor: "muted",
+                fontSize: [1, 2],
+                fontWeight: [700, 900],
+                display: ["inline", "block"],
               }}
             >
               {type}
             </Styled.h4>
-          </React.Fragment>
+            <small sx={{ ml: [2, 0] }}>{formattedDate}</small>
+          </div>
         }
-        aside={<small>{formattedDate}</small>}
       />
-    </a>
+    </div>
   )
 }
 

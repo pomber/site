@@ -24,6 +24,8 @@ function Item({ title, date, url, type, description }) {
     <div
       sx={{
         my: [4, 5],
+        "& aside": { transition: "color 0.25s" },
+        "&:hover aside": { color: ["none", "#fff"] },
       }}
     >
       <ContentWithAside

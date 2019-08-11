@@ -1,0 +1,406 @@
+---
+title: Build your own React
+date: 2019-07-31
+---
+
+import { CodeWave } from "gatsby-theme-waves"
+
+We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code, but without all the optimizations and non-essential features.
+
+This is my third time building a mini-react. The first one was before React v16. Second one was after React v16, when the Fiber architecture was introduced. And the third one, this one, is based on v16.8: the one with hooks.
+
+You can find the history with all the blog posts and code on the [Didact repo](https://github.com/pomber/didact). There's also a [talk covering the same content](https://youtu.be/8Kc2REHdwnQ).
+
+But this post is self-contained. Starting from scratch, these are all the things we'll add to our version of React one by one:
+
+- **Step I**: The `createElement` Function
+- **Step II**: The `render` Function
+- **Step III**: Concurrent Mode
+- **Step IV**: Fibers
+- **Step V**: Render and Commit Phases
+- **Step VI**: Reconciliation
+- **Step VII**: Function Components
+- **Step VIII**: Hooks
+
+We'll write around 300 lines of code. Don't expect to finish this post in 10 minutes. It will take some time, but it will worth it. You can stop between steps and come back later.
+
+<CodeWave>
+
+```jsx
+const element = <h1 title="foo">Hello</h1>
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
+```
+
+### Step Zero: Review
+
+But first let's review some basic concepts. You can skip this step if you already have a good idea of how React, JSX, elements and DOM mutations work.
+
+We'll use this React app, just three lines of code. The first one defines a React element. The next one gets a node from the DOM. The last one renders the React element into the container.
+
+**Let's remove all the React specific code and replace it with vanilla JavaScript**.
+
+```jsx 1
+const element = <h1 title="foo">Hello</h1>
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
+```
+
+On the first line we have the element, defined with JSX. It isn't even valid JavaScript, so to replace it with vanilla JS, first we need to replace it with valid JS.
+
+JSX is transformed to JS by build tools like Babel. But the transformation is usually simple: **replace the code inside the tags with a call to `createElement`, passing the tag name, the props and the children as parameters**.
+
+```jsx
+const element = React.createElement(
+  "h1",
+  { title: "foo" },
+  "Hello"
+)
+
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
+```
+
+`React.createElement` creates an object from its arguments. Besides some validations, that's all it does. So we can safely **replace the function call with its output**.
+
+```jsx
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
+}
+
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
+```
+
+And this is what an element is, an object with two properties: `type` and `props` (well, it can have more, but we only care about these two).
+
+The `type` is a string that specifies the type of the dom node we want to create, it's the `tagName` you pass to `document.createElement` when you want to create an HTML element. It can also be a function, but we'll leave that for Step VII.
+
+`props` is another object, it has all the keys and values from the JSX attributes. It also has a special property: `children`.
+
+`children` in this case is a string, but it's usually an array with more elements. That's why elements are also trees.
+
+```jsx 10
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
+}
+
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
+```
+
+The other piece of React code we need to replace is the call to `ReactDOM.render`.
+
+`render` is where React changes the dom, so let's do the updates ourselves.
+
+```jsx 1,2,4,7,11,12
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
+}
+
+const container = document.getElementById("root")
+
+const node = document.createElement(element.type)
+node["title"] = element.props.title
+
+const text = document.createTextNode("")
+text["nodeValue"] = element.props.children
+
+node.appendChild(text)
+container.appendChild(node)
+```
+
+First we create a node using the element `type`, in this case `h1`.
+
+Then we assign all the element `props` to that node. Here it's just the title.
+
+_To avoid confusions, I'll use "element" to refer to React elements and "node" for DOM elements._
+
+```js 1,5,7,14,15
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
+}
+
+const container = document.getElementById("root")
+
+const node = document.createElement(element.type)
+node["title"] = element.props.title
+
+const text = document.createTextNode("")
+text["nodeValue"] = element.props.children
+
+node.appendChild(text)
+container.appendChild(node)
+```
+
+Then we create the nodes for the children. We only have a string as a child so we create a text node.
+
+Using `textNode` instead of setting `innerText` will allow us to treat all elements in the same way later. Note also how we set the `nodeValue` like we did it with the `h1` title, it's almost as if the string had `props: {nodeValue: "hello"}`, right?
+
+```js 9,17,18
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
+}
+
+const container = document.getElementById("root")
+
+const node = document.createElement(element.type)
+node["title"] = element.props.title
+
+const text = document.createTextNode("")
+text["nodeValue"] = element.props.children
+
+node.appendChild(text)
+container.appendChild(node)
+```
+
+Finally, we append the `textNode` to the `h1` and the `h1` to the `container`.
+
+```js 1:18
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
+}
+
+const container = document.getElementById("root")
+
+const node = document.createElement(element.type)
+node["title"] = element.props.title
+
+const text = document.createTextNode("")
+text["nodeValue"] = element.props.children
+
+node.appendChild(text)
+container.appendChild(node)
+```
+
+And now we have the same app as before, but without using React.
+
+</CodeWave>
+
+We turned a simple app from 3 lines of code to 18. 18 lines of code that only work for this specific app.
+
+Let's start again with another app. This time we'll replace React code with our own version of React.
+
+<CodeWave>
+
+```jsx file=./00.jsx
+```
+
+### Step I: The `createElement` Function
+
+We'll start by writing our own `createElement`. Let's transform the JSX to JS so we can see the `createElement` calls.
+
+```jsx file=./01.jsx
+```
+
+As we saw in the previous step, an element is an object with `type` and `props`. The only thing that our function needs to do is create that object.
+
+```jsx file=./02.jsx
+```
+
+We use the _spread operator_ for the `props` and the _rest parameter syntax_ for the `children`, this way the `children` prop will allways be an array.
+
+<div>
+
+`createElement("div")` returns:
+
+```json
+{
+  "type": "div",
+  "props": { "children": [] }
+}
+```
+
+`createElement("div", null, a)` returns:
+
+```json
+{
+  "type": "div",
+  "props": { "children": [a] }
+}
+```
+
+`createElement("div", null, a, b)` returns:
+
+```json
+{
+  "type": "div",
+  "props": { "children": [a, b] }
+}
+```
+
+</div>
+
+```jsx file=./03.jsx
+```
+
+The `children` array could also contain primitive values like strings or numbers. So we'll wrap everything that isn't an object inside its own element and create a special type to tag them: `TEXT_ELEMENT`.
+
+_React doesn't wrap primitive values or create empty arrays when there aren't `children`, but we do it because it will simplify our code, and for our library we prefer simple code than performant code._
+
+```jsx file=./03.jsx  25,28,29,30
+```
+
+Ok, we have the createElement function but we are still using React here. In order to replace it let's give a name to our library. We need a name that sounds like React but describing it as educational or didactic.
+Preact is already taken so we'll name it Didact
+
+```jsx file=./04.jsx
+```
+
+But we still want to use JSX here. How do we tell babel to use Didact's create element instead of React's? A comment.
+
+```jsx file=./05.jsx
+```
+
+If we have a comment like this one in our file, when babel transpiles the JSX it will use the function that we want.
+
+```jsx file=./05.jsx 37
+```
+
+### Step I: The `render` Function
+
+Next, we need to write our version of the `ReactDOM.render` function.
+
+```jsx file=./06.jsx 25:27,29,31,32,42
+```
+
+For now, we only care about adding stuff to the DOM. We'll handle updating and deleting later.
+
+```jsx file=./07.jsx
+```
+
+We start by creating the dom node using the element type.
+we append it to the container.
+
+```jsx file=./08.jsx
+```
+
+And then we recursively do the same for each child
+
+```jsx file=./09.jsx
+```
+
+We also need to handle text elements, so if the element type is TEXT_ELEMENT we create a textnode instead of a regular node
+
+```jsx file=./10.jsx
+```
+
+```jsx file=./11.jsx
+```
+
+```jsx file=./12.jsx
+```
+
+```jsx file=./13.jsx
+```
+
+```jsx file=./14.jsx
+```
+
+```jsx file=./15.jsx
+```
+
+```jsx file=./16.jsx
+```
+
+```jsx file=./17.jsx
+```
+
+```jsx file=./18.jsx
+```
+
+```jsx file=./19.jsx
+```
+
+```jsx file=./20.jsx
+```
+
+```jsx file=./21.jsx
+```
+
+```jsx file=./22.jsx
+```
+
+```jsx file=./23.jsx
+```
+
+```jsx file=./24.jsx
+```
+
+```jsx file=./25.jsx
+```
+
+```jsx file=./26.jsx
+```
+
+```jsx file=./27.jsx
+```
+
+```jsx file=./28.jsx
+```
+
+```jsx file=./29.jsx
+```
+
+```jsx file=./30.jsx
+```
+
+```jsx file=./31.jsx
+```
+
+```jsx file=./32.jsx
+```
+
+```jsx file=./33.jsx
+```
+
+```jsx file=./34.jsx
+```
+
+```jsx file=./35.jsx
+```
+
+```jsx file=./36.jsx
+```
+
+```jsx file=./37.jsx
+```
+
+```jsx file=./38.jsx
+```
+
+```jsx file=./39.jsx
+```
+
+</CodeWave>
+
+Lorem ipsum dolor sit amet, fugit errem avolumus ex sit, magna fugit deserunt et qui. Sapientem mnesarchum ei vis, offendit appetere inimicus eu has. Te utamur voluptua per. Per dicant intellegebat in. Laboramus referrentur id his, electram philosophia sit an. Possim efficiendi no sea, eu admodum copiosae indoctum mea.
+
+Sit eligendi dignissim et, sit eius ancillae voluptatibus te. Ea summo nostrum omnesque sed. Deserunt iracundia definiebas ei est. An vitae reprimique ius, facer timeam cu nam.
+
+Id quot impetus prodesset eum, et usu iuvaret alienum. Ut amet quaerendum pro, impetus appetere disputando te per. Stet congue ancillae mei in, nam fuisset antiopam id. Ad denique blandit accommodare ius. Solum legere ea sea, per cu affert timeam, meis expetendis intellegebat ex pro.
+Delete me, and get writing!

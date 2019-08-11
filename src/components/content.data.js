@@ -1,5 +1,11 @@
 export default [
   {
+    type: "blog post",
+    title: "Build your own React",
+    date: "2019/08/01",
+    url: "/build-your-own-react",
+  },
+  {
     type: "project",
     title: "Gatsby Theme Waves",
     description: "Bring scrollytelling to your MDX",

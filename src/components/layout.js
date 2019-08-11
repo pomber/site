@@ -4,7 +4,13 @@ import { Global } from "@emotion/core"
 
 function Layout({ children }) {
   return (
-    <Styled.root sx={{ display: "flex", overflowX: "hidden", width: "100vw" }}>
+    <Styled.root
+      sx={{
+        display: "flex",
+        // overflowX: "hidden",
+        width: "100vw",
+      }}
+    >
       <Global
         styles={{
           body: { margin: 0, overflowX: "hidden" },

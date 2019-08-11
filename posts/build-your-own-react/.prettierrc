@@ -1,9 +1,7 @@
 {
-  "trailingComma": "es5",
-  "semi": false,
   "overrides": [
     {
-      "files": "*.mdx",
+      "files": "*.jsx",
       "options": {
         "printWidth": 50,
         "semi": false

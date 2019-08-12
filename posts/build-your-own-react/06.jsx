@@ -23,7 +23,7 @@ function createTextElement(text) {
 }
 
 function render(element, container) {
-  // TODO
+  // TODO create dom nodes
 }
 
 const Didact = {

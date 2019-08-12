@@ -1,13 +1,5 @@
 {
   "printWidth": 50,
   "semi": false,
-  "overrides": [
-    {
-      "files": "*.[jsx|mdx]",
-      "options": {
-        "printWidth": 50,
-        "semi": false
-      }
-    }
-  ]
+  "trailingComma": "es5"
 }

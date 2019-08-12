@@ -5,9 +5,9 @@ date: 2019-07-31
 
 import { CodeWave } from "gatsby-theme-waves"
 
-We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code, but without all the optimizations and non-essential features.
+We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code but without all the optimizations and non-essential features.
 
-This is my third time building a mini-react. The first one was before React v16. Second one was after React v16, when the Fiber architecture was introduced. And the third one, this one, is based on v16.8: the one with hooks.
+This is the third time I'm building a mini-react. The first one was before React v16. Second one was after React v16, when the Fiber architecture was introduced. And the third one, this one, is based on v16.8: the one with hooks.
 
 You can find the history with all the blog posts and code on the [Didact repo](https://github.com/pomber/didact). There's also a [talk covering the same content](https://youtu.be/8Kc2REHdwnQ).
 
@@ -68,8 +68,8 @@ const element = {
   type: "h1",
   props: {
     title: "foo",
-    children: "Hello"
-  }
+    children: "Hello",
+  },
 }
 
 const container = document.getElementById("root")
@@ -89,8 +89,8 @@ const element = {
   type: "h1",
   props: {
     title: "foo",
-    children: "Hello"
-  }
+    children: "Hello",
+  },
 }
 
 const container = document.getElementById("root")
@@ -106,8 +106,8 @@ const element = {
   type: "h1",
   props: {
     title: "foo",
-    children: "Hello"
-  }
+    children: "Hello",
+  },
 }
 
 const container = document.getElementById("root")
@@ -133,8 +133,8 @@ const element = {
   type: "h1",
   props: {
     title: "foo",
-    children: "Hello"
-  }
+    children: "Hello",
+  },
 }
 
 const container = document.getElementById("root")
@@ -158,8 +158,8 @@ const element = {
   type: "h1",
   props: {
     title: "foo",
-    children: "Hello"
-  }
+    children: "Hello",
+  },
 }
 
 const container = document.getElementById("root")
@@ -181,8 +181,8 @@ const element = {
   type: "h1",
   props: {
     title: "foo",
-    children: "Hello"
-  }
+    children: "Hello",
+  },
 }
 
 const container = document.getElementById("root")
@@ -226,7 +226,7 @@ We use the _spread operator_ for the `props` and the _rest parameter syntax_ for
 
 <div>
 
-`createElement("div")` returns:
+For example, `createElement("div")` returns:
 
 ```json
 {
@@ -244,7 +244,7 @@ We use the _spread operator_ for the `props` and the _rest parameter syntax_ for
 }
 ```
 
-`createElement("div", null, a, b)` returns:
+and `createElement("div", null, a, b)` returns:
 
 ```json
 {
@@ -258,20 +258,23 @@ We use the _spread operator_ for the `props` and the _rest parameter syntax_ for
 ```jsx file=./03.jsx
 ```
 
-The `children` array could also contain primitive values like strings or numbers. So we'll wrap everything that isn't an object inside its own element and create a special type to tag them: `TEXT_ELEMENT`.
+The `children` array could also contain primitive values like strings or numbers. So we'll wrap everything that isn't an object inside its own element and create a special type for them: `TEXT_ELEMENT`.
 
 _React doesn't wrap primitive values or create empty arrays when there aren't `children`, but we do it because it will simplify our code, and for our library we prefer simple code than performant code._
 
 ```jsx file=./03.jsx  25,28,29,30
 ```
 
-Ok, we have the createElement function but we are still using React here. In order to replace it let's give a name to our library. We need a name that sounds like React but describing it as educational or didactic.
-Preact is already taken so we'll name it Didact
+We have the `createElement` function but we are still using React here.
+
+In order to replace it let's give a name to our library. We need a name that sounds like React but also makes it clear that it has a _didactic_ purpose.
 
 ```jsx file=./04.jsx
 ```
 
-But we still want to use JSX here. How do we tell babel to use Didact's create element instead of React's? A comment.
+We'll call it Didact.
+
+But we still want to use JSX here. How do we tell babel to use Didact's `createElement` instead of React's? A comment.
 
 ```jsx file=./05.jsx
 ```
@@ -293,18 +296,17 @@ For now, we only care about adding stuff to the DOM. We'll handle updating and d
 ```jsx file=./07.jsx
 ```
 
-We start by creating the dom node using the element type.
-we append it to the container.
+We start by creating the dom node using the element type. And then append the new node to the container.
 
 ```jsx file=./08.jsx
 ```
 
-And then we recursively do the same for each child
+We recursively do the same for each child.
 
 ```jsx file=./09.jsx
 ```
 
-We also need to handle text elements, so if the element type is TEXT_ELEMENT we create a textnode instead of a regular node
+We also need to handle text elements, if the element type is `TEXT_ELEMENT` we create a textnode instead of a regular node.
 
 ```jsx file=./10.jsx
 ```

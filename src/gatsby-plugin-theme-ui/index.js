@@ -41,6 +41,9 @@ const theme = merge.all([
       monospace: `Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace`,
     },
     styles: {
+      root: {
+        fontFamily: `body`,
+      },
       a: {
         color: "inherit",
         textDecoration: "none",
@@ -49,17 +52,52 @@ const theme = merge.all([
       },
       li: {
         marginBottom: "4px",
+        code: {
+          fontSize: `inherit`,
+        },
       },
       pre: {
+        variant: `prism`,
+        fontFamily: `monospace`,
+        tabSize: 4,
+        hyphens: `none`,
+        overflow: `auto`,
+        borderRadius: 10,
+        p: 3,
         color: "lightText",
         backgroundColor: "darkBackground",
         marginBottom: "28px",
+      },
+      code: {
+        fontFamily: `monospace`,
+        fontSize: `inherit`,
       },
       h3: {
         marginTop: 4,
       },
       inlineCode: {
-        // background: "highlight",
+        borderRadius: `0.3em`,
+        // color: `secondary`,
+        // bg: `highlight`,
+        paddingTop: `0.15em`,
+        paddingBottom: `0.05em`,
+        paddingX: `0.2em`,
+      },
+      hr: {
+        borderColor: `muted`,
+      },
+      p: {
+        code: {
+          fontSize: `inherit`,
+        },
+      },
+      blockquote: {
+        color: `inherit`,
+        borderLeftColor: `inherit`,
+        opacity: 0.8,
+        "&.translation": {
+          fontSize: `1em`,
+        },
       },
       waves: {
         default: {
@@ -116,6 +154,15 @@ const theme = merge.all([
 ])
 
 theme.breakpoints = ["1000px"]
+
+theme.prism = {
+  ".builtin, .changed, .keyword, .punctuation, .operator, .tag, .deleted, .string, .attr-value, .char, .number, .inserted": {
+    color: lightBlue,
+  },
+  ".comment, .cdata, .doctype": {
+    fontStyle: "italic",
+  },
+}
 
 // console.log({ theme })
 

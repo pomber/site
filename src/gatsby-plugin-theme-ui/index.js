@@ -3,7 +3,6 @@ import "typeface-merriweather"
 import { toTheme } from "@theme-ui/typography"
 import typography from "typography-theme-wordpress-2016"
 import merge from "deepmerge"
-import wavesTheme from "gatsby-theme-waves/src/gatsby-plugin-theme-ui/index"
 
 const typographyTheme = toTheme(typography)
 
@@ -16,7 +15,6 @@ const lighterBlue = "#ebfcf6"
 
 const theme = merge.all([
   typographyTheme,
-  wavesTheme,
   {
     colors: {
       background: "#FAF9F5",
@@ -102,33 +100,51 @@ const theme = merge.all([
       waves: {
         default: {
           Wave: {
-            width: content * 2 + innerMargin * 2,
-            marginLeft: -(content + 2 * innerMargin),
-            marginTop: 0,
+            width: ["100%", content * 2 + innerMargin * 2],
+            // marginTop: "40px",
+            marginLeft: [0, -(content + 2 * innerMargin)],
             marginBottom: "28px",
+            position: "relative",
+            display: ["block", "flex"],
           },
           ScrollerContainer: {
-            flex: null,
-            width: "content",
-            paddingLeft: innerMargin,
+            paddingTop: ["50px", 0],
+            width: ["auto", "content"],
+            paddingLeft: [0, innerMargin],
           },
           ScrollerStep: {
+            position: "relative",
             padding: 0,
-            borderLeft: 0,
             minHeight: "400px",
+            display: "flex",
+            alignItems: "center",
+            borderLeft: 0,
           },
           ScrollerProgress: {
             backgroundColor: "muted",
-            left: "-25px",
             borderRadius: "3px",
+            position: "absolute",
+            left: ["-12px", "-25px"],
           },
           StickerContainer: {
-            width: "content",
-            paddingRight: innerMargin,
+            width: ["100vw", "content"],
+            marginLeft: ["calc(50% - 50vw)", 0],
+            position: ["sticky", "static"],
+            top: [0, "auto"],
+            zIndex: [1, "auto"],
+            height: ["50vh", "auto"],
+            paddingRight: [0, innerMargin],
           },
           Sticker: {
-            border: 0,
+            position: ["static", "sticky"],
+            width: "100%",
+            height: ["100%", "60vh"],
+            top: ["auto", "20vh"],
           },
+          // this is used to select the active scroller step
+          // 0.5 selects the step that is at half the screen height
+          // 0.7 the step that is at 70% the screen height
+          focus: [0.7, 0.5],
         },
       },
       CodeSurfer: {

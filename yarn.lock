@@ -1267,10 +1267,10 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
   integrity sha512-ONhaKPIufzzrlNbqtWFFd+jlnemX6lJAgq9ZeiZtS7I1PIf/la7CW4m83rTXRnVnsMbW2k56pGYu7AUFJD9Pow==
 
-"@styled-system/css@^5.0.5":
-  version "5.0.17"
-  resolved "https://registry.yarnpkg.com/@styled-system/css/-/css-5.0.17.tgz#aaab722fe2f30d44b32909725f426a491e79d88d"
-  integrity sha512-MSKnFq3zK53fJ/Au2oAnioNiKZJ2GATi4/tGYlh+/qSbDa09YX0siOzO8kIMKYt4L2fNCZnCuKPXJS7NFcWbmA==
+"@styled-system/css@^5.0.16":
+  version "5.0.22"
+  resolved "https://registry.yarnpkg.com/@styled-system/css/-/css-5.0.22.tgz#9210efed998d8fa2fe67f8d044f04c158f2ab36a"
+  integrity sha512-M3+scJH+ObuVkZNFhL15gzQvMXh5yeyVQLbbEwuohvKT5rxWWVtRWWbtFJdn1BS2R+iRZmF66+KIypf/jA5W9A==
 
 "@theme-ui/prism@^0.2.29":
   version "0.2.29"
@@ -11922,13 +11922,13 @@ text-table@0.2.0, text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-theme-ui@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/theme-ui/-/theme-ui-0.2.5.tgz#f1eceb415317f44ab8e52ae7ccba83b8c6d3c359"
-  integrity sha512-hFTOi0nDNB8ZejSg7zKQr2AKAcYv+nbbxE1oU9T/Is56tFvBgFDxc5DXrO82CayOAdAx3LN6iCsFzh/20f5HcQ==
+theme-ui@^0.2.31:
+  version "0.2.31"
+  resolved "https://registry.yarnpkg.com/theme-ui/-/theme-ui-0.2.31.tgz#c3a1398b77f36f4a573ca06554504cf92fc18e36"
+  integrity sha512-f+0hoqjecTRKEvpOobSu0Yz/mbLDYmdG8X/DpOu+rqIfgm/pH36jaB6X+wO2Zdu4KUMo0fQ49ksuCalc/8GdIw==
   dependencies:
     "@emotion/is-prop-valid" "^0.8.1"
-    "@styled-system/css" "^5.0.5"
+    "@styled-system/css" "^5.0.16"
     deepmerge "^3.2.0"
     react "^16.8.0"
 

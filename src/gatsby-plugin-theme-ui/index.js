@@ -61,9 +61,10 @@ const theme = merge.all([
         hyphens: `none`,
         overflow: `auto`,
         borderRadius: 10,
-        p: 3,
-        color: "lightText",
-        backgroundColor: "darkBackground",
+        p: 0,
+        pl: 2,
+        color: "text",
+        backgroundColor: "background",
         marginBottom: "28px",
       },
       code: {
@@ -173,7 +174,7 @@ theme.breakpoints = ["1000px"]
 
 theme.prism = {
   ".builtin, .changed, .keyword, .punctuation, .operator, .tag, .deleted, .string, .attr-value, .char, .number, .inserted": {
-    color: lightBlue,
+    color: "#0f8f5e",
   },
   ".comment, .cdata, .doctype": {
     fontStyle: "italic",

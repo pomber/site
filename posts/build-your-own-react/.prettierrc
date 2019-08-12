@@ -1,7 +1,9 @@
 {
+  "printWidth": 50,
+  "semi": false,
   "overrides": [
     {
-      "files": "*.jsx",
+      "files": "*.[jsx|mdx]",
       "options": {
         "printWidth": 50,
         "semi": false

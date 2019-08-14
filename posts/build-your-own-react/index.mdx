@@ -4,6 +4,7 @@ date: 2019-07-31
 ---
 
 import { CodeWave } from "gatsby-theme-waves"
+import ImageWave from "../../src/components/image-wave"
 
 We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code but without all the optimizations and non-essential features.
 
@@ -23,6 +24,30 @@ But this post is self-contained. Starting from scratch, these are all the things
 - **Step VIII**: Hooks
 
 We'll write around 300 lines of code. Don't expect to finish this post in 10 minutes. It will take some time, but it will worth it. You can stop between steps and come back later.
+
+<ImageWave>
+
+![Fiber Tree 0](./fiber0.png)
+
+0
+
+![Fiber Tree 1](./fiber1.png)
+
+1
+
+![Fiber Tree 2](./fiber2.png)
+
+2
+
+![Fiber Tree 3](./fiber3.png)
+
+3
+
+![Fiber Tree 4](./fiber4.png)
+
+4
+
+</ImageWave>
 
 <CodeWave>
 
@@ -284,7 +309,7 @@ If we have a comment like this one in our file, when babel transpiles the JSX it
 ```jsx file=./05.jsx 37
 ```
 
-### Step I: The `render` Function
+### Step II: The `render` Function
 
 Next, we need to write our version of the `ReactDOM.render` function.
 
@@ -311,12 +336,114 @@ We also need to handle text elements, if the element type is `TEXT_ELEMENT` we c
 ```jsx file=./10.jsx
 ```
 
-10
+The last thing we need to do here is assign the element props to the node.
+
+```jsx file=./10.jsx 1:58
+```
+
+And that's it. We now have a library that can render JSX to the DOM.
+
+</CodeWave>
+
+### Step III: Concurrent Mode
+
+But... before we start adding more code we need a refactor.
+
+<CodeWave>
+
+```jsx file=./10.jsx 25,38:40,43
+```
+
+There's a problem with this recursive call.
+
+Once we start rendering, we won't stop until we rendered all the element tree.
+If the element tree is big, it may block the main thread for too long. And if the browser needs to do high priority stuff like handling user input or keeping an animation smooth, it will have to wait until the render finishes.
 
 ```jsx file=./11.jsx
 ```
 
-11
+So what we are going to do is break the work into small units,
+and after we finish each unit
+we'll let the browser interrupt the rendering if there's anything else that needs to be done.
+
+```jsx file=./11.jsx 47,55,56,58
+```
+
+We use `requestIdleCallback` to make a loop.
+You can think of `requestIdleCallback` as a `setTimeout`, but instead of us telling it when to run, the browser will run tha callback when the main thread is free.
+
+```jsx file=./11.jsx 47,48,49,53,54,56
+```
+
+Also, it gives us a deadline parameter
+We can use it to check how much time we have until the browser needs to take control again.
+
+Small disclaimer here,
+the concurrent mode is still unstable in the last version of React,
+so unless you explicitly opt-in,
+it will still use a while loop like this one
+but without checking if it should yield to the browser
+End of the disclaimer
+
+```jsx file=./11.jsx 47,50:52,56,60:62
+```
+
+What we need to do now, is write a performUnitOfWork function that not only perform the work but also choose the next thing to work on.
+
+Edit -> three things:
+
+- set the first uow
+- perform it
+- choose the next one
+
+</CodeWave>
+
+### Step IV: Fibers
+
+And for that we need a data structure: a fiber tree.
+Fibers are going to be the units of work, they are just javascript objects, and we will have one for each element in the element tree
+
+<CodeWave>
+
+```jsx
+Didact.render(
+  <div>
+    <h1 />
+    <section>
+      <h2 />
+    </section>
+    <span />
+  </div>,
+  container
+)
+```
+
+Let me show you with an example. Suppose we want to render an element tree like this one.
+
+```jsx 1:15
+const children = [
+  <div>
+    <h1 />
+    <section>
+      <h2 />
+    </section>
+    <span />
+  </div>,
+]
+nextUnitOfWork = {
+  dom: container,
+  props: {
+    children,
+  },
+}
+```
+
+We will create the first unit of work in the render function, this will be the root of the fiber tree.
+The rest of the work will happen in the performUnitOfWork function. Let's see how it works.
+
+</CodeWave>
+
+<CodeWave>
 
 ```jsx file=./12.jsx
 ```

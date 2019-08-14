@@ -22,7 +22,7 @@ module.exports = {
               linkImagesToOriginal: false,
             },
           },
-          { resolve: `gatsby-remark-smartypants` },
+          "gatsby-remark-smartypants",
         ],
         remarkPlugins: [require(`remark-slug`), require(`remark-import-code`)],
       },

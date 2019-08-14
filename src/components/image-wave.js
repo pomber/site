@@ -19,7 +19,7 @@ function toColumns(items, columnCount) {
     // console.log("item props", item.props, isImg)
     if (isImg) {
       const img = React.cloneElement(item.props.children.props.children[3], {
-        style: { width: "100%", height: "100%", objectFit: "contain" },
+        style: { objectFit: "contain", margin: 0 },
       })
       columns[0].push(img)
       columns[1].push(React.createElement("div", {}, []))
@@ -55,19 +55,25 @@ function ImageSticker({ progress, steps, variant }) {
   const curr = steps[currentStep]
   const next = steps[currentStep + 1]
 
+  const sx = {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    justifyContent: ["center", "flex-end"],
+  }
+
   return (
-    <div sx={{ variant: `styles.waves.${variant}.StickerContainer` }}>
+    <div
+      sx={{
+        variant: `styles.waves.${variant}.StickerContainer`,
+        backgroundColor: "darkBackground",
+      }}
+    >
       <div sx={{ variant: `styles.waves.${variant}.Sticker` }}>
-        <div
-          sx={{
-            position: "absolute",
-            height: "100%",
-            width: "100%",
-          }}
-        />
         {prev && (
           <div
-            sx={{ position: "absolute", height: "100%", width: "100%" }}
+            sx={sx}
             style={{ opacity: Math.max(0, currentStep - progress) }}
             key={currentStep - 1}
           >
@@ -75,7 +81,7 @@ function ImageSticker({ progress, steps, variant }) {
           </div>
         )}
         <div
-          sx={{ position: "absolute", height: "100%", width: "100%" }}
+          sx={sx}
           style={{ opacity: 1 - Math.abs(currentStep - progress) }}
           key={currentStep}
         >
@@ -83,20 +89,13 @@ function ImageSticker({ progress, steps, variant }) {
         </div>
         {next && (
           <div
-            sx={{ position: "absolute", height: "100%", width: "100%" }}
+            sx={sx}
             style={{ opacity: Math.max(0, progress - currentStep) }}
             key={currentStep + 1}
           >
             {next}
           </div>
         )}
-        <div
-          sx={{
-            position: "absolute",
-            height: "100%",
-            width: "100%",
-          }}
-        />
       </div>
     </div>
   )

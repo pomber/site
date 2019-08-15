@@ -41,6 +41,7 @@
   },
   "scripts": {
     "start": "gatsby develop",
+    "start:public": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build"
   }
 }

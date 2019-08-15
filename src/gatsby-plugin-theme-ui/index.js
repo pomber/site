@@ -66,6 +66,7 @@ const theme = merge.all([
         color: "text",
         backgroundColor: "background",
         marginBottom: "28px",
+        whiteSpace: "normal",
       },
       code: {
         fontFamily: `monospace`,

@@ -60,7 +60,7 @@ function ImageSticker({ progress, steps, variant }) {
     height: "100%",
     width: "100%",
     display: "flex",
-    justifyContent: ["center", "flex-end"],
+    justifyContent: "center",
   }
 
   return (

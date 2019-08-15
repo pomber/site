@@ -2,7 +2,7 @@ import React from "react"
 import { Helmet } from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
 
-const SEO = ({ title, description, pathname, article }) => (
+const SEO = ({ title, description, pathname, article, card }) => (
   <StaticQuery
     query={query}
     render={({
@@ -24,7 +24,7 @@ const SEO = ({ title, description, pathname, article }) => (
       const seo = {
         title: title || defaultTitle,
         description: description || defaultDescription,
-        image: `${siteUrl}${imageSrc}`,
+        image: `${siteUrl}${card ? card.childImageSharp.fixed.src : imageSrc}`,
         url: `${siteUrl}${pathname || "/"}`,
       }
 

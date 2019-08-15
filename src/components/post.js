@@ -8,9 +8,14 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import ContentWithAside from "../components/content-with-aside"
 import replaceImportedCode from "remark-import-code/loader"
 
-const Post = ({ data: { post }, location }) => (
+const Post = ({ data: { post, card }, location }) => (
   <Layout location={location}>
-    <SEO title={post.title} description={post.excerpt} article={true} />
+    <SEO
+      title={post.title}
+      description={post.excerpt}
+      article={true}
+      card={card}
+    />
     <main>
       <ContentWithAside
         main={

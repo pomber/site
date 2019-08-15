@@ -75,6 +75,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             slug
             title
             date(formatString: "MMMM DD, YYYY")
+            parent {
+              parent {
+                ... on File {
+                  relativeDirectory
+                }
+              }
+            }
           }
         }
       }
@@ -95,7 +102,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     createPage({
       path: slug,
       component: PostTemplate,
-      context: post,
+      context: {
+        ...post,
+        relativeDirectory: post.parent.parent.relativeDirectory,
+      },
     })
   })
 }

@@ -2,7 +2,9 @@ export default [
   {
     type: "blog post",
     title: "Build your own React",
-    date: "2019/08/01",
+    description:
+      "We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code…",
+    date: "2019/08/27",
     url: "/build-your-own-react",
   },
   {

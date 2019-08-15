@@ -655,65 +655,120 @@ The next thing we need to add is support for function components.
 
 First let's change the example, we'll use this simple function component, that returns an h1 element.
 
-```jsx file=./39.jsx
+Note that if we transform the jsx to js, it will be:
+
+<div>
+
+```js
+function App({ props }) {
+  return Didact.createElement(
+    "h1",
+    null,
+    "Hi ",
+    props.name
+  )
+}
+const element = Didact.createElement(App, {
+  name: "foo",
+})
 ```
 
-39
+</div>
 
-```jsx file=./40.jsx
+```jsx file=./38.jsx 162:165
 ```
 
-40
+For function components we won't have a dom node, so let's add an if here
 
 ```jsx file=./41.jsx
 ```
 
-41
+We check if the fiber type is a function, and depending on that we go to updateFunctionComponent or updateHostComponent.
+In updateHostComponent we do the same as before
+And in updateFunctionComponent we'll do something similar
 
 ```jsx file=./42.jsx
 ```
 
-42
+The diference with host components is the way we get the children.
+Instead of getting them directly from the props we need to run the function
+For our example, here the fiber.type is the App function and when we run it, it returns the h1 element
+Then, once we have the children, the reconciliation works in the same way, we don't need to change anything there.
+
+```jsx file=./42.jsx
+```
+
+What we need to change is the commitWork function
+Now that we have fibers without dom nodes we need to change two things
 
 ```jsx file=./43.jsx
 ```
 
-43
+First, to find the parent of a dom node we'll need togo up the fiber tree until we find a fiber with a dom node
 
 ```jsx file=./44.jsx
 ```
 
-44
+And when removing a node we also need to keep going until we find a child with a dom node
+
+```jsx file=./44.jsx 270:276
+```
+
+### Step VIII: Hooks
+
+Last step
+
+Now that we have function components let's also add state.
 
 ```jsx file=./45.jsx
 ```
 
-45
+Let's change our example again, and use the classic counter component.
+Each time we click it, it increments the state by one
 
-```jsx file=./46.jsx
+```jsx file=./46.jsx 195,196,198:202
 ```
 
-46
+Here is where we call the Counter function from the example. And inside that function we call useState.
 
 ```jsx file=./47.jsx
 ```
 
-47
+We need to initialize some global variables _before_ calling the function component,
+so we can use them inside of the useState function.
+First we set the work in progress fiber.
+Then we keep track of the hook index, starting at 0.
+And we also add an empty hook array to the fiber.
 
 ```jsx file=./48.jsx
 ```
 
-48
+When the function component calls useState, we check if we have an old hook.
+We check in the alternate of the fiber using the hook index.
+If we do, we copy the state from the old hook to the new hook,
+if we don't we intialize the state.
+
+Then we add the new hook to the fiber, increment the hook index by one, and return the state.
 
 ```jsx file=./49.jsx
 ```
 
-49
+useState should also return a function to update the state.
+So we define a setState function that receives an action, for the Counter example this action is the function that increments the state by one.
+We push that action to a queue we added to the hook.
+And then we do something similar to what we did in the render function, set a new work in progress root as the next unit of work so the work loop can start a new render phase.
+
+But we haven't run the action yet
 
 ```jsx file=./50.jsx
 ```
 
-50
+We'll do it the next time we are rendering the component, we get all the actions from the old hook queue, and then apply them one by one to the new hook state, so when we return the state it's updated. And that's all.
+
+```jsx file=./50.jsx 1:319
+```
+
+Here's the full code, look, it fits in one slide.
 
 </CodeWave>
 

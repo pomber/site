@@ -125,7 +125,7 @@ const theme = merge.all([
             backgroundColor: "muted",
             borderRadius: "3px",
             position: "absolute",
-            left: ["-12px", "-25px"],
+            left: "-24px",
           },
           StickerContainer: {
             width: ["100vw", "content"],

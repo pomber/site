@@ -39,7 +39,7 @@ function createDom(fiber) {
 }
 
 function commitRoot() {
-  // TODO
+  // TODO add nodes to dom
 }
 
 function render(element, container) {

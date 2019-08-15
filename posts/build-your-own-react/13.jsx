@@ -63,7 +63,9 @@ function workLoop(deadline) {
 requestIdleCallback(workLoop)
 
 function performUnitOfWork(fiber) {
-  // TODO
+  // TODO add dom node
+  // TODO create new fibers
+  // TODO return next unit of work
 }
 
 const Didact = {

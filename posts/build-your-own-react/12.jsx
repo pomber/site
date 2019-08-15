@@ -39,7 +39,7 @@ function createDom(fiber) {
 }
 
 function render(element, container) {
-  // TODO
+  // TODO set next unit of work
 }
 
 let nextUnitOfWork = null
@@ -58,7 +58,9 @@ function workLoop(deadline) {
 requestIdleCallback(workLoop)
 
 function performUnitOfWork(fiber) {
-  // TODO
+  // TODO add dom node
+  // TODO create new fibers
+  // TODO return next unit of work
 }
 
 const Didact = {

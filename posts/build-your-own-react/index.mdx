@@ -25,30 +25,6 @@ But this post is self-contained. Starting from scratch, these are all the things
 
 We'll write around 300 lines of code. Don't expect to finish this post in 10 minutes. It will take some time, but it will worth it. You can stop between steps and come back later.
 
-<ImageWave>
-
-![Fiber Tree 0](./fiber0.png)
-
-0
-
-![Fiber Tree 1](./fiber1.png)
-
-1
-
-![Fiber Tree 2](./fiber2.png)
-
-2
-
-![Fiber Tree 3](./fiber3.png)
-
-3
-
-![Fiber Tree 4](./fiber4.png)
-
-4
-
-</ImageWave>
-
 <CodeWave>
 
 ```jsx
@@ -403,187 +379,341 @@ Edit -> three things:
 And for that we need a data structure: a fiber tree.
 Fibers are going to be the units of work, they are just javascript objects, and we will have one for each element in the element tree
 
-<CodeWave>
+Let's see how the fiber tree will look like with an example.
+
+We will create the first unit of work in the render function, this will be the root of the fiber tree.
+The rest of the work will happen in the performUnitOfWork function. Let's see how it works.
+
+<ImageWave>
+
+![Fiber Tree 0](./fiber0.png)
+
+Suppose we want to render an element tree like this one:
 
 ```jsx
 Didact.render(
   <div>
-    <h1 />
-    <section>
-      <h2 />
-    </section>
-    <span />
+    <h1>
+      <p />
+      <a />
+    </h1>
+    <h2 />
   </div>,
   container
 )
 ```
 
-Let me show you with an example. Suppose we want to render an element tree like this one.
+In the `render` we'll create the root fiber and set it as the `nextUnitOfWork`. The rest of the work will happen on the `performUnitOfWork` function, there we will do three things for each fiber:
 
-```jsx 1:15
-const children = [
-  <div>
-    <h1 />
-    <section>
-      <h2 />
-    </section>
-    <span />
-  </div>,
-]
-nextUnitOfWork = {
-  dom: container,
-  props: {
-    children,
-  },
-}
-```
+1. add the element to the dom
+2. create the fibers for the element's children
+3. select the next unit of work
 
-We will create the first unit of work in the render function, this will be the root of the fiber tree.
-The rest of the work will happen in the performUnitOfWork function. Let's see how it works.
+![Fiber Tree 1](./fiber1.png)
 
-</CodeWave>
+One of the goals of this data structure is to make it easy to find the next unit of work. That's why each fiber has a link to its first child, its next sibling and its parent.
+
+![Fiber Tree 2](./fiber2.png)
+
+When we finish performing work on a fiber, if it has a `child` that fiber will be the next unit of work.
+
+From our example, when we finish working on the `div` fiber the next unit of work will be the `h1` fiber.
+
+![Fiber Tree 3](./fiber3.png)
+
+If the fiber doesn't have a `child`, we use the `sibling` as the next unit of work.
+
+For example, the `p` fiber doesn't have a `child` so we move to the `a` fiber after finishing it.
+
+![Fiber Tree 4](./fiber4.png)
+
+And if the fiber doesn't have a `child` nor a `sibling` we go to the "uncle": the `sibling` of the `parent`. Like `a` and `h2` fibers from the example.
+
+Also, if the `parent` doesn't have a `sibling`, we keep going up through the `parent`s until we find one with a `sibling` or until we reach the root. If we reached the root, it means we finished performing all the work for this `render`.
+
+</ImageWave>
+
+Now let's put it into code
 
 <CodeWave>
 
-```jsx file=./12.jsx
+```jsx file=./11.jsx 25:45
 ```
 
-12
+First, let's remove this code from the render function.
 
-```jsx file=./13.jsx
+```jsx file=./12.jsx 25,39,41:45
 ```
 
-13
+We keep the part that creates a dom node in its own function, we are going to use it later.
+
+```jsx file=./13.jsx 41:50
+```
+
+In the render function we set nextUnitOfWork to the root of the fiber tree
+
+```jsx file=./13.jsx 52,55:57,61,65:69
+```
+
+Then, when the browser is ready,
+it will call our workLoop and we'll start working on the root
 
 ```jsx file=./14.jsx
 ```
 
-14
+First, we create a new dom node and append it to the dom
 
 ```jsx file=./15.jsx
 ```
 
-15
+Then for each child we create a new fiber
 
 ```jsx file=./16.jsx
 ```
 
-16
+And we add it to the fiber tree setting it either as a child or as a sibling, dependig if it's the first child or not.
 
 ```jsx file=./17.jsx
 ```
 
-17
+Finally we search for the next unit of work.
+We first try with the child, then with the sibling, then with the uncle, and so on.
 
-```jsx file=./18.jsx 3
+```jsx file=./17.jsx 65:108
 ```
 
-18
+And that's our `performUnitOfWork`
 
-```jsx file=./19.jsx
+```jsx file=./17.jsx 65,70:72
 ```
 
-19
+### Step V: Render and Commit Phases
 
-```jsx file=./20.jsx
+We have another problem here.
+
+We are adding a new node to the dom each time we work on an element.
+And, remember, the browser could interrupt our work before we finish rendering the whole tree.
+In that case, the user will see an incomplete UI. And we don't want that.
+
+```jsx file=./18.jsx 41,42,48,50,70[1]
 ```
 
-20
+So we need to remove the part that mutates the DOM from here.
+
+```jsx file=./18.1.jsx
+```
+
+Instead, we'll keep track of the root of the fiber tree.
+We call it the work in progress root
+
+```jsx file=./19.jsx 41:43,58,67:69,72
+```
+
+and once we finish all the work,
+(we know it because there isnt a next unit of work)
+we commit the fiber tree to the DOM
+
+```jsx file=./20.jsx 41:54
+```
+
+We call the commitRoot function,
+And here we recursively append all the nodes to the dom
+
+### Step VI: Reconciliation
+
+So far we only _added_ stuff to the DOM.
+but what about updating or deleting nodes?
+
+That's what we are going to do now,
+we need to compare the elements we receive on the render function
+to the last fiber tree we commited to the DOM.
 
 ```jsx file=./21.jsx
 ```
 
-21
+For that we neeed to save a reference to the root after we finish the commit.
+We call it currentRoot.
+We also add the "alternate" property to every fiber.
+This property is a link to the old fiber,
+the fiber that we commited to the DOM in the previous commit phase.
 
-```jsx file=./22.jsx
+```jsx file=./21.jsx 90:129
 ```
 
-22
+Remember in performUnitOfWork, the part were we create new fibers?
+Let's move it to a new function
+
+```jsx file=./22.jsx 90,95,96,108,110,114[1]
+```
+
+We extracted the part that create the new fibers
+
+```jsx file=./22.jsx 110,133
+```
+
+Here we will reconcile the old fibers with the new elements
 
 ```jsx file=./23.jsx
 ```
 
-23
+So, inside this while, the two variables that matter are the element and the oldFiber.
+the element is the thing we want to render to the dom
+and the oldFiber is what we rendered the last time,
+how do we compare them?
 
 ```jsx file=./24.jsx
 ```
 
-24
+We use the type
+if the old fiber and the new element have the same type, we can keep the dom node and just update it with the new props
+if the type is different and there is a new element, it means we need to create a new dom node.
+and if the types are different and there is an old fiber, we need to remove the old node
+
+Here React also uses keys, that makes a better reconciliation,
+but we are not doing that, we want to keep it simple, or simpler.
 
 ```jsx file=./25.jsx
 ```
 
-25
+Ok, for the case of the update, we can keep the dom node from the old fiber.
+And here we are adding a new property, the effectTag, which we we'll use later, on the commit phase.
 
 ```jsx file=./26.jsx
 ```
 
-26
+Then for the case where the element needs a new dom node we tag the new fiber with the PLACEMENT effect tag.
 
 ```jsx file=./27.jsx
 ```
 
-27
+And for the case where we need to delete the node, we don't have a new fiber so we add the effect tag to the old fiber.
+
+But when we commit the fiber tree to the DOM we do it from the work in progress root, which doesn't have the old fibers.
 
 ```jsx file=./28.jsx
 ```
 
-28
+So we need an array to keep track of the nodes we want to remove.
 
 ```jsx file=./29.jsx
 ```
 
-29
+and then when we are commiting the changes to the DOM we also use the fibers from that array
+
+```jsx file=./29.jsx 48:56
+```
+
+Now, let's change the commitWork function to handle the new effectTags
 
 ```jsx file=./30.jsx
 ```
 
-30
+If the fiber has a PLACEMENT effect tag we do the same as before, append the dom node to the node from the parent fiber
 
 ```jsx file=./31.jsx
 ```
 
-31
+If it's a DELETION, we do the opposite, remove the child
 
 ```jsx file=./32.jsx
 ```
 
-32
+And if it's an UPDATE, we need to update the existing dom node with the props that changed.
 
 ```jsx file=./33.jsx
 ```
 
-33
+We'll do it in this updateDom function
 
-```jsx file=./34.jsx
+```jsx file=./34.jsx 36:56
 ```
 
-34
+We compare the props from the old fiber to the props of the new fiber,
+remove the props that are gone, and set the props that are new or changed.
 
 ```jsx file=./35.jsx
 ```
 
-35
+One special kind of prop that we need to update are event listeners, so if the prop name starts with th "on" prefix, we'll handle them differently.
 
 ```jsx file=./36.jsx
 ```
 
-36
+If the event handler changed we remove it from the node.
 
 ```jsx file=./37.jsx
 ```
 
-37
+And then we add the new handler.
 
 ```jsx file=./38.jsx
 ```
 
-38
+### Step VII: Function Components
+
+The next thing we need to add is support for function components.
+
+First let's change the example, we'll use this simple function component, that returns an h1 element.
 
 ```jsx file=./39.jsx
 ```
 
 39
+
+```jsx file=./40.jsx
+```
+
+40
+
+```jsx file=./41.jsx
+```
+
+41
+
+```jsx file=./42.jsx
+```
+
+42
+
+```jsx file=./43.jsx
+```
+
+43
+
+```jsx file=./44.jsx
+```
+
+44
+
+```jsx file=./45.jsx
+```
+
+45
+
+```jsx file=./46.jsx
+```
+
+46
+
+```jsx file=./47.jsx
+```
+
+47
+
+```jsx file=./48.jsx
+```
+
+48
+
+```jsx file=./49.jsx
+```
+
+49
+
+```jsx file=./50.jsx
+```
+
+50
 
 </CodeWave>
 

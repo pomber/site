@@ -94,6 +94,8 @@ function performUnitOfWork(fiber) {
     prevSibling = newFiber
     index++
   }
+
+  // TODO return next unit of work
 }
 
 const Didact = {

@@ -109,7 +109,7 @@ const theme = merge.all([
             display: ["block", "flex"],
           },
           ScrollerContainer: {
-            paddingTop: ["50px", 0],
+            paddingTop: ["80px", 0],
             width: ["auto", "content"],
             paddingLeft: [0, innerMargin],
           },

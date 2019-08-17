@@ -21,12 +21,11 @@ const SEO = ({ title, description, pathname, article, card }) => (
         },
       },
     }) => {
-      const url = process.env.PULL_REQUEST ? process.env.DEPLOY_URL : siteUrl
       const seo = {
         title: title || defaultTitle,
         description: description || defaultDescription,
-        image: `${url}${card ? card.childImageSharp.fixed.src : imageSrc}`,
-        url: `${url}${pathname || "/"}`,
+        image: `${siteUrl}${card ? card.childImageSharp.fixed.src : imageSrc}`,
+        url: `${siteUrl}${pathname || "/"}`,
       }
 
       return (

@@ -1,6 +1,7 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 
 const SEO = ({ title, description, pathname, article, card }) => (
   <StaticQuery
@@ -57,6 +58,12 @@ const SEO = ({ title, description, pathname, article, card }) => (
             )}
             {seo.image && <meta name="twitter:image" content={seo.image} />}
           </Helmet>
+          {/* not sure how to make gatsby copy the image to the public folder */}
+          {card && (
+            <div hidden>
+              <Img fixed={card.childImageSharp.fixed} alt={title} />
+            </div>
+          )}
         </>
       )
     }}

@@ -1,6 +1,6 @@
 ---
 title: Build your own React
-date: 2019-07-31
+date: 2019-08-27
 ---
 
 import { CodeWave } from "gatsby-theme-waves"
@@ -8,11 +8,11 @@ import ImageWave from "../../src/components/image-wave"
 
 We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code but without all the optimizations and non-essential features.
 
-This is the third time I'm building a mini-react. The first one was before React v16. Second one was after React v16, when the Fiber architecture was introduced. And the third one, this one, is based on v16.8: the one with hooks.
+If you've read any of [my previous "build your own React" posts](https://engineering.hexacta.com/didact-learning-how-react-works-by-building-it-from-scratch-51007984e5c5), the difference is that this post is based on React 16.8, so we can now use hooks and drop all the code related to classes.
 
-You can find the history with all the blog posts and code on the [Didact repo](https://github.com/pomber/didact). There's also a [talk covering the same content](https://youtu.be/8Kc2REHdwnQ).
+You can find the history with the old blog posts and the code on the [Didact repo](https://github.com/pomber/didact). There's also a [talk covering the same content](https://youtu.be/8Kc2REHdwnQ).
 
-But this post is self-contained. Starting from scratch, these are all the things we'll add to our version of React one by one:
+But this is a self-contained post. Starting from scratch, these are all the things we'll add to our version of React one by one:
 
 - **Step I**: The `createElement` Function
 - **Step II**: The `render` Function
@@ -22,8 +22,6 @@ But this post is self-contained. Starting from scratch, these are all the things
 - **Step VI**: Reconciliation
 - **Step VII**: Function Components
 - **Step VIII**: Hooks
-
-We'll write around 300 lines of code. Don't expect to finish this post in 10 minutes. It will take some time, but it will worth it. You can stop between steps and come back later.
 
 <CodeWave>
 
@@ -35,7 +33,7 @@ ReactDOM.render(element, container)
 
 ### Step Zero: Review
 
-But first let's review some basic concepts. You can skip this step if you already have a good idea of how React, JSX, elements and DOM mutations work.
+But first let's review some basic concepts. You can skip this step if you already have a good idea of how React, JSX and DOM elements work.
 
 We'll use this React app, just three lines of code. The first one defines a React element. The next one gets a node from the DOM. The last one renders the React element into the container.
 
@@ -47,9 +45,9 @@ const container = document.getElementById("root")
 ReactDOM.render(element, container)
 ```
 
-On the first line we have the element, defined with JSX. It isn't even valid JavaScript, so to replace it with vanilla JS, first we need to replace it with valid JS.
+On the first line we have the element, defined with JSX. It isn't even valid JavaScript, so in order to replace it with vanilla JS, first we need to replace it with valid JS.
 
-JSX is transformed to JS by build tools like Babel. But the transformation is usually simple: **replace the code inside the tags with a call to `createElement`, passing the tag name, the props and the children as parameters**.
+JSX is transformed to JS by build tools like Babel. The transformation is usually simple: replace the code inside the tags with a call to `createElement`, passing the tag name, the props and the children as parameters.
 
 ```jsx
 const element = React.createElement(
@@ -62,7 +60,7 @@ const container = document.getElementById("root")
 ReactDOM.render(element, container)
 ```
 
-`React.createElement` creates an object from its arguments. Besides some validations, that's all it does. So we can safely **replace the function call with its output**.
+`React.createElement` creates an object from its arguments. Besides some validations, that's all it does. So we can safely replace the function call with its output.
 
 ```jsx
 const element = {
@@ -77,7 +75,7 @@ const container = document.getElementById("root")
 ReactDOM.render(element, container)
 ```
 
-And this is what an element is, an object with two properties: `type` and `props` (well, it can have more, but we only care about these two).
+And this is what an element is, an object with two properties: `type` and `props` (well, it has more, but we only care about these two).
 
 The `type` is a string that specifies the type of the dom node we want to create, it's the `tagName` you pass to `document.createElement` when you want to create an HTML element. It can also be a function, but we'll leave that for Step VII.
 
@@ -123,11 +121,11 @@ node.appendChild(text)
 container.appendChild(node)
 ```
 
-First we create a node using the element `type`, in this case `h1`.
+First we create a node\* using the element `type`, in this case `h1`.
 
 Then we assign all the element `props` to that node. Here it's just the title.
 
-_To avoid confusions, I'll use "element" to refer to React elements and "node" for DOM elements._
+_\* To avoid confusion, I'll use "element" to refer to React elements and "node" for DOM elements._
 
 ```js 1,5,7,14,15
 const element = {
@@ -152,7 +150,7 @@ container.appendChild(node)
 
 Then we create the nodes for the children. We only have a string as a child so we create a text node.
 
-Using `textNode` instead of setting `innerText` will allow us to treat all elements in the same way later. Note also how we set the `nodeValue` like we did it with the `h1` title, it's almost as if the string had `props: {nodeValue: "hello"}`, right?
+Using `textNode` instead of setting `innerText` will allow us to treat all elements in the same way later. Note also how we set the `nodeValue` like we did it with the `h1` title, it's almost as if the string had `props: {nodeValue: "hello"}`.
 
 ```js 9,17,18
 const element = {
@@ -202,10 +200,6 @@ And now we have the same app as before, but without using React.
 
 </CodeWave>
 
-We turned a simple app from 3 lines of code to 18. 18 lines of code that only work for this specific app.
-
-Let's start again with another app. This time we'll replace React code with our own version of React.
-
 <CodeWave>
 
 ```jsx file=./00.jsx
@@ -213,7 +207,11 @@ Let's start again with another app. This time we'll replace React code with our 
 
 ### Step I: The `createElement` Function
 
-We'll start by writing our own `createElement`. Let's transform the JSX to JS so we can see the `createElement` calls.
+Let's start again with another app. This time we'll replace React code with our own version of React.
+
+We'll start by writing our own `createElement`.
+
+Let's transform the JSX to JS so we can see the `createElement` calls.
 
 ```jsx file=./01.jsx
 ```
@@ -266,21 +264,21 @@ _React doesn't wrap primitive values or create empty arrays when there aren't `c
 ```jsx file=./03.jsx  25,28,29,30
 ```
 
-We have the `createElement` function but we are still using React here.
+We are still using React's `createElement`.
 
-In order to replace it let's give a name to our library. We need a name that sounds like React but also makes it clear that it has a _didactic_ purpose.
+In order to replace it, let's give a name to our library. We need a name that sounds like React but also hints its _didactic_ purpose.
 
 ```jsx file=./04.jsx
 ```
 
 We'll call it Didact.
 
-But we still want to use JSX here. How do we tell babel to use Didact's `createElement` instead of React's? A comment.
+But we still want to use JSX here. How do we tell babel to use Didact's `createElement` instead of React's?
 
 ```jsx file=./05.jsx
 ```
 
-If we have a comment like this one in our file, when babel transpiles the JSX it will use the function that we want.
+If we have a comment like this one, when babel transpiles the JSX it will use the function we define.
 
 ```jsx file=./05.jsx 37
 ```
@@ -294,12 +292,12 @@ Next, we need to write our version of the `ReactDOM.render` function.
 
 For now, we only care about adding stuff to the DOM. We'll handle updating and deleting later.
 
-```jsx file=./07.jsx
+```jsx file=./07.jsx 25:29
 ```
 
-We start by creating the dom node using the element type. And then append the new node to the container.
+We start by creating the dom node using the element type, and then append the new node to the container.
 
-```jsx file=./08.jsx
+```jsx file=./08.jsx 25,28:30,33
 ```
 
 We recursively do the same for each child.
@@ -307,7 +305,7 @@ We recursively do the same for each child.
 ```jsx file=./09.jsx
 ```
 
-We also need to handle text elements, if the element type is `TEXT_ELEMENT` we create a textnode instead of a regular node.
+We also need to handle text elements, if the element type is `TEXT_ELEMENT` we create a text node instead of a regular node.
 
 ```jsx file=./10.jsx
 ```
@@ -318,6 +316,8 @@ The last thing we need to do here is assign the element props to the node.
 ```
 
 And that's it. We now have a library that can render JSX to the DOM.
+
+Give it a try in [codesandbox](https://codesandbox.io/s/didact-2-k6rbj).
 
 </CodeWave>
 

@@ -12,6 +12,7 @@
     "@mdx-js/react": "^1.0.6",
     "@theme-ui/prism": "^0.2.29",
     "@theme-ui/typography": "^0.2.25",
+    "@weknow/gatsby-remark-twitter": "^0.2.3",
     "deepmerge": "^4.0.0",
     "gatsby": "^2.13.48",
     "gatsby-image": "^2.2.8",

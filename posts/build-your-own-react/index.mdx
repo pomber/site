@@ -770,11 +770,24 @@ We'll do it the next time we are rendering the component, we get all the actions
 
 Here's the full code, look, it fits in one slide.
 
+You can play with it in [codesandbox](csb).
+
 </CodeWave>
 
-Lorem ipsum dolor sit amet, fugit errem avolumus ex sit, magna fugit deserunt et qui. Sapientem mnesarchum ei vis, offendit appetere inimicus eu has. Te utamur voluptua per. Per dicant intellegebat in. Laboramus referrentur id his, electram philosophia sit an. Possim efficiendi no sea, eu admodum copiosae indoctum mea.
+### Epilogue
 
-Sit eligendi dignissim et, sit eius ancillae voluptatibus te. Ea summo nostrum omnesque sed. Deserunt iracundia definiebas ei est. An vitae reprimique ius, facer timeam cu nam.
+We wrote code similar to React's.
+Code doesnt have many optimizations.
 
-Id quot impetus prodesset eum, et usu iuvaret alienum. Ut amet quaerendum pro, impetus appetere disputando te per. Stet congue ancillae mei in, nam fuisset antiopam id. Ad denique blandit accommodare ius. Solum legere ea sea, per cu affert timeam, meis expetendis intellegebat ex pro.
-Delete me, and get writing!
+To name a few:
+
+- Render the whole tree instead of bail out.
+- On the commit phase we are walking the whole fiber tree. To avoid this, React keeps a linked list with all the fibers that have changes.
+- Recycle the objects from old fiber trees
+- And many more
+
+And if you want to comment, like or share this post you can use this tweet:
+
+https://twitter.com/pomber/status/1158024820015190017
+
+Thanks for reading!

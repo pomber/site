@@ -1,8 +1,10 @@
 /** @jsx jsx */
 import { jsx, Styled } from "theme-ui"
 import { Global } from "@emotion/core"
+import { useTwitterEffect } from "./twitter-effect"
 
 function Layout({ children }) {
+  useTwitterEffect()
   return (
     <Styled.root
       sx={{

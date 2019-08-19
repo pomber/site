@@ -23,6 +23,7 @@ module.exports = {
             },
           },
           "gatsby-remark-smartypants",
+          "@weknow/gatsby-remark-twitter",
         ],
         remarkPlugins: [require(`remark-slug`), require(`remark-import-code`)],
       },

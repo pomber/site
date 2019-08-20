@@ -57,7 +57,7 @@ const theme = merge.all([
       pre: {
         variant: `prism`,
         fontFamily: `monospace`,
-        tabSize: 4,
+        tabSize: 2,
         hyphens: `none`,
         overflow: `auto`,
         borderRadius: 10,
@@ -66,7 +66,7 @@ const theme = merge.all([
         color: "text",
         backgroundColor: "background",
         marginBottom: "28px",
-        whiteSpace: "normal",
+        whiteSpace: "pre-wrap",
       },
       code: {
         fontFamily: `monospace`,

@@ -338,28 +338,31 @@ If the element tree is big, it may block the main thread for too long. And if th
 ```jsx file=./11.jsx
 ```
 
-So what we are going to do is break the work into small units,
-and after we finish each unit
-we'll let the browser interrupt the rendering if there's anything else that needs to be done.
+So we are going to break the work into small units, and after we finish each unit we'll let the browser interrupt the rendering if there's anything else that needs to be done.
 
 ```jsx file=./11.jsx 47,55,56,58
 ```
 
-We use `requestIdleCallback` to make a loop.
-You can think of `requestIdleCallback` as a `setTimeout`, but instead of us telling it when to run, the browser will run tha callback when the main thread is free.
+We use `requestIdleCallback` to make a loop. You can think of `requestIdleCallback` as a `setTimeout`, but instead of us telling it when to run, the browser will run the callback when the main thread is idle.
 
 ```jsx file=./11.jsx 47,48,49,53,54,56
 ```
 
-Also, it gives us a deadline parameter
-We can use it to check how much time we have until the browser needs to take control again.
+`requestIdleCallback` also gives us a deadline parameter. We can use it to check how much time we have until the browser needs to take control again.
 
-Small disclaimer here,
-the concurrent mode is still unstable in the last version of React,
-so unless you explicitly opt-in,
-it will still use a while loop like this one
-but without checking if it should yield to the browser
-End of the disclaimer
+<div>
+
+_As of August 2019, Concurrent Mode isn't stable in React yet. Currently the loop looks more like this:_
+
+```js
+while (nextUnitOfWork) {
+  nextUnitOfWork = performUnitOfWork(
+    nextUnitOfWork
+  )
+}
+```
+
+</div>
 
 ```jsx file=./11.jsx 47,50:52,56,60:62
 ```

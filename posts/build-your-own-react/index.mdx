@@ -364,28 +364,20 @@ while (nextUnitOfWork) {
 
 </div>
 
-```jsx file=./11.jsx 47,50:52,56,60:62
+```jsx file=./11.jsx 45,47,50:52,56,60:62
 ```
 
-What we need to do now, is write a performUnitOfWork function that not only perform the work but also choose the next thing to work on.
-
-Edit -> three things:
-
-- set the first uow
-- perform it
-- choose the next one
+To start using the loop we'll need to set the first unit of work, and then write a `performUnitOfWork` function that not only performs the work but also returns the next unit of work.
 
 </CodeWave>
 
 ### Step IV: Fibers
 
-And for that we need a data structure: a fiber tree.
-Fibers are going to be the units of work, they are just javascript objects, and we will have one for each element in the element tree
+To organize the units of work we'll need a data structure: a fiber tree.
 
-Let's see how the fiber tree will look like with an example.
+We'll have one fiber for each element and each fiber will be a unit of work.
 
-We will create the first unit of work in the render function, this will be the root of the fiber tree.
-The rest of the work will happen in the performUnitOfWork function. Let's see how it works.
+Let me show you with an example.
 
 <ImageWave>
 
@@ -436,14 +428,14 @@ Also, if the `parent` doesn't have a `sibling`, we keep going up through the `pa
 
 </ImageWave>
 
-Now let's put it into code
+Now let's put it into code.
 
 <CodeWave>
 
 ```jsx file=./11.jsx 25:45
 ```
 
-First, let's remove this code from the render function.
+First, let's remove this code from the `render` function.
 
 ```jsx file=./12.jsx 25,39,41:45
 ```
@@ -453,23 +445,22 @@ We keep the part that creates a dom node in its own function, we are going to us
 ```jsx file=./13.jsx 41:50
 ```
 
-In the render function we set nextUnitOfWork to the root of the fiber tree
+In the `render` function we set `nextUnitOfWork` to the root of the fiber tree.
 
 ```jsx file=./13.jsx 52,55:57,61,65:69
 ```
 
-Then, when the browser is ready,
-it will call our workLoop and we'll start working on the root
+Then, when the browser is ready,it will call our `workLoop` and we'll start working on the root.
 
 ```jsx file=./14.jsx
 ```
 
-First, we create a new dom node and append it to the dom
+First, we create a new node and append it to the dom.
 
 ```jsx file=./15.jsx
 ```
 
-Then for each child we create a new fiber
+Then for each child we create a new fiber.
 
 ```jsx file=./16.jsx
 ```
@@ -485,7 +476,7 @@ We first try with the child, then with the sibling, then with the uncle, and so 
 ```jsx file=./17.jsx 65:108
 ```
 
-And that's our `performUnitOfWork`
+And that's our `performUnitOfWork`.
 
 ```jsx file=./17.jsx 65,70:72
 ```
@@ -506,55 +497,45 @@ So we need to remove the part that mutates the DOM from here.
 ```jsx file=./18.1.jsx
 ```
 
-Instead, we'll keep track of the root of the fiber tree.
-We call it the work in progress root
+Instead, we'll keep track of the root of the fiber tree. We call it the work in progress root or `wipRoot`.
 
 ```jsx file=./19.jsx 41:43,58,67:69,72
 ```
 
-and once we finish all the work,
-(we know it because there isnt a next unit of work)
-we commit the fiber tree to the DOM
+And once we finish all the work (we know it because there isn't a next unit of work) we commit the whole fiber tree to the dom.
 
 ```jsx file=./20.jsx 41:54
 ```
 
-We call the commitRoot function,
-And here we recursively append all the nodes to the dom
+We do it in the `commitRoot` function. Here we recursively append all the nodes to the dom.
 
 ### Step VI: Reconciliation
 
-So far we only _added_ stuff to the DOM.
-but what about updating or deleting nodes?
+So far we only _added_ stuff to the dom, but what about updating or deleting nodes?
 
-That's what we are going to do now,
-we need to compare the elements we receive on the render function
-to the last fiber tree we commited to the DOM.
+That's what we are going to do now, we need to compare the elements we receive on the `render` function to the last fiber tree we commited to the dom.
 
-```jsx file=./21.jsx
+```jsx file=./21.jsx 41,43,45,57,58,63,64,66,69
 ```
 
-For that we neeed to save a reference to the root after we finish the commit.
-We call it currentRoot.
-We also add the "alternate" property to every fiber.
-This property is a link to the old fiber,
-the fiber that we commited to the DOM in the previous commit phase.
+So we need to save a reference to that "last fiber tree we commited to the dom" after we finish the commit. We call it `currentRoot`.
+
+We also add the `alternate` property to every fiber. This property is a link to the old fiber, the fiber that we commited to the dom in the previous commit phase.
 
 ```jsx file=./21.jsx 90:129
 ```
 
-Remember in performUnitOfWork, the part were we create new fibers?
-Let's move it to a new function
+Now let's extract the code from `performUnitOfWork` that creates the new fibers...
 
 ```jsx file=./22.jsx 90,95,96,108,110,114[1]
 ```
 
-We extracted the part that create the new fibers
+...to a new `reconcileChildren` function.
 
 ```jsx file=./22.jsx 110,133
 ```
 
-Here we will reconcile the old fibers with the new elements
+Here we will reconcile the old fibers with the new elements.
 
 ```jsx file=./23.jsx
 ```
@@ -787,6 +768,7 @@ To name a few:
 - Render the whole tree instead of bail out.
 - On the commit phase we are walking the whole fiber tree. To avoid this, React keeps a linked list with all the fibers that have changes.
 - Recycle the objects from old fiber trees
+- Priorities
 - And many more
 
 And if you want to comment, like or share this post you can use this tweet:

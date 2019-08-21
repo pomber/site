@@ -774,25 +774,37 @@ You can play with it on [codesandbox](https://codesandbox.io/s/didact-8-21ost).
 
 ### Epilogue
 
-We wrote code similar to React's.
-Code doesnt have many optimizations.
-
 <ImageWave>
 
-![Stack](./stack.png)
+![React call stack](./stack.png)
 
-We wrote code similar to React's.
-Code doesnt have many optimizations.
+Besides helping you understand how React works, one of the goals of this post is to make it easier for you to dive deeper in the React codebase. That's why we used the same variable and function names almost everywhere.
+
+For example, if you add a breakpoint in one of your function components the call stack should show you:
+
+- `workLoop`
+- `performUnitOfWork`
+- `updateFunctionComponent`
 
 </ImageWave>
 
-To name a few:
+We didn't include a lot of React features and optimizations. For example, these are a few things that React does differently:
 
-- Render the whole tree instead of bail out.
-- On the commit phase we are walking the whole fiber tree. To avoid this, React keeps a linked list with all the fibers that have changes.
+- In Didact, we are walking the whole tree during the render phase. React instead follows some hints and heuristics to skip entire sub-trees where nothing changed.
+- We are also walking the whole tree in the commit phase. React keeps a linked list with just the fibers that have effects and only visit those fibers.
 - Recycle the objects from old fiber trees
-- Priorities
-- And many more
+- Every time we build a new work in progress tree, we create new objects for each fiber. React recycles the fibers from the previous trees.
+- When Didact receives a new update during the render phase, it throws away the work in progress tree and starts again from the root. React tags each update with an expiration timestamp and uses it to decide which update has a higher priority.
+- Instead of `requestIdleCallback` React uses its own scheduler
+- And many more...
+
+There are also a few features that you can add easily:
+
+- Use an object for the style prop
+- useEffect hook
+- reconciliation by key
+
+If you add any of these or other features to Didact send a pull request to the [GitHub repo](https://github.com/pomber/didact), so others can see it and comment it.
 
 And if you want to comment, like or share this post you can use this tweet:
 

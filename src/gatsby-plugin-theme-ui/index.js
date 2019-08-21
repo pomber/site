@@ -140,7 +140,8 @@ const theme = merge.all([
           Sticker: {
             position: ["static", "sticky"],
             width: "100%",
-            height: ["100%", "60vh"],
+            height: "100%",
+            maxHeight: ["100%", "60vh"],
             top: ["auto", "20vh"],
           },
           // this is used to select the active scroller step

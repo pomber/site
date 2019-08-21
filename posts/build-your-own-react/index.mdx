@@ -714,61 +714,61 @@ And when removing a node we also need to keep going until we find a child with a
 
 ### Step VIII: Hooks
 
-Last step
-
-Now that we have function components let's also add state.
+Last step. Now that we have function components let's also add state.
 
 ```jsx file=./45.jsx
 ```
 
-Let's change our example again, and use the classic counter component.
-Each time we click it, it increments the state by one
+Let's change our example to the classic counter component. Each time we click it, it increments the state by one.
+
+Note that we are using `Didact.useState` to get and update the counter value.
 
 ```jsx file=./46.jsx 195,196,198:202
 ```
 
-Here is where we call the Counter function from the example. And inside that function we call useState.
+Here is where we call the `Counter` function from the example. And inside that function we call `useState`.
 
-```jsx file=./47.jsx
+```jsx file=./47.jsx 195:201,202[21:43],204
 ```
 
-We need to initialize some global variables _before_ calling the function component,
-so we can use them inside of the useState function.
+We need to initialize some global variables before calling the function component so we can use them inside of the `useState` function.
+
 First we set the work in progress fiber.
-Then we keep track of the hook index, starting at 0.
-And we also add an empty hook array to the fiber.
 
-```jsx file=./48.jsx
+We also add a `hooks` array to the fiber to support calling `useState` several times in the same component. And we keep track of the current hook index.
+
+```jsx file=./48.jsx 206:218
 ```
 
-When the function component calls useState, we check if we have an old hook.
-We check in the alternate of the fiber using the hook index.
-If we do, we copy the state from the old hook to the new hook,
+When the function component calls `useState`, we check if we have an old hook. We check in the `alternate` of the fiber using the hook index.
+
+If we have an old hook, we copy the state from the old hook to the new hook,
 if we don't we intialize the state.
 
 Then we add the new hook to the fiber, increment the hook index by one, and return the state.
 
-```jsx file=./49.jsx
+```jsx file=./49.jsx 211,213:225,229
 ```
 
-useState should also return a function to update the state.
-So we define a setState function that receives an action, for the Counter example this action is the function that increments the state by one.
-We push that action to a queue we added to the hook.
-And then we do something similar to what we did in the render function, set a new work in progress root as the next unit of work so the work loop can start a new render phase.
+`useState` should also return a function to update the state, so we define a `setState` function that receives an action (for the `Counter` example this action is the function that increments the state by one).
 
-But we haven't run the action yet
+We push that action to a queue we added to the hook.
+
+And then we do something similar to what we did in the `render` function, set a new work in progress root as the next unit of work so the work loop can start a new render phase.
 
 ```jsx file=./50.jsx
 ```
 
-We'll do it the next time we are rendering the component, we get all the actions from the old hook queue, and then apply them one by one to the new hook state, so when we return the state it's updated. And that's all.
+But we haven't run the action yet.
+
+We do it the next time we are rendering the component, we get all the actions from the old hook queue, and then apply them one by one to the new hook state, so when we return the state it's updated.
 
 ```jsx file=./50.jsx 1:319
 ```
 
-Here's the full code, look, it fits in one slide.
+And that's all. We've built our own version of React.
 
-You can play with it on [codesandbox](csb).
+You can play with it on [codesandbox](https://codesandbox.io/s/didact-8-21ost).
 
 </CodeWave>
 
@@ -776,6 +776,15 @@ You can play with it on [codesandbox](csb).
 
 We wrote code similar to React's.
 Code doesnt have many optimizations.
+
+<ImageWave>
+
+![Stack](./stack.png)
+
+We wrote code similar to React's.
+Code doesnt have many optimizations.
+
+</ImageWave>
 
 To name a few:
 

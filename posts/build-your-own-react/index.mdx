@@ -317,7 +317,7 @@ The last thing we need to do here is assign the element props to the node.
 
 And that's it. We now have a library that can render JSX to the DOM.
 
-Give it a try in [codesandbox](https://codesandbox.io/s/didact-2-k6rbj).
+Give it a try on [codesandbox](https://codesandbox.io/s/didact-2-k6rbj).
 
 </CodeWave>
 
@@ -537,88 +537,91 @@ Now let's extract the code from `performUnitOfWork` that creates the new fibers.
 
 Here we will reconcile the old fibers with the new elements.
 
-```jsx file=./23.jsx
+```jsx file=./23.jsx 110:113,116:120,123
 ```
 
-So, inside this while, the two variables that matter are the element and the oldFiber.
-the element is the thing we want to render to the dom
-and the oldFiber is what we rendered the last time,
-how do we compare them?
+We iterate at the same time over the children of the old fiber (`wipFiber.alternate`) and the array of elements we want to reconcile.
+
+If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with that matter inside this while: `oldFiber` and `element`. The `element` is the thing we want to render to the dom and the `oldFiber` is what we rendered the last time.
+
+We need to compare them to see if there's any change we need to apply to the dom.
 
 ```jsx file=./24.jsx
 ```
 
-We use the type
-if the old fiber and the new element have the same type, we can keep the dom node and just update it with the new props
-if the type is different and there is a new element, it means we need to create a new dom node.
-and if the types are different and there is an old fiber, we need to remove the old node
+To compare them we use the type:
 
-Here React also uses keys, that makes a better reconciliation,
-but we are not doing that, we want to keep it simple, or simpler.
+- if the old fiber and the new element have the same type, we can keep the dom node and just update it with the new props
 
-```jsx file=./25.jsx
+- if the type is different and there is a new element, it means we need to create a new dom node
+
+- and if the types are different and there is an old fiber, we need to remove the old node
+
+_Here React also uses keys, that makes a better reconciliation. For example, it detects when children change places in the elements array._
+
+```jsx file=./25.jsx 123:137
 ```
 
-Ok, for the case of the update, we can keep the dom node from the old fiber.
-And here we are adding a new property, the effectTag, which we we'll use later, on the commit phase.
+When the old fiber and the element have the same type, we create a new fiber keeping the dom node from the old fiber and the props from the element.
 
-```jsx file=./26.jsx
+We also add a new property to the fiber: the `effectTag`. We'll use this property later, on the commit phase.
+
+```jsx file=./26.jsx 138:147
 ```
 
-Then for the case where the element needs a new dom node we tag the new fiber with the PLACEMENT effect tag.
+Then for the case where the element needs a new dom node we tag the new fiber with the `PLACEMENT` effect tag.
 
-```jsx file=./27.jsx
+```jsx file=./27.jsx 148:151
 ```
 
 And for the case where we need to delete the node, we don't have a new fiber so we add the effect tag to the old fiber.
 
-But when we commit the fiber tree to the DOM we do it from the work in progress root, which doesn't have the old fibers.
+But when we commit the fiber tree to the dom we do it from the work in progress root, which doesn't have the old fibers.
 
-```jsx file=./28.jsx
+```jsx file=./28.jsx 57,65,67,72
 ```
 
 So we need an array to keep track of the nodes we want to remove.
 
-```jsx file=./29.jsx
+```jsx file=./29.jsx 41,42,46
 ```
 
-and then when we are commiting the changes to the DOM we also use the fibers from that array
+And then, when we are commiting the changes to the dom, we also use the fibers from that array.
 
 ```jsx file=./29.jsx 48:56
 ```
 
-Now, let's change the commitWork function to handle the new effectTags
+Now, let's change the `commitWork` function to handle the new `effectTags`.
 
 ```jsx file=./30.jsx
 ```
 
-If the fiber has a PLACEMENT effect tag we do the same as before, append the dom node to the node from the parent fiber
+If the fiber has a `PLACEMENT` effect tag we do the same as before, append the dom node to the node from the parent fiber.
 
 ```jsx file=./31.jsx
 ```
 
-If it's a DELETION, we do the opposite, remove the child
+If it's a `DELETION`, we do the opposite, remove the child.
 
 ```jsx file=./32.jsx
 ```
 
-And if it's an UPDATE, we need to update the existing dom node with the props that changed.
+And if it's an `UPDATE`, we need to update the existing dom node with the props that changed.
 
 ```jsx file=./33.jsx
 ```
 
-We'll do it in this updateDom function
+We'll do it in this `updateDom` function.
 
 ```jsx file=./34.jsx 36:56
 ```
 
-We compare the props from the old fiber to the props of the new fiber,
-remove the props that are gone, and set the props that are new or changed.
+We compare the props from the old fiber to the props of the new fiber, remove the props that are gone, and set the props that are new or changed.
 
 ```jsx file=./35.jsx
 ```
 
-One special kind of prop that we need to update are event listeners, so if the prop name starts with th "on" prefix, we'll handle them differently.
+One special kind of prop that we need to update are event listeners, so if the prop name starts with the "on" prefix we'll handle them differently.
 
 ```jsx file=./36.jsx
 ```
@@ -630,14 +633,20 @@ If the event handler changed we remove it from the node.
 
 And then we add the new handler.
 
-```jsx file=./38.jsx
+</CodeWave>
+
+Try the version with reconciliation on [codesandbox](https://codesandbox.io/s/didact-6-96533).
+
+<CodeWave>
+
+```jsx file=./38.jsx 245:251
 ```
 
 ### Step VII: Function Components
 
 The next thing we need to add is support for function components.
 
-First let's change the example, we'll use this simple function component, that returns an h1 element.
+First let's change the example. We'll use this simple function component, that returns an `h1` element.
 
 Note that if we transform the jsx to js, it will be:
 
@@ -659,41 +668,46 @@ const element = Didact.createElement(App, {
 
 </div>
 
-```jsx file=./38.jsx 162:165
+```jsx file=./38.jsx 162:168
 ```
 
-For function components we won't have a dom node, so let's add an if here
+Function components are differents in two ways:
+
+- the fiber from a function component doesn't have a dom node
+- and the children come from running the function instead of getting them directly from the `props`
 
 ```jsx file=./41.jsx
 ```
 
-We check if the fiber type is a function, and depending on that we go to updateFunctionComponent or updateHostComponent.
-In updateHostComponent we do the same as before
-And in updateFunctionComponent we'll do something similar
+We check if the fiber type is a function, and depending on that we go to a different update function.
+
+In `updateHostComponent` we do the same as before.
 
 ```jsx file=./42.jsx
 ```
 
-The diference with host components is the way we get the children.
-Instead of getting them directly from the props we need to run the function
-For our example, here the fiber.type is the App function and when we run it, it returns the h1 element
+And in `updateFunctionComponent` we run the function to get the children.
+
+For our example, here the `fiber.type` is the `App` function and when we run it, it returns the `h1` element.
+
 Then, once we have the children, the reconciliation works in the same way, we don't need to change anything there.
 
 ```jsx file=./42.jsx 99:125
 ```
 
-What we need to change is the commitWork function
-Now that we have fibers without dom nodes we need to change two things
+What we need to change is the `commitWork` function.
 
-```jsx file=./43.jsx
+Now that we have fibers without dom nodes we need to change two things.
+
+```jsx file=./43.jsx 104:108,114
 ```
 
-First, to find the parent of a dom node we'll need togo up the fiber tree until we find a fiber with a dom node
+First, to find the parent of a dom node we'll need to go up the fiber tree until we find a fiber with a dom node.
 
 ```jsx file=./44.jsx
 ```
 
-And when removing a node we also need to keep going until we find a child with a dom node
+And when removing a node we also need to keep going until we find a child with a dom node.
 
 ```jsx file=./44.jsx 270:276
 ```
@@ -754,7 +768,7 @@ We'll do it the next time we are rendering the component, we get all the actions
 
 Here's the full code, look, it fits in one slide.
 
-You can play with it in [codesandbox](csb).
+You can play with it on [codesandbox](csb).
 
 </CodeWave>
 

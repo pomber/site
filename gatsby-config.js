@@ -24,8 +24,9 @@ module.exports = {
           },
           "gatsby-remark-smartypants",
           "@weknow/gatsby-remark-twitter",
+          "gatsby-remark-import-code",
         ],
-        remarkPlugins: [require(`remark-slug`), require(`remark-import-code`)],
+        remarkPlugins: [require(`remark-slug`)],
       },
     },
     {

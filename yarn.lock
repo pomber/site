@@ -5592,6 +5592,14 @@ gatsby-remark-images@^3.1.8:
     unist-util-select "^1.5.0"
     unist-util-visit-parents "^2.0.1"
 
+gatsby-remark-import-code@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-import-code/-/gatsby-remark-import-code-0.1.1.tgz#7cefff965f6f2c58685f7dab51359713e9f37bed"
+  integrity sha512-sFIgQbMlY5o3DHIHpVO8F4vca9JP1PHIZr9QtElDAPEzwSd5Bxig5OC/ztGhgmZtXpjX5/eazHtrsGwVdLZ6MQ==
+  dependencies:
+    shell-quote "^1.6.1"
+    unist-util-visit "^1.4.1"
+
 gatsby-remark-smartypants@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/gatsby-remark-smartypants/-/gatsby-remark-smartypants-2.1.2.tgz#19786139811eb77c42b78e6acd3f8b9a017d6b7a"
@@ -10497,14 +10505,6 @@ relay-runtime@2.0.0:
   dependencies:
     "@babel/runtime" "^7.0.0"
     fbjs "^1.0.0"
-
-remark-import-code@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/remark-import-code/-/remark-import-code-0.0.2.tgz#49e3ff233efae86803914d177147777ec73310d7"
-  integrity sha512-oDobrlQDt1m4gnIOov3rG6xMFt7tYmbQPSzAjNMRW/bwV8Mmt1XRX7dOMNiutRSeKcwL2SyvE4DnoBlhoN1PbQ==
-  dependencies:
-    shell-quote "^1.6.1"
-    unist-util-visit "^1.4.1"
 
 remark-mdx@^1.2.2:
   version "1.2.2"

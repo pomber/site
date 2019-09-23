@@ -102,14 +102,17 @@ function Page({ children }) {
                 fontWeight: 700,
                 display: "inline",
               }}
+              contentEditable
             >
               Blog Post
             </Styled.h4>
-            <small sx={{ ml: 2 }}>August 27, 2019</small>
-            <Styled.h1 sx={{ fontSize: "30px", mb: "20px" }}>
+            <small sx={{ ml: 2 }} contentEditable>
+              August 27, 2019
+            </small>
+            <Styled.h1 sx={{ fontSize: "30px", mb: "20px" }} contentEditable>
               Build your own React
             </Styled.h1>
-            <Styled.p sx={{ p: 0, m: 0, fontSize: "14px" }}>
+            <Styled.p sx={{ p: 0, m: 0, fontSize: "14px" }} contentEditable>
               We are going to rewrite React from scratch. Step by step.
               Following the architecture from the real React code…
             </Styled.p>

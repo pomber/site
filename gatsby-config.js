@@ -27,6 +27,7 @@ module.exports = {
           "gatsby-remark-import-code",
         ],
         remarkPlugins: [require(`remark-slug`)],
+        rehypePlugins: [require(`rehype-waves`)],
       },
     },
     {

@@ -763,6 +763,30 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@code-surfer/standalone@3.0.0-alpha.3":
+  version "3.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@code-surfer/standalone/-/standalone-3.0.0-alpha.3.tgz#d03a46384f2ce431f168126c031b9540a11d1e00"
+  integrity sha512-rRkXMlIGFK4Fr8Y52OIEhp1RuVnbDEIqbzsuxD+jrNRitbRyA1GTEcVX/S5NOzKx9aSAC7qbpdDIcEQ/3Go/xA==
+  dependencies:
+    "@code-surfer/step-parser" "3.0.0-alpha.3"
+    "@types/table" "^4.0.7"
+    "@types/theme-ui" "^0.2.2"
+    array.prototype.flat "^1.2.1"
+    diff "^4.0.1"
+    prismjs "^1.16.0"
+    rebound "^0.1.0"
+    shell-quote "^1.6.1"
+
+"@code-surfer/step-parser@3.0.0-alpha.3":
+  version "3.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@code-surfer/step-parser/-/step-parser-3.0.0-alpha.3.tgz#22b81addfa14f34fb82cb06858abc3cb2a354c3f"
+  integrity sha512-LqB7b+8VHQ84ulBh5yRTXyDKVdYRYZ0eLVlR6FnXOwCYBhhSkYntI+za+87WjfWCheRO0wzUdxhhA24fjaOI4g==
+  dependencies:
+    array.prototype.flat "^1.2.1"
+    diff "^4.0.1"
+    prismjs "^1.16.0"
+    shell-quote "^1.6.1"
+
 "@emotion/babel-plugin-jsx-pragmatic@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin-jsx-pragmatic/-/babel-plugin-jsx-pragmatic-0.1.3.tgz#e06489b00bda80304e7198be76f448dd267df397"
@@ -1391,10 +1415,15 @@
   dependencies:
     csstype "^2.6.6"
 
-"@types/theme-ui@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@types/theme-ui/-/theme-ui-0.2.0.tgz#6ac815ce8974b5650d04e104affc16fc73b54ed7"
-  integrity sha512-ir3sCWszCnlwj1hRk7oREYGeLvASa6XffMsKg9AVCxxiu0Hngg9jUYQF5PPAsi56v9KGdSm1NFTj+Plx2ZfFHg==
+"@types/table@^4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@types/table/-/table-4.0.7.tgz#c21100d37d4924abbbde85414170260d4d7b0316"
+  integrity sha512-HKtXvBxU8U8evZCSlUi9HbfT/SFW7nSGCoiBEheB06jAhXeW6JbGh8biEAqIFG5rZo9f8xeJVdIn455sddmIcw==
+
+"@types/theme-ui@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@types/theme-ui/-/theme-ui-0.2.2.tgz#06c8e51bf231ce643f7ce859d6309d104e18a4d9"
+  integrity sha512-c6kGvo8GeLGw92nbH3jGCzJHmJQ838fwo4Pst7WoYkUwOar2fIDCW70DRdW+mFXrvA1l1jPUY0bwYwwjXFjhZA==
   dependencies:
     "@types/react" "*"
     "@types/styled-system" "*"
@@ -3084,18 +3113,6 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
-
-code-surfer@3.0.0-alpha.1:
-  version "3.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/code-surfer/-/code-surfer-3.0.0-alpha.1.tgz#a4d8e81259ab7c26628c32fd28c025c039caedb5"
-  integrity sha512-GWQ/bnxpfQj9ca3XiiM+pFcZVazMzlC//6z5gpRgmevohSEMUCyOrHrBJsI04EiizyMrgGXKTBdpYaoTv7dpYA==
-  dependencies:
-    "@types/theme-ui" "^0.2.0"
-    array.prototype.flat "^1.2.1"
-    diff "^4.0.1"
-    prismjs "^1.16.0"
-    rebound "^0.1.0"
-    shell-quote "^1.6.1"
 
 collapse-white-space@^1.0.0, collapse-white-space@^1.0.2:
   version "1.0.5"
@@ -5654,15 +5671,16 @@ gatsby-telemetry@^1.1.9:
     stack-utils "1.0.2"
     uuid "3.3.2"
 
-gatsby-theme-waves@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/gatsby-theme-waves/-/gatsby-theme-waves-0.1.1.tgz#a8e13d1bf68924bc934343428c2043877c92dec9"
-  integrity sha512-EVAvPbIbcR7CK7avKJVa9hY5ZRyYOuvs+xw5oTBwdLUYHroPm0GDFOAiYS7DR8HZziScCltMxmIyjE11C1HBow==
+gatsby-theme-waves@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/gatsby-theme-waves/-/gatsby-theme-waves-0.1.3.tgz#1b194ee74f7858f91404766520dec27eb0a29d45"
+  integrity sha512-SC0CVB7K4cV1apZ0uL2tQ4KT/mcSBA4ZJokwS3m7TSCsP0A07avvn5WfTUkmHNZyJ46Uafj+5JQQMj1ik3xdUQ==
   dependencies:
+    "@code-surfer/standalone" "3.0.0-alpha.3"
     "@mdx-js/react" "^1.0.21"
-    code-surfer "3.0.0-alpha.1"
     rebound "^0.1.0"
     shell-quote "^1.6.1"
+    use-spring "^0.1.1"
 
 gatsby-transformer-sharp@^2.2.5:
   version "2.2.5"
@@ -10498,6 +10516,15 @@ regjsparser@^0.6.0:
   dependencies:
     jsesc "~0.5.0"
 
+rehype-waves@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/rehype-waves/-/rehype-waves-0.1.3.tgz#966ed2778e0c36c7d40a67322816c89adb581870"
+  integrity sha512-CymXiYsFMXZaEy7AMYC5uiU9luD+bAqIp5omWtDp1pPX/pw0ftSLg1yIQYPjiy5Z79FcD0680Z+De6yWZ4uH4w==
+  dependencies:
+    "@code-surfer/step-parser" "3.0.0-alpha.3"
+    shell-quote "^1.7.2"
+    unist-util-visit "^2.0.0"
+
 relay-runtime@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-2.0.0.tgz#0e42df90365cc69f104f7e4b20fdcf975f5a9c0b"
@@ -11127,6 +11154,11 @@ shell-quote@1.6.1, shell-quote@^1.6.1:
     array-map "~0.0.0"
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
+
+shell-quote@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
+  integrity sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==
 
 sift@^5.1.0:
   version "5.1.0"
@@ -12445,7 +12477,7 @@ unist-util-visit-parents@^3.0.0:
     "@types/unist" "^2.0.3"
     unist-util-is "^4.0.0"
 
-unist-util-visit@2.0.0:
+unist-util-visit@2.0.0, unist-util-visit@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-2.0.0.tgz#1fdae5ea88251651bfe49b7e84390d664fc227c5"
   integrity sha512-kiTpWKsF54u/78L/UU/i7lxrnqGiEWBgqCpaIZBYP0gwUC+Akq0Ajm4U8JiNIoQNfAioBdsyarnOcTEAb9mLeQ==
@@ -12577,6 +12609,11 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-spring@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/use-spring/-/use-spring-0.1.1.tgz#fa213d32db2cbde949e6fd5a1230a9c5f1efa618"
+  integrity sha512-hhYZHPCyiOj/OF8NZqobxsxZbb2RrIreeOnxgXUojxNWZbWmCTENcQFes7iyujPkwyDPXmXx/Ntyr9zaIq7XYA==
 
 use@^3.1.0:
   version "3.1.1"

@@ -10516,10 +10516,10 @@ regjsparser@^0.6.0:
   dependencies:
     jsesc "~0.5.0"
 
-rehype-waves@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/rehype-waves/-/rehype-waves-0.1.3.tgz#966ed2778e0c36c7d40a67322816c89adb581870"
-  integrity sha512-CymXiYsFMXZaEy7AMYC5uiU9luD+bAqIp5omWtDp1pPX/pw0ftSLg1yIQYPjiy5Z79FcD0680Z+De6yWZ4uH4w==
+rehype-waves@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/rehype-waves/-/rehype-waves-0.1.4.tgz#2c5d39e125daf13bbb929b35a8e5eeba35d9c1f2"
+  integrity sha512-VOY0Cp2XV6dUuCVOVjA+a5iTJzOYsqdH12w9UQujFbOSXEW0MyaazlGCfaxAiZAxFLyLcIyOvgDSqroLQOh3Aw==
   dependencies:
     "@code-surfer/step-parser" "3.0.0-alpha.3"
     shell-quote "^1.7.2"

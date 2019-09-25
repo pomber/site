@@ -34,7 +34,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-toggle": "^4.0.2",
-    "rehype-waves": "^0.1.3",
+    "rehype-waves": "^0.1.4",
     "remark-slug": "^5.1.2",
     "theme-ui": "^0.2.31",
     "typeface-merriweather": "^0.0.72",

@@ -1,15 +1,35 @@
 export default [
   {
-    type: "blog post",
-    title: "Build your own React",
-    description:
-      "We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code…",
-    date: "2019/08/27",
-    url: "/build-your-own-react",
+    type: "project",
+    title: "Code Surfer",
+    description: "Rad code slides",
+    date: "2019/10/16",
+    url: "https://codesurfer.pomb.us",
   },
   {
     type: "project",
-    title: "Gatsby Theme Waves",
+    title: "Codem Ipsum",
+    description: "Lorem ipsum but for code",
+    date: "2019/09/27",
+    url: "https://codemipsum.pomb.us",
+  },
+  {
+    type: "project",
+    title: "use-spring",
+    description: "Minimal React hook for spring animations",
+    date: "2019/09/24",
+    url: "https://github.com/pomber/use-spring",
+  },
+  {
+    type: "project",
+    title: "Spring Editor",
+    description: "Stiffness? Damping? Mass? Spring Editor",
+    date: "2019/09/22",
+    url: "https://springs.pomb.us",
+  },
+  {
+    type: "project",
+    title: "Gatsby Waves",
     description: "Bring scrollytelling to your MDX",
     date: "2019/08/01",
     url: "https://waves.pomb.us/",
@@ -20,13 +40,6 @@ export default [
     description: "— at jsday 2019",
     date: "2019/05/09",
     url: "https://youtu.be/8Kc2REHdwnQ",
-  },
-  {
-    type: "project",
-    title: "Code Surfer",
-    description: "Rad code slides",
-    date: "2019/05/06",
-    url: "https://github.com/pomber/code-surfer",
   },
   {
     type: "blog post",

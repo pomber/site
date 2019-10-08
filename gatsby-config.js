@@ -9,6 +9,27 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+    "gatsby-theme-waves",
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 420,
+              linkImagesToOriginal: false,
+            },
+          },
+          "gatsby-remark-smartypants",
+          "@weknow/gatsby-remark-twitter",
+          "gatsby-remark-import-code",
+        ],
+        remarkPlugins: [require(`remark-slug`)],
+        // rehypePlugins: [require(`rehype-waves`)],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -16,8 +37,14 @@ module.exports = {
         path: `${__dirname}/static/`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `posts`,
+        name: `posts`,
+      },
+    },
   ],
-
   siteMetadata: {
     title: "Rodrigo Pombo",
     description,

@@ -138,6 +138,56 @@ The first attribute is `elevation`, an angle between `0` and `180`. Think of `el
 
 <DistantWidget />
 
+```html
+<svg width="0" height="0">
+  <filter id="point-light">
+    <feDiffuseLighting
+      in="SourceGraphic"
+      surfaceScale="10"
+      lighting-color="#FDB813"
+    >
+      <fePointLight x="0.5" y="0" z="0.5" />
+    </feDiffuseLighting>
+  </filter>
+</svg>
+<h1 style="filter: url(#point-light)">
+  Hello
+</h1>
+```
+
+## Point Light
+
+Point lights work like light bulbs, they are close to the surface and shine light in all directions.
+
+import PointLightWidget from "./point-light.jsx"
+
+<PointLightWidget />
+
+```html
+<svg width="0" height="0">
+  <filter id="point-light">
+    <feDiffuseLighting
+      in="SourceGraphic"
+      surfaceScale="10"
+      lighting-color="#FDB813"
+    >
+      <feSpotLight x="0.5" y="0" z="0.5" />
+    </feDiffuseLighting>
+  </filter>
+</svg>
+<h1 style="filter: url(#point-light)">
+  Hello
+</h1>
+```
+
+## Spot Light
+
+Spotlights are like... well, spotlights. The difference with point lights is that the light is directed to a point on the surface.
+
+import SpotLightWidget from "./spot-light.jsx"
+
+<SpotLightWidget />
+
 </CodeWave>
 
 Notes:

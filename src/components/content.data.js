@@ -1,6 +1,13 @@
 export default [
   {
     type: "project",
+    title: "Hitchcock",
+    description: "A debugging tool for React Suspense",
+    date: "2019/10/27",
+    url: "https://github.com/pomber/hitchcock",
+  },
+  {
+    type: "project",
     title: "Code Surfer",
     description: "Rad code slides",
     date: "2019/10/16",
@@ -88,13 +95,6 @@ export default [
     date: "2018/10/24",
     url:
       "https://blog.usejournal.com/classes-where-were-going-we-don-t-need-classes-react-16-6-e643ffc8c38d",
-  },
-  {
-    type: "project",
-    title: "Hitchcock",
-    description: "A debugging tool for React Suspense",
-    date: "2018/10/20",
-    url: "https://github.com/pomber/hitchcock",
   },
   {
     type: "talk",

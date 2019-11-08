@@ -16,7 +16,7 @@ export default function SpotLightWidget() {
   const width = 220
   const height = 100
 
-  if (typeof window === "undefined") return
+  if (typeof window === "undefined") return null
 
   return (
     <div>

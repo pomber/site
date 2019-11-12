@@ -763,12 +763,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@code-surfer/standalone@3.0.0-alpha.3":
-  version "3.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@code-surfer/standalone/-/standalone-3.0.0-alpha.3.tgz#d03a46384f2ce431f168126c031b9540a11d1e00"
-  integrity sha512-rRkXMlIGFK4Fr8Y52OIEhp1RuVnbDEIqbzsuxD+jrNRitbRyA1GTEcVX/S5NOzKx9aSAC7qbpdDIcEQ/3Go/xA==
+"@code-surfer/standalone@3.0.0-beta.1":
+  version "3.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@code-surfer/standalone/-/standalone-3.0.0-beta.1.tgz#3740d0f675c46528a215731ecc55443e5fee7f4b"
+  integrity sha512-D9LVRyhhZ60v/RGs8uUNUhNlegGL/uPMc0zwovjJ1ZR90gBxxAbG4eK00hM7VnmR7K7Cij9l60KcPdcizthKaQ==
   dependencies:
-    "@code-surfer/step-parser" "3.0.0-alpha.3"
+    "@code-surfer/step-parser" "3.0.0-beta.1"
+    "@code-surfer/themes" "3.0.0-beta.1"
     "@types/table" "^4.0.7"
     "@types/theme-ui" "^0.2.2"
     array.prototype.flat "^1.2.1"
@@ -786,6 +787,21 @@
     diff "^4.0.1"
     prismjs "^1.16.0"
     shell-quote "^1.6.1"
+
+"@code-surfer/step-parser@3.0.0-beta.1":
+  version "3.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@code-surfer/step-parser/-/step-parser-3.0.0-beta.1.tgz#1a1342fa03365b9b69b2ab45f90a9a5a4b512ab6"
+  integrity sha512-hau7gWFL2rSC657XCkYR66G/0zOJOAA5sOjCj7rxy0JQBD1r4A4BVtjPFxtCpFLslaA1BBXj2VWgi9z1LJfvYw==
+  dependencies:
+    array.prototype.flat "^1.2.1"
+    diff "^4.0.1"
+    prismjs "^1.16.0"
+    shell-quote "^1.6.1"
+
+"@code-surfer/themes@3.0.0-beta.1":
+  version "3.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@code-surfer/themes/-/themes-3.0.0-beta.1.tgz#2284e77c7b5a14063e01101c3c976e9046e95100"
+  integrity sha512-vS32tmnLTPVHdsAiVe0ou7qku3nsAZXSmpLeV3ADM+9a8xS2wp7ov8In252q0tX5a0jSK1B/pV7gP8i2T9n7hQ==
 
 "@emotion/babel-plugin-jsx-pragmatic@^0.1.3":
   version "0.1.3"
@@ -5671,12 +5687,12 @@ gatsby-telemetry@^1.1.9:
     stack-utils "1.0.2"
     uuid "3.3.2"
 
-gatsby-theme-waves@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/gatsby-theme-waves/-/gatsby-theme-waves-0.1.3.tgz#1b194ee74f7858f91404766520dec27eb0a29d45"
-  integrity sha512-SC0CVB7K4cV1apZ0uL2tQ4KT/mcSBA4ZJokwS3m7TSCsP0A07avvn5WfTUkmHNZyJ46Uafj+5JQQMj1ik3xdUQ==
+gatsby-theme-waves@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/gatsby-theme-waves/-/gatsby-theme-waves-0.1.5.tgz#90517bb20f2fc0bbb0914a4181df8e5f450493cd"
+  integrity sha512-FviU4mn35AAxqqvGKuqjb5M2R47evz0A+xbGMw7DU2z7/39wFUf1B6qEDSf8r0kQ6MugXahDhu0q3//D/S9y9g==
   dependencies:
-    "@code-surfer/standalone" "3.0.0-alpha.3"
+    "@code-surfer/standalone" "3.0.0-beta.1"
     "@mdx-js/react" "^1.0.21"
     rebound "^0.1.0"
     shell-quote "^1.6.1"

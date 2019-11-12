@@ -27,7 +27,7 @@
     "gatsby-remark-import-code": "^0.1.1",
     "gatsby-remark-smartypants": "^2.1.2",
     "gatsby-source-filesystem": "^2.1.8",
-    "gatsby-theme-waves": "^0.1.3",
+    "gatsby-theme-waves": "^0.1.5",
     "gatsby-transformer-sharp": "^2.2.5",
     "mdx-utils": "^0.2.0",
     "react": "^16.8.6",

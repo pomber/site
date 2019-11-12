@@ -1,20 +1,18 @@
 ---
 title: Build your own React
-date: 2019-08-27
+date: 2019-11-13
 ---
 
 import { CodeWave } from "gatsby-theme-waves"
 import ImageWave from "../../src/components/image-wave"
 
-> ⚠️ This is a draft, I'm still writing this post. Subscribe to the merge event on [this PR](https://github.com/pomber/site/pull/3) to receive a notification when I publish it.
-
 We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code but without all the optimizations and non-essential features.
 
 If you've read any of [my previous "build your own React" posts](https://engineering.hexacta.com/didact-learning-how-react-works-by-building-it-from-scratch-51007984e5c5), the difference is that this post is based on React 16.8, so we can now use hooks and drop all the code related to classes.
 
-You can find the history with the old blog posts and the code on the [Didact repo](https://github.com/pomber/didact). There's also a [talk covering the same content](https://youtu.be/8Kc2REHdwnQ).
+You can find the history with the old blog posts and the code on the [Didact repo](https://github.com/pomber/didact). There's also a [talk covering the same content](https://youtu.be/8Kc2REHdwnQ). But this is a self-contained post. 
 
-But this is a self-contained post. Starting from scratch, these are all the things we'll add to our version of React one by one:
+Starting from scratch, these are all the things we'll add to our version of React one by one:
 
 - **Step I**: The `createElement` Function
 - **Step II**: The `render` Function
@@ -77,7 +75,7 @@ const container = document.getElementById("root")
 ReactDOM.render(element, container)
 ```
 
-And this is what an element is, an object with two properties: `type` and `props` (well, it has more, but we only care about these two).
+And this is what an element is, an object with two properties: `type` and `props` (well, [it has more](https://github.com/facebook/react/blob/f4cc45ce962adc9f307690e1d5cfa28a288418eb/packages/react/src/ReactElement.js#L111), but we only care about these two).
 
 The `type` is a string that specifies the type of the dom node we want to create, it's the `tagName` you pass to `document.createElement` when you want to create an HTML element. It can also be a function, but we'll leave that for Step VII.
 
@@ -347,24 +345,14 @@ So we are going to break the work into small units, and after we finish each uni
 
 We use `requestIdleCallback` to make a loop. You can think of `requestIdleCallback` as a `setTimeout`, but instead of us telling it when to run, the browser will run the callback when the main thread is idle.
 
+_React [doesn't use `requestIdleCallback` anymore](https://github.com/facebook/react/issues/11171#issuecomment-417349573). Now it uses the [scheduler package](https://github.com/facebook/react/tree/master/packages/scheduler). But for this use case it's conceptually the same._
+
+
 ```jsx file=./11.jsx 47,48,49,53,54,56
 ```
 
 `requestIdleCallback` also gives us a deadline parameter. We can use it to check how much time we have until the browser needs to take control again.
 
-<div>
-
-_As of August 2019, Concurrent Mode isn't stable in React yet. Currently the loop looks more like this:_
-
-```js
-while (nextUnitOfWork) {
-  nextUnitOfWork = performUnitOfWork(
-    nextUnitOfWork
-  )
-}
-```
-
-</div>
 
 ```jsx file=./11.jsx 45,47,50:52,56,60:62
 ```
@@ -459,6 +447,8 @@ Then, when the browser is ready,it will call our `workLoop` and we'll start work
 
 First, we create a new node and append it to the dom.
 
+We keep track of the dom node in the `fiber.dom` property. 
+
 ```jsx file=./15.jsx
 ```
 
@@ -491,7 +481,7 @@ We are adding a new node to the dom each time we work on an element.
 And, remember, the browser could interrupt our work before we finish rendering the whole tree.
 In that case, the user will see an incomplete UI. And we don't want that.
 
-```jsx file=./18.jsx 41,42,48,50,70[1]
+```jsx file=./18.jsx 65,72[1]
 ```
 
 So we need to remove the part that mutates the DOM from here.
@@ -544,7 +534,7 @@ Here we will reconcile the old fibers with the new elements.
 
 We iterate at the same time over the children of the old fiber (`wipFiber.alternate`) and the array of elements we want to reconcile.
 
-If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with that matter inside this while: `oldFiber` and `element`. The `element` is the thing we want to render to the dom and the `oldFiber` is what we rendered the last time.
+If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with that matter inside this while: `oldFiber` and `element`. **The `element` is the thing we want to render to the dom and the `oldFiber` is what we rendered the last time.**
 
 We need to compare them to see if there's any change we need to apply to the dom.
 
@@ -559,7 +549,7 @@ To compare them we use the type:
 
 - and if the types are different and there is an old fiber, we need to remove the old node
 
-_Here React also uses keys, that makes a better reconciliation. For example, it detects when children change places in the elements array._
+_Here React also uses keys, that makes a better reconciliation. For example, it detects when children change places in the element array._
 
 ```jsx file=./25.jsx 123:137
 ```
@@ -585,10 +575,12 @@ But when we commit the fiber tree to the dom we do it from the work in progress 
 
 So we need an array to keep track of the nodes we want to remove.
 
+
 ```jsx file=./29.jsx 41,42,46
 ```
 
 And then, when we are commiting the changes to the dom, we also use the fibers from that array.
+
 
 ```jsx file=./29.jsx 48:56
 ```
@@ -770,7 +762,7 @@ We do it the next time we are rendering the component, we get all the actions fr
 
 And that's all. We've built our own version of React.
 
-You can play with it on [codesandbox](https://codesandbox.io/s/didact-8-21ost).
+You can play with it on [codesandbox](https://codesandbox.io/s/didact-8-21ost) or [github](https://github.com/pomber/didact).
 
 </CodeWave>
 
@@ -778,7 +770,7 @@ You can play with it on [codesandbox](https://codesandbox.io/s/didact-8-21ost).
 
 Besides helping you understand how React works, one of the goals of this post is to make it easier for you to dive deeper in the React codebase. That's why we used the same variable and function names almost everywhere.
 
-For example, if you add a breakpoint in one of your function components the call stack should show you:
+For example, if you add a breakpoint in one of your function components in a real React app, the call stack should show you:
 
 - `workLoop`
 - `performUnitOfWork`
@@ -788,22 +780,22 @@ We didn't include a lot of React features and optimizations. For example, these 
 
 - In Didact, we are walking the whole tree during the render phase. React instead follows some hints and heuristics to skip entire sub-trees where nothing changed.
 - We are also walking the whole tree in the commit phase. React keeps a linked list with just the fibers that have effects and only visit those fibers.
-- Recycle the objects from old fiber trees
 - Every time we build a new work in progress tree, we create new objects for each fiber. React recycles the fibers from the previous trees.
 - When Didact receives a new update during the render phase, it throws away the work in progress tree and starts again from the root. React tags each update with an expiration timestamp and uses it to decide which update has a higher priority.
-- Instead of `requestIdleCallback` React uses its own scheduler
 - And many more...
 
 There are also a few features that you can add easily:
 
-- Use an object for the style prop
+- use an object for the style prop
+- [flatten children arrays](https://github.com/pomber/didact/issues/11)
 - useEffect hook
 - reconciliation by key
 
-If you add any of these or other features to Didact send a pull request to the [GitHub repo](https://github.com/pomber/didact), so others can see it and comment it.
+If you add any of these or other features to Didact send a pull request to the [GitHub repo](https://github.com/pomber/didact), so others can see it.
+
+Thanks for reading!
 
 And if you want to comment, like or share this post you can use this tweet:
 
 https://twitter.com/pomber/status/1158024820015190017
 
-Thanks for reading!

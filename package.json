@@ -43,6 +43,7 @@
   },
   "scripts": {
     "start": "gatsby develop",
+    "clean": "gatsby clean",
     "start:public": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build"
   }

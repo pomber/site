@@ -1,13 +1,6 @@
 export default [
   {
     type: "project",
-    title: "Hitchcock",
-    description: "A debugging tool for React Suspense",
-    date: "2019/10/27",
-    url: "https://github.com/pomber/hitchcock",
-  },
-  {
-    type: "project",
     title: "Code Surfer",
     description: "Rad code slides",
     date: "2019/11/14",
@@ -20,6 +13,13 @@ export default [
       "We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code...",
     date: "2019/11/13",
     url: "/build-your-own-react",
+  },
+  {
+    type: "project",
+    title: "Hitchcock",
+    description: "A debugging tool for React Suspense",
+    date: "2019/10/27",
+    url: "https://github.com/pomber/hitchcock",
   },
   {
     type: "project",

@@ -353,6 +353,19 @@ _React [doesn't use `requestIdleCallback` anymore](https://github.com/facebook/r
 
 `requestIdleCallback` also gives us a deadline parameter. We can use it to check how much time we have until the browser needs to take control again.
 
+<div>	
+
+_As of November 2019, Concurrent Mode isn't stable in React yet. The stable version of the loop looks more like this:_	
+
+```js	
+while (nextUnitOfWork) {	
+  nextUnitOfWork = performUnitOfWork(	
+    nextUnitOfWork	
+  )	
+}	
+```	
+
+</div>
 
 ```jsx file=./11.jsx 45,47,50:52,56,60:62
 ```

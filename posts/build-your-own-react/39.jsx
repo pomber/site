@@ -243,7 +243,7 @@ const Didact = {
 }
 
 /** @jsx Didact.createElement */
-function App({ props }) {
+function App(props) {
   return Didact.createElement(
     "h1",
     null,

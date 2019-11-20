@@ -255,7 +255,7 @@ const Didact = {
 }
 
 /** @jsx Didact.createElement */
-function App({ props }) {
+function App(props) {
   return <h1>Hi {props.name}</h1>
 }
 const element = <App name="foo" />

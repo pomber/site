@@ -332,7 +332,7 @@ But... before we start adding more code we need a refactor.
 
 There's a problem with this recursive call.
 
-Once we start rendering, we won't stop until we rendered all the element tree.
+Once we start rendering, we won't stop until we have rendered the complete element tree.
 If the element tree is big, it may block the main thread for too long. And if the browser needs to do high priority stuff like handling user input or keeping an animation smooth, it will have to wait until the render finishes.
 
 ```jsx file=./11.jsx
@@ -427,7 +427,7 @@ For example, the `p` fiber doesn't have a `child` so we move to the `a` fiber af
 
 And if the fiber doesn't have a `child` nor a `sibling` we go to the "uncle": the `sibling` of the `parent`. Like `a` and `h2` fibers from the example.
 
-Also, if the `parent` doesn't have a `sibling`, we keep going up through the `parent`s until we find one with a `sibling` or until we reach the root. If we reached the root, it means we finished performing all the work for this `render`.
+Also, if the `parent` doesn't have a `sibling`, we keep going up through the `parent`s until we find one with a `sibling` or until we reach the root. If we have reached the root, it means we have finished performing all the work for this `render`.
 
 </ImageWave>
 
@@ -470,7 +470,7 @@ Then for each child we create a new fiber.
 ```jsx file=./16.jsx
 ```
 
-And we add it to the fiber tree setting it either as a child or as a sibling, dependig if it's the first child or not.
+And we add it to the fiber tree setting it either as a child or as a sibling, depending on whether it's the first child or not.
 
 ```jsx file=./17.jsx
 ```
@@ -547,7 +547,7 @@ Here we will reconcile the old fibers with the new elements.
 
 We iterate at the same time over the children of the old fiber (`wipFiber.alternate`) and the array of elements we want to reconcile.
 
-If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with that matter inside this while: `oldFiber` and `element`. **The `element` is the thing we want to render to the dom and the `oldFiber` is what we rendered the last time.**
+If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with what matters most inside this while: `oldFiber` and `element`. **The `element` is the thing we want to render to the dom and the `oldFiber` is what we rendered the last time.**
 
 We need to compare them to see if there's any change we need to apply to the dom.
 
@@ -569,7 +569,7 @@ _Here React also uses keys, that makes a better reconciliation. For example, it 
 
 When the old fiber and the element have the same type, we create a new fiber keeping the dom node from the old fiber and the props from the element.
 
-We also add a new property to the fiber: the `effectTag`. We'll use this property later, on the commit phase.
+We also add a new property to the fiber: the `effectTag`. We'll use this property later, during the commit phase.
 
 ```jsx file=./26.jsx 138:147
 ```

@@ -545,9 +545,9 @@ Here we will reconcile the old fibers with the new elements.
 ```jsx file=./23.jsx 110:113,116:120,123
 ```
 
-At the same time we iterate over the children of the old fiber (`wipFiber.alternate`) and the array of elements we want to reconcile.
+We iterate at the same time over the children of the old fiber (`wipFiber.alternate`) and the array of elements we want to reconcile.
 
-If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with that matter inside this while: `oldFiber` and `element`. **The `element` is the thing we want to render to the dom and the `oldFiber` is what we rendered the last time.**
+If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with what matters most inside this while: `oldFiber` and `element`. **The `element` is the thing we want to render to the dom and the `oldFiber` is what we rendered the last time.**
 
 We need to compare them to see if there's any change we need to apply to the dom.
 

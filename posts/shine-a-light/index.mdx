@@ -1,9 +1,14 @@
 ---
 title: Shine a Light on CSS filters
-date: 2019-10-27
+date: 2019-12-27
 ---
 
 import { CodeWave } from "gatsby-theme-waves"
+
+
+I've been playing with applying lighting filters to HTML elements, so let me show you the basics of CSS filters, SVG filters, and physics of lights.
+
+> Browser support for some of these features isn't the best, so if you have trouble with the demos try using Chrome or Firefox.
 
 <CodeWave>
 
@@ -13,11 +18,46 @@ import { CodeWave } from "gatsby-theme-waves"
 </h1>
 ```
 
-We can apply a number of graphical effects to any HTML element using the `filter` CSS property:
+We can apply a number of graphical effects to any HTML element using the `filter` CSS property.
+
+For example we can blur an `h1` like this:
 
 <h1 style="filter: blur(3px)">Hello World</h1>
 
-There are ten different [CSS filter functions](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function). We've already saw `blur`, the otheres allow us to change brightness, contrast, shadow, opacity, etc.
+
+```html 1[5:49]
+<h1 style="filter: drop-shadow(2px 6px 2px pink)">
+  Hello World
+</h1>
+```
+
+Or add a shadow:
+
+<h1 style="filter: drop-shadow(2px 6px 2px pink)">Hello World</h1>
+
+`blur` and `drop-shadow` are two of ten different [CSS filter functions](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function). 
+
+
+```html 1[5:38]
+<h1 style="filter: url(#my-filter-id)">
+  Hello World
+</h1>
+```
+
+The most powerful of these CSS filter functions is `url`. 
+
+```html 1:5,6[5:38]
+<svg width="0" height="0">
+  <filter id="my-filter-id">
+    ...
+  </filter>
+</svg>
+<h1 style="filter: url(#my-filter-id)">
+  Hello World
+</h1>
+```
+
+With `url` we can use any SVG filter from CSS. 
 
 ```html 1:13,14[12:37]
 <svg width="0" height="0">
@@ -54,7 +94,7 @@ We can build our own filters using primitive effects like `feTurbulence` and `fe
   Hello World
 </h1>
 
-There are more than twenty [SVG filter effects](https://developer.mozilla.org/en-US/docs/Web/SVG/Element#Filter_primitive_elements) that can be combined together to build very complex stuff.
+There are more than twenty [SVG filter effects](https://developer.mozilla.org/en-US/docs/Web/SVG/Element#Filter_primitive_elements) that can be combined to build very complex stuff.
 
 //TODO link to complex example
 

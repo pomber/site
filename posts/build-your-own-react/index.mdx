@@ -77,7 +77,7 @@ ReactDOM.render(element, container)
 
 And this is what an element is, an object with two properties: `type` and `props` (well, [it has more](https://github.com/facebook/react/blob/f4cc45ce962adc9f307690e1d5cfa28a288418eb/packages/react/src/ReactElement.js#L111), but we only care about these two).
 
-The `type` is a string that specifies the type of the dom node we want to create, it's the `tagName` you pass to `document.createElement` when you want to create an HTML element. It can also be a function, but we'll leave that for Step VII.
+The `type` is a string that specifies the type of the DOM node we want to create, it's the `tagName` you pass to `document.createElement` when you want to create an HTML element. It can also be a function, but we'll leave that for Step VII.
 
 `props` is another object, it has all the keys and values from the JSX attributes. It also has a special property: `children`.
 
@@ -98,7 +98,7 @@ ReactDOM.render(element, container)
 
 The other piece of React code we need to replace is the call to `ReactDOM.render`.
 
-`render` is where React changes the dom, so let's do the updates ourselves.
+`render` is where React changes the DOM, so let's do the updates ourselves.
 
 ```jsx 1,2,4,7,11,12
 const element = {
@@ -221,7 +221,7 @@ As we saw in the previous step, an element is an object with `type` and `props`.
 ```jsx file=./02.jsx
 ```
 
-We use the _spread operator_ for the `props` and the _rest parameter syntax_ for the `children`, this way the `children` prop will allways be an array.
+We use the _spread operator_ for the `props` and the _rest parameter syntax_ for the `children`, this way the `children` prop will always be an array.
 
 <div>
 
@@ -295,7 +295,7 @@ For now, we only care about adding stuff to the DOM. We'll handle updating and d
 ```jsx file=./07.jsx 25:29
 ```
 
-We start by creating the dom node using the element type, and then append the new node to the container.
+We start by creating the DOM node using the element type, and then append the new node to the container.
 
 ```jsx file=./08.jsx 25,28:30,33
 ```
@@ -403,7 +403,7 @@ Didact.render(
 
 In the `render` we'll create the root fiber and set it as the `nextUnitOfWork`. The rest of the work will happen on the `performUnitOfWork` function, there we will do three things for each fiber:
 
-1. add the element to the dom
+1. add the element to the DOM
 2. create the fibers for the element's children
 3. select the next unit of work
 
@@ -443,7 +443,7 @@ First, let's remove this code from the `render` function.
 ```jsx file=./12.jsx 25,39,41:45
 ```
 
-We keep the part that creates a dom node in its own function, we are going to use it later.
+We keep the part that creates a DOM node in its own function, we are going to use it later.
 
 ```jsx file=./13.jsx 41:50
 ```
@@ -458,9 +458,9 @@ Then, when the browser is ready,it will call our `workLoop` and we'll start work
 ```jsx file=./14.jsx
 ```
 
-First, we create a new node and append it to the dom.
+First, we create a new node and append it to the DOM.
 
-We keep track of the dom node in the `fiber.dom` property. 
+We keep track of the DOM node in the `fiber.dom` property. 
 
 ```jsx file=./15.jsx
 ```
@@ -490,7 +490,7 @@ And that's our `performUnitOfWork`.
 
 We have another problem here.
 
-We are adding a new node to the dom each time we work on an element.
+We are adding a new node to the DOM each time we work on an element.
 And, remember, the browser could interrupt our work before we finish rendering the whole tree.
 In that case, the user will see an incomplete UI. And we don't want that.
 
@@ -507,7 +507,7 @@ Instead, we'll keep track of the root of the fiber tree. We call it the work in 
 ```jsx file=./19.jsx 41:43,58,67:69,72
 ```
 
-And once we finish all the work (we know it because there isn't a next unit of work) we commit the whole fiber tree to the dom.
+And once we finish all the work (we know it because there isn't a next unit of work) we commit the whole fiber tree to the DOM.
 
 ```jsx file=./20.jsx 41:54
 ```
@@ -516,16 +516,16 @@ We do it in the `commitRoot` function. Here we recursively append all the nodes 
 
 ### Step VI: Reconciliation
 
-So far we only _added_ stuff to the dom, but what about updating or deleting nodes?
+So far we only _added_ stuff to the DOM, but what about updating or deleting nodes?
 
-That's what we are going to do now, we need to compare the elements we receive on the `render` function to the last fiber tree we commited to the dom.
+That's what we are going to do now, we need to compare the elements we receive on the `render` function to the last fiber tree we committed to the DOM.
 
 ```jsx file=./21.jsx 41,43,45,57,58,63,64,66,69
 ```
 
-So we need to save a reference to that "last fiber tree we commited to the dom" after we finish the commit. We call it `currentRoot`.
+So we need to save a reference to that "last fiber tree we committed to the DOM" after we finish the commit. We call it `currentRoot`.
 
-We also add the `alternate` property to every fiber. This property is a link to the old fiber, the fiber that we commited to the dom in the previous commit phase.
+We also add the `alternate` property to every fiber. This property is a link to the old fiber, the fiber that we committed to the DOM in the previous commit phase.
 
 ```jsx file=./21.jsx 90:129
 ```
@@ -547,18 +547,18 @@ Here we will reconcile the old fibers with the new elements.
 
 We iterate at the same time over the children of the old fiber (`wipFiber.alternate`) and the array of elements we want to reconcile.
 
-If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with what matters most inside this while: `oldFiber` and `element`. **The `element` is the thing we want to render to the dom and the `oldFiber` is what we rendered the last time.**
+If we ignore all the boilerplate needed to iterate over an array and a linked list at the same time, we are left with what matters most inside this while: `oldFiber` and `element`. **The `element` is the thing we want to render to the DOM and the `oldFiber` is what we rendered the last time.**
 
-We need to compare them to see if there's any change we need to apply to the dom.
+We need to compare them to see if there's any change we need to apply to the DOM.
 
 ```jsx file=./24.jsx
 ```
 
 To compare them we use the type:
 
-- if the old fiber and the new element have the same type, we can keep the dom node and just update it with the new props
+- if the old fiber and the new element have the same type, we can keep the DOM node and just update it with the new props
 
-- if the type is different and there is a new element, it means we need to create a new dom node
+- if the type is different and there is a new element, it means we need to create a new DOM node
 
 - and if the types are different and there is an old fiber, we need to remove the old node
 
@@ -567,21 +567,21 @@ _Here React also uses keys, that makes a better reconciliation. For example, it 
 ```jsx file=./25.jsx 123:137
 ```
 
-When the old fiber and the element have the same type, we create a new fiber keeping the dom node from the old fiber and the props from the element.
+When the old fiber and the element have the same type, we create a new fiber keeping the DOM node from the old fiber and the props from the element.
 
 We also add a new property to the fiber: the `effectTag`. We'll use this property later, during the commit phase.
 
 ```jsx file=./26.jsx 138:147
 ```
 
-Then for the case where the element needs a new dom node we tag the new fiber with the `PLACEMENT` effect tag.
+Then for the case where the element needs a new DOM node we tag the new fiber with the `PLACEMENT` effect tag.
 
 ```jsx file=./27.jsx 148:151
 ```
 
 And for the case where we need to delete the node, we don't have a new fiber so we add the effect tag to the old fiber.
 
-But when we commit the fiber tree to the dom we do it from the work in progress root, which doesn't have the old fibers.
+But when we commit the fiber tree to the DOM we do it from the work in progress root, which doesn't have the old fibers.
 
 ```jsx file=./28.jsx 57,65,67,72
 ```
@@ -592,7 +592,7 @@ So we need an array to keep track of the nodes we want to remove.
 ```jsx file=./29.jsx 41,42,46
 ```
 
-And then, when we are commiting the changes to the dom, we also use the fibers from that array.
+And then, when we are commiting the changes to the DOM, we also use the fibers from that array.
 
 
 ```jsx file=./29.jsx 48:56
@@ -603,7 +603,7 @@ Now, let's change the `commitWork` function to handle the new `effectTags`.
 ```jsx file=./30.jsx
 ```
 
-If the fiber has a `PLACEMENT` effect tag we do the same as before, append the dom node to the node from the parent fiber.
+If the fiber has a `PLACEMENT` effect tag we do the same as before, append the DOM node to the node from the parent fiber.
 
 ```jsx file=./31.jsx
 ```
@@ -613,7 +613,7 @@ If it's a `DELETION`, we do the opposite, remove the child.
 ```jsx file=./32.jsx
 ```
 
-And if it's an `UPDATE`, we need to update the existing dom node with the props that changed.
+And if it's an `UPDATE`, we need to update the existing DOM node with the props that changed.
 
 ```jsx file=./33.jsx
 ```
@@ -680,7 +680,7 @@ const element = Didact.createElement(App, {
 
 Function components are differents in two ways:
 
-- the fiber from a function component doesn't have a dom node
+- the fiber from a function component doesn't have a DOM node
 - and the children come from running the function instead of getting them directly from the `props`
 
 ```jsx file=./41.jsx
@@ -704,17 +704,17 @@ Then, once we have the children, the reconciliation works in the same way, we do
 
 What we need to change is the `commitWork` function.
 
-Now that we have fibers without dom nodes we need to change two things.
+Now that we have fibers without DOM nodes we need to change two things.
 
 ```jsx file=./43.jsx 104:108,114
 ```
 
-First, to find the parent of a dom node we'll need to go up the fiber tree until we find a fiber with a dom node.
+First, to find the parent of a DOM node we'll need to go up the fiber tree until we find a fiber with a DOM node.
 
 ```jsx file=./44.jsx
 ```
 
-And when removing a node we also need to keep going until we find a child with a dom node.
+And when removing a node we also need to keep going until we find a child with a DOM node.
 
 ```jsx file=./44.jsx 270:276
 ```
@@ -750,7 +750,7 @@ We also add a `hooks` array to the fiber to support calling `useState` several t
 When the function component calls `useState`, we check if we have an old hook. We check in the `alternate` of the fiber using the hook index.
 
 If we have an old hook, we copy the state from the old hook to the new hook,
-if we don't we intialize the state.
+if we don't we initialize the state.
 
 Then we add the new hook to the fiber, increment the hook index by one, and return the state.
 

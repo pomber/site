@@ -1,9 +1,9 @@
-export default [
+module.exports = [
   {
     type: "project",
-    title: "Code Surfer",
+    title: "Code Surfer v3",
     description: "Rad code slides",
-    date: "2019/11/14",
+    date: "2019/12/10",
     url: "https://codesurfer.pomb.us",
   },
   {

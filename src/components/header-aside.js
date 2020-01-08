@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { Twitter, Medium, GitHub, Patreon } from "./social-icons"
+import { Twitter, Medium, GitHub, RSS } from "./social-icons"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
@@ -42,7 +42,8 @@ function HeaderAside() {
         <Twitter />
         <GitHub />
         <Medium />
-        <Patreon />
+        {/* <Patreon /> */}
+        <RSS />
       </div>
     </div>
   )

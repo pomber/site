@@ -54,4 +54,22 @@ function RSS() {
   )
 }
 
-export { Twitter, GitHub, Medium, Patreon, RSS }
+function SocialIcons() {
+  return (
+    <div
+      sx={{
+        pt: 2,
+        mx: ["auto", 0],
+        textAlign: "center",
+        "& > :not(:last-child)": { pr: 3 },
+      }}
+    >
+      <Twitter />
+      <GitHub />
+      <Medium />
+      <RSS />
+    </div>
+  )
+}
+
+export { Twitter, GitHub, Medium, Patreon, RSS, SocialIcons }

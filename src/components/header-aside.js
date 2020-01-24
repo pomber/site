@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { Twitter, Medium, GitHub, RSS } from "./social-icons"
+import { SocialIcons } from "./social-icons"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
@@ -31,20 +31,7 @@ function HeaderAside() {
         }}
         alt="Rodrigo Pombo"
       />
-      <div
-        sx={{
-          pt: 2,
-          mx: ["auto", 0],
-          textAlign: "center",
-          "& > :not(:last-child)": { pr: 3 },
-        }}
-      >
-        <Twitter />
-        <GitHub />
-        <Medium />
-        {/* <Patreon /> */}
-        <RSS />
-      </div>
+      <SocialIcons />
     </div>
   )
 }

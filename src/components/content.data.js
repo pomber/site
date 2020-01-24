@@ -1,6 +1,13 @@
 module.exports = [
   {
     type: "project",
+    title: "CSS Dragon Illusion",
+    description: "A CSS-only optical illusion",
+    date: "2020/01/22",
+    url: "https://codepen.io/pomber/full/povqmoX",
+  },
+  {
+    type: "project",
     title: "Code Surfer v3",
     description: "Rad code slides",
     date: "2019/12/10",

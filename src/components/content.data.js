@@ -1,5 +1,12 @@
 module.exports = [
   {
+    type: "blog post",
+    title: "Open Source Spotlight",
+    description: "I was interviewed in BrowserStack's blog",
+    date: "2020/02/17",
+    url: "https://www.browserstack.com/blog/open-source-spotlight-git-history-with-rodrigo-pombo/",
+  },
+  {
     type: "project",
     title: "CSS Dragon Illusion",
     description: "A CSS-only optical illusion",

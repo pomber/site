@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 
-function Icon({ url, title, children }) {
+function Icon({ url, title, children, size = 24 }) {
   return (
     <a href={url} sx={{ color: "inherit" }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
+        viewBox={`0 0 ${size} ${size}`}
         height="28"
         width="28"
         fill="currentColor"
@@ -46,5 +46,30 @@ function Patreon() {
     </Icon>
   )
 }
+function RSS() {
+  return (
+    <Icon url="/rss.xml" title="RSS" size="16">
+      <path d="m7,16c0,-3.86599 -3.13401,-7 -7,-7l0,-3c5.52285,0 10,4.47715 10,10l-3,0zm-5,0c-1.10457,0 -2,-0.89543 -2,-2c0,-1.10457 0.89543,-2 2,-2c1.10457,0 2,0.89543 2,2c0,1.10457 -0.89543,2 -2,2zm11,0c0,-7.1797 -5.8203,-13 -13,-13l0,-3c8.83656,0 16,7.16344 16,16l-3,0zm0,0" />
+    </Icon>
+  )
+}
 
-export { Twitter, GitHub, Medium, Patreon }
+function SocialIcons() {
+  return (
+    <div
+      sx={{
+        pt: 2,
+        mx: ["auto", 0],
+        textAlign: "center",
+        "& > :not(:last-child)": { pr: 3 },
+      }}
+    >
+      <Twitter />
+      <GitHub />
+      <Medium />
+      <RSS />
+    </div>
+  )
+}
+
+export { Twitter, GitHub, Medium, Patreon, RSS, SocialIcons }

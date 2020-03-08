@@ -6,6 +6,19 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import ContentWithAside from "../components/content-with-aside"
+import { SocialIcons } from "./social-icons"
+
+const PostFooter = () => {
+  return (
+    <footer sx={{ paddingTop: 3, textAlign: "center" }}>
+      <p sx={{ fontSize: "2rem", letterSpacing: "0.3em" }}>***</p>
+      <p>
+        Explore more on <Styled.a href="/">pomb.us</Styled.a>
+      </p>
+      <SocialIcons />
+    </footer>
+  )
+}
 
 const Post = ({ data: { post, card }, location }) => (
   <Layout location={location}>
@@ -34,6 +47,7 @@ const Post = ({ data: { post, card }, location }) => (
         }
       />
       <MDXRenderer>{post.body}</MDXRenderer>
+      <PostFooter />
     </main>
   </Layout>
 )

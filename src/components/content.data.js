@@ -1,10 +1,39 @@
-export default [
+module.exports = [
+  {
+    type: "blog post",
+    title: "Open Source Spotlight",
+    description: "I was interviewed in BrowserStack's blog",
+    date: "2020/02/17",
+    url: "https://www.browserstack.com/blog/open-source-spotlight-git-history-with-rodrigo-pombo/",
+  },
   {
     type: "project",
-    title: "Code Surfer",
+    title: "CSS Dragon Illusion",
+    description: "A CSS-only optical illusion",
+    date: "2020/01/22",
+    url: "https://codepen.io/pomber/full/povqmoX",
+  },
+  {
+    type: "project",
+    title: "Code Surfer v3",
     description: "Rad code slides",
-    date: "2019/10/16",
+    date: "2019/12/10",
     url: "https://codesurfer.pomb.us",
+  },
+  {
+    type: "blog post",
+    title: "Build your own React",
+    description:
+      "We are going to rewrite React from scratch. Step by step. Following the architecture from the real React code...",
+    date: "2019/11/13",
+    url: "/build-your-own-react",
+  },
+  {
+    type: "project",
+    title: "Hitchcock",
+    description: "A debugging tool for React Suspense",
+    date: "2019/10/27",
+    url: "https://github.com/pomber/hitchcock",
   },
   {
     type: "project",
@@ -88,13 +117,6 @@ export default [
     date: "2018/10/24",
     url:
       "https://blog.usejournal.com/classes-where-were-going-we-don-t-need-classes-react-16-6-e643ffc8c38d",
-  },
-  {
-    type: "project",
-    title: "Hitchcock",
-    description: "A debugging tool for React Suspense",
-    date: "2018/10/20",
-    url: "https://github.com/pomber/hitchcock",
   },
   {
     type: "talk",

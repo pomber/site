@@ -140,7 +140,7 @@ const theme = merge.all([
           Sticker: {
             position: ["static", "sticky"],
             width: "100%",
-            height: "100%",
+            height: ["100%", "60vh"],
             maxHeight: ["100%", "60vh"],
             top: ["auto", "20vh"],
           },

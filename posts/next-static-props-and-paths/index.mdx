@@ -1,0 +1,232 @@
+---
+title: Next.js Static Props
+date: 2020-03-22
+---
+
+import {
+  HikeWave,
+  View,
+  Browser,
+  Editor,
+} from "../../src/components/hike"
+
+<HikeWave>
+
+<View><Browser url="https://some.now.sh" height={300} /></View>
+
+In this post we are going to build a small NextJS app using some of its newest game-changing features: `getStaticProps` and `getStaticPaths`.
+
+The app downloads a JSON file with some Coronavirus stats from a public URL, it shows an `index` page with a chart and a table using the data from the last day. The table has links to pages for each country showing a timeseries chart for that country.
+
+> Disclaimer: It isn't the purpose of this post to build accurate charts and data
+
+The JSON file has data for each country and for each day from the last months. The file is updated once per day.
+
+If you want, try to think how would you build this site and then continue reading this post.
+
+<View><Editor height={350} /></View>
+
+We first initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). If you are coding along run this on an empty folder.
+
+```bash
+yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
+```
+
+Then add the scripts section to the `package.json`
+
+```json
+{
+  "dependencies": {
+    "@nivo/stream": "0.59.0",
+    "@nivo/treemap": "0.59.0",
+    "next": "^9.3.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+```
+
+<View>
+  <Editor height={350} />
+  <Browser url="https://some.now.sh" height={300} />
+</View>
+
+Let's create a `pages/index.js` and run the dev server
+
+```jsx
+export default function HomePage() {
+  return (
+    <>
+      <h1>Hello</h1>
+    </>
+  )
+}
+```
+
+```bash
+yarn dev
+```
+
+> https://x1-965tkyiws.now.sh/
+
+---
+
+Build a naive version first. A client side rendered page. We download the html and js, then React runs and download the JSON, and when the download finished we show something.
+
+```jsx
+export default function HomePage() {
+  const [data, setData] = React.useState()
+  React.useEffect(() => {
+    fetch(
+      "https://pomber.github.io/covid19/timeseries.json"
+    )
+      .then(response => response.json())
+      .then(data => setData(data))
+  }, [])
+
+  if (!data) {
+    return <h1>Loading...</h1>
+  }
+
+  return (
+    <>
+      <h1>Loaded</h1>
+    </>
+  )
+}
+```
+
+> https://x1-i6qvdxal6.now.sh/
+
+The JSON we are downloading looks like this:
+
+```json
+{
+  China: [
+    {},
+    ...,
+    {}
+  ]
+}
+```
+
+Let's start by displaying the last date from the JSON:
+
+```jsx
+export default function HomePage() {
+  const [data, setData] = React.useState()
+  React.useEffect(async () => {
+    const response = await fetch("")
+    const data = await response.json()
+    setData(data)
+  }, [])
+
+  if (!data) {
+    return (
+      <>
+        <h1>Loading...</h1>
+      </>
+    )
+  }
+
+  const { lastDate } = transform(data)
+
+  return (
+    <>
+      <h1>Coronavirus {lastDate}</h1>
+    </>
+  )
+}
+
+function transform(data) {
+  const countries = Object.keys(data)
+  const firstCountry = data[countries[0]]
+  return {
+    lastDate:
+      firstCountry[firstCountry.length - 1].date,
+  }
+}
+```
+
+> https://x1-q04u5abja.now.sh/
+
+---
+
+// move from client side to ssg
+// tell about ssr (better SEO, less "loading...") but we are still downlading and transforming the json for everyrequest (now on the server)
+
+// note that getStaticProps doesn't run on the browser, it runs on Node at build time. So we can't use the browser fetch
+
+```jsx
+import fetch from "node-fetch"
+
+export async function getStaticProps() {
+  const response = await fetch(
+    "https://pomber.github.io/covid19/timeseries.json"
+  )
+  const data = await response.json()
+  const { lastDate } = transform(data)
+
+  return {
+    props: { lastDate },
+  }
+}
+
+export default function HomePage({ lastDate }) {
+  return (
+    <>
+      <h1>Coronavirus {lastDate}</h1>
+    </>
+  )
+}
+
+function transform(data) {
+  const countries = Object.keys(data)
+  const firstCountry = data[countries[0]]
+  return {
+    lastDate:
+      firstCountry[firstCountry.length - 1].date,
+  }
+}
+```
+
+> https://x1-hpye19f6q.now.sh/
+
+---
+
+// do something more interesting, render the table
+
+> https://x1-5p8jjgqz9.now.sh/
+
+---
+
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
+
+> https://x1-bx780mpxy.now.sh/
+
+```jsx
+```
+
+Cool thing is, the chart is rendered even if we disable javascript.
+
+---
+
+Let's make the add links
+
+---
+
+---
+
+https://nextjs.org/blog/next-9-3
+https://nextjs.org/blog/next-9
+https://nextjs.org/docs/basic-features/data-fetching
+https://nextjs.org/docs/routing/dynamic-routes
+
+</HikeWave>

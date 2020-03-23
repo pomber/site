@@ -1,7 +1,7 @@
 module.exports = [
   {
     type: "blog post",
-    title: "NextJS getStaticProps and getStaticPaths",
+    title: "NextJS Static Props",
     description:
       "A small NextJS app using some of its newest game-changing features",
     date: "2020/03/22",

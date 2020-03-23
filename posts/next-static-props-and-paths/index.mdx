@@ -3,18 +3,14 @@ title: Next.js Static Props
 date: 2020-03-22
 ---
 
-import {
-  HikeWave,
-  View,
-  Browser,
-  Editor,
-} from "../../src/components/hike"
-
-<HikeWave>
-
-<View><Browser url="https://some.now.sh" height={300} /></View>
+import { HikeWave, View } from "./trail-wave.js"
+import trail  from "./views"
 
 In this post we are going to build a small NextJS app using some of its newest game-changing features: `getStaticProps` and `getStaticPaths`.
+
+<HikeWave trail={trail}>
+
+<View />
 
 The app downloads a JSON file with some Coronavirus stats from a public URL, it shows an `index` page with a chart and a table using the data from the last day. The table has links to pages for each country showing a timeseries chart for that country.
 
@@ -24,7 +20,7 @@ The JSON file has data for each country and for each day from the last months. T
 
 If you want, try to think how would you build this site and then continue reading this post.
 
-<View><Editor height={350} /></View>
+<View />
 
 We first initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). If you are coding along run this on an empty folder.
 
@@ -51,10 +47,7 @@ Then add the scripts section to the `package.json`
 }
 ```
 
-<View>
-  <Editor height={350} />
-  <Browser url="https://some.now.sh" height={300} />
-</View>
+<View />
 
 Let's create a `pages/index.js` and run the dev server
 
@@ -68,13 +61,16 @@ export default function HomePage() {
 }
 ```
 
+> Make sure you have yarn installed
+
 ```bash
+yarn
 yarn dev
 ```
 
 > https://x1-965tkyiws.now.sh/
 
----
+<View />
 
 Build a naive version first. A client side rendered page. We download the html and js, then React runs and download the JSON, and when the download finished we show something.
 
@@ -103,6 +99,10 @@ export default function HomePage() {
 
 > https://x1-i6qvdxal6.now.sh/
 
+
+<View />
+
+
 The JSON we are downloading looks like this:
 
 ```json
@@ -114,6 +114,8 @@ The JSON we are downloading looks like this:
   ]
 }
 ```
+
+<View />
 
 Let's start by displaying the last date from the JSON:
 
@@ -155,7 +157,7 @@ function transform(data) {
 
 > https://x1-q04u5abja.now.sh/
 
----
+<View />
 
 // move from client side to ssg
 // tell about ssr (better SEO, less "loading...") but we are still downlading and transforming the json for everyrequest (now on the server)
@@ -197,13 +199,13 @@ function transform(data) {
 
 > https://x1-hpye19f6q.now.sh/
 
----
+<View />
 
 // do something more interesting, render the table
 
 > https://x1-5p8jjgqz9.now.sh/
 
----
+<View />
 
 So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
 
@@ -216,11 +218,25 @@ Let's show a chart with some stats.
 
 Cool thing is, the chart is rendered even if we disable javascript.
 
----
+
+<View />
 
 Let's make the add links
 
----
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
+
+
+<View />
+
+Let's make the add links
+
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
+
+
 
 ---
 

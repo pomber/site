@@ -115,7 +115,7 @@ function TabsContainer({ files, active }) {
         </Tab>
       ))}
       <div style={{ flex: 1 }} />
-      <CopyAllButton />
+      {/* <CopyAllButton /> */}
       <GitHubLink href="#" />
     </div>
   )

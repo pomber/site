@@ -1,11 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import React from "react"
-import { BrowserIframe } from "./browser"
-import EditorFrame from "./editor-walk"
 import Wave from "gatsby-theme-waves/src/components/wave"
 import Scroller from "gatsby-theme-waves/src/components/bar-scroller"
-import { CodeSurfer } from "@code-surfer/standalone"
 
 function toColumns(items) {
   const columns = [[], []]
@@ -13,7 +10,7 @@ function toColumns(items) {
   items.forEach((item, i) => {
     const isView = item && item.props && item.props.originalType === View
     if (isView) {
-      columns[0].push(React.Children.toArray(item.props.children))
+      columns[0].push(1)
       columns[1].push(React.createElement("div", {}, []))
     } else {
       const step = columns[0].length - 1
@@ -24,10 +21,11 @@ function toColumns(items) {
   return columns
 }
 
-function HikeWave(props) {
+export function HikeWave({ trail, ...props }) {
   const childrenToColumns = children => {
     const items = React.Children.map(children, child => [child])
-    return toColumns(items)
+    const [, steps] = toColumns(items)
+    return [trail, steps]
   }
 
   return (
@@ -39,12 +37,16 @@ function HikeWave(props) {
   )
 }
 
+export function View() {
+  return null
+}
+
 function Sticker({ progress, steps, variant }) {
   const prevKids = steps[Math.floor(progress)]
   const nextKids = steps[Math.floor(progress) + 1] || prevKids
   const padding = 30
 
-  const frame = getFrame(prevKids, nextKids, progress % 1, padding)
+  const { frame, height } = getFrame(prevKids, nextKids, progress % 1, padding)
 
   return (
     <div
@@ -54,10 +56,10 @@ function Sticker({ progress, steps, variant }) {
     >
       <div
         style={{
-          height: "100vh",
+          height,
           width: "100%",
           position: "sticky",
-          top: 0,
+          top: `calc(50vh - ${height / 2}px)`,
         }}
       >
         {frame.map(({ child, translateY, opacity }, i) => (
@@ -70,35 +72,18 @@ function Sticker({ progress, steps, variant }) {
               opacity: opacity,
             }}
           >
-            {child}
+            {React.cloneElement(child, { progress })}
           </div>
         ))}
       </div>
     </div>
   )
 }
-function View({ children }) {
-  return <div>{children}</div>
-}
-function Editor({ children, progress, steps, ...props }) {
-  return <EditorFrame steps={steps} progress={progress} {...props} />
-}
-function Browser({ height, url }) {
-  return <BrowserIframe url={url} height={height} />
-}
-
-export { HikeWave, View, Editor, Browser }
 
 function getFrame(prevKids, nextKids, progress, padding) {
-  const current = prevKids.filter(e =>
-    nextKids.some(p => p.props.originalType === e.props.originalType)
-  )
-  const exit = prevKids.filter(
-    e => !nextKids.some(p => p.props.originalType === e.props.originalType)
-  )
-  const enter = nextKids.filter(
-    e => !prevKids.some(p => p.props.originalType === e.props.originalType)
-  )
+  const current = prevKids.filter(e => nextKids.some(p => p.type === e.type))
+  const exit = prevKids.filter(e => !nextKids.some(p => p.type === e.type))
+  const enter = nextKids.filter(e => !prevKids.some(p => p.type === e.type))
 
   const currentHeights = getHeights(current)
   const exitHeights = getHeights(exit)
@@ -118,7 +103,7 @@ function getFrame(prevKids, nextKids, progress, padding) {
   )
   const frameTops = tween(prevTops, nextTops, progress)
 
-  return [...exit, ...current, ...enter].map((kid, i) => ({
+  const frame = [...exit, ...current, ...enter].map((kid, i) => ({
     child: kid,
     translateY: frameTops[i],
     opacity: current.includes(kid)
@@ -127,10 +112,13 @@ function getFrame(prevKids, nextKids, progress, padding) {
       ? tweenOpacity(1 - progress)
       : tweenOpacity(progress),
   }))
+
+  const height = sum(prevKids.map(k => (k && k.props && k.props.height) || 0))
+  return { frame, height }
 }
 
 function tweenOpacity(t) {
-  return t * t * t
+  return Math.pow(t, 4)
 }
 
 function tween(prevs, nexts, t) {

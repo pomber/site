@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from "react"
 import { Styled, jsx } from "theme-ui"
+import { Global } from "@emotion/core"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -22,6 +23,13 @@ const PostFooter = () => {
 
 const Post = ({ data: { post, card }, location }) => (
   <Layout location={location}>
+    <Global
+      styles={_ => ({
+        html: {
+          scrollBehavior: "smooth",
+        },
+      })}
+    />
     <SEO
       title={post.title}
       description={post.excerpt}

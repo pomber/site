@@ -39,7 +39,8 @@
     "theme-ui": "^0.2.31",
     "typeface-merriweather": "^0.0.72",
     "typeface-montserrat": "^0.0.75",
-    "typography-theme-wordpress-2016": "^0.16.19"
+    "typography-theme-wordpress-2016": "^0.16.19",
+    "use-spring": "^0.2.1"
   },
   "scripts": {
     "start": "gatsby develop",

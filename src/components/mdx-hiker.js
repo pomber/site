@@ -1,4 +1,5 @@
 import React from "react"
+import { CodeHike } from "./code-hiker/code-hiker"
 
 export function View() {
   return null
@@ -6,6 +7,7 @@ export function View() {
 
 export function Hike({ views, children }) {
   const mdxSteps = React.useMemo(() => getTextChildrenFromMdx(children), [])
+  return <CodeHike steps={mdxSteps} views={views} />
 }
 
 function getTextChildrenFromMdx(children) {

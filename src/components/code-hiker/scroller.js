@@ -4,7 +4,7 @@ const ObserverContext = React.createContext()
 
 export function Scroller({ onStepChange, children }) {
   const [observer, setObserver] = useState()
-  const ref = useRef(null)
+  // const ref = useRef(null)
 
   const vh = useWindowHeight()
 
@@ -12,7 +12,7 @@ export function Scroller({ onStepChange, children }) {
     const handleIntersect = entries => {
       entries.forEach(entry => {
         if (entry.intersectionRatio > 0) {
-          ref.current = entry.target.stepInfo
+          // ref.current = entry.target.stepInfo
           onStepChange(entry.target.stepInfo)
         }
       })
@@ -25,45 +25,6 @@ export function Scroller({ onStepChange, children }) {
 
     return () => observer.disconnect()
   }, [vh])
-
-  React.useEffect(() => {
-    const handleKeyDown = event => {
-      if (/^(?:input|textarea|select|button)$/i.test(event.target.tagName)) {
-        return
-      }
-
-      if (event.keyCode == 32 && !event.shiftKey) {
-        const nextIndex = ref.current != null ? ref.current + 1 : 0
-        // TODO extract element id format
-        const element = document.getElementById(`step-${nextIndex}`)
-        if (element) {
-          event.preventDefault()
-          element.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          })
-        }
-      }
-      if (event.keyCode == 32 && event.shiftKey) {
-        const nextIndex = ref.current != null ? Math.max(ref.current - 1, 0) : 0
-        // TODO extract element id format
-        const element = document.getElementById(`step-${nextIndex}`)
-        if (element) {
-          event.preventDefault()
-          element.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          })
-        }
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown)
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [])
 
   return (
     <ObserverContext.Provider value={observer}>
@@ -110,4 +71,49 @@ function useWindowHeight() {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
   return windowHeight
+}
+
+function useKeywordNavigation(ref) {
+  React.useEffect(() => {
+    const handleKeyDown = event => {
+      if (/^(?:input|textarea|select|button)$/i.test(event.target.tagName)) {
+        return
+      }
+
+      if (event.keyCode == 32 && !event.shiftKey) {
+        const nextIndex = ref.current != null ? ref.current + 1 : 0
+        // TODO extract element id format
+        const element = document.getElementById(`step-${nextIndex}`)
+        if (element) {
+          event.preventDefault()
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          })
+          window.location.href = "#"
+          window.location.href = `#step-${nextIndex}`
+        }
+      }
+      if (event.keyCode == 32 && event.shiftKey) {
+        const prevIndex = ref.current != null ? Math.max(ref.current - 1, 0) : 0
+        // TODO extract element id format
+        const element = document.getElementById(`step-${prevIndex}`)
+        if (element) {
+          event.preventDefault()
+          // element.scrollIntoView({
+          //   behavior: "smooth",
+          //   block: "start",
+          // })
+          window.location.href = "#"
+          window.location.href = `#step-${prevIndex}`
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [])
 }

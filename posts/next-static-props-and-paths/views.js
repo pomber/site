@@ -1,4 +1,4 @@
-import { Browser, Editor } from "../../src/components/hike"
+import { Browser, Editor } from "../../src/components/code-hiker/code-hiker"
 import React from "react"
 
 // prettier-ignore

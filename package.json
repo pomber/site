@@ -46,7 +46,6 @@
     "start": "gatsby develop",
     "clean": "gatsby clean",
     "start:public": "gatsby develop -H 0.0.0.0",
-    "build": "gatsby build",
-    "trail": "nodemon posts/next-static-props-and-paths/trail-gen.js --watch posts/next-static-props-and-paths/trail-gen.js posts/next-static-props-and-paths/code"
+    "build": "gatsby build"
   }
 }

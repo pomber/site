@@ -2,6 +2,8 @@ import React from "react"
 import { Scroller, StepContainer } from "./scroller"
 import { useSpring } from "use-spring"
 import { getFrame } from "./vertical-queue"
+import { BrowserIframe } from "./browser"
+import EditorFrame from "./editor-walk"
 
 export function CodeHike({ steps, views }) {
   const [currentIndex, setCurrentIndex] = React.useState(null)
@@ -99,6 +101,12 @@ function Sticker({ views, progress, backwards }) {
       ))}
     </div>
   )
+}
+export function Editor({ children, progress, steps, ...props }) {
+  return <EditorFrame steps={steps} progress={progress} {...props} />
+}
+export function Browser({ height, url }) {
+  return <BrowserIframe url={url} height={height} />
 }
 
 function StepLink({ index, progress }) {

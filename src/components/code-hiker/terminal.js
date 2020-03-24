@@ -34,7 +34,7 @@ export function Terminal({ code, running }) {
     }
   }, [notMeasured])
 
-  const current = useSpring(target)
+  const [current] = useSpring(target)
 
   const stepProgress = getProgressList(
     current,

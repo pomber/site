@@ -7,6 +7,7 @@
   "author": "Rodrigo Pombo",
   "license": "MIT",
   "dependencies": {
+    "@code-surfer/standalone": "^3.1.0",
     "@emotion/core": "^10.0.7",
     "@mdx-js/mdx": "^1.2.2",
     "@mdx-js/react": "^1.0.6",

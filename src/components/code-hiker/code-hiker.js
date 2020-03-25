@@ -53,6 +53,7 @@ export function CodeHike({ steps, views }) {
               id={i}
               key={i}
             >
+              <StepLink index={i} progress={progress} />
               {child}
               <div
                 id={"step-" + i}
@@ -63,7 +64,6 @@ export function CodeHike({ steps, views }) {
                   visibility: "hidden",
                 }}
               />
-              <StepLink index={i} progress={progress} />
             </StepContainer>
           ))}
         </div>
@@ -109,6 +109,45 @@ export function Browser({ height, url }) {
   return <BrowserIframe url={url} height={height} />
 }
 
+function StepLink1({ index, progress }) {
+  const p = 1 - Math.max(1 - Math.abs(index - progress), 0)
+  const width = 30
+  const left = -85
+  return (
+    <div
+      style={{
+        transform: `translateX(-${p * 100}%)`,
+        height: "100%",
+        width: "100%",
+        left: 0,
+        position: "absolute",
+        top: 0,
+        background: "#eee",
+      }}
+    >
+      {/* <a
+        style={{
+          position: "absolute",
+          height: "100%",
+          width: "100%",
+          left: 0,
+          top: 0,
+          display: "block",
+          background: "#202226",
+          textAlign: "center",
+          color: "rgba(175,173,169,1)",
+          paddingTop: 10,
+          boxSizing: "border-box",
+          // border: "2px solid rgba(175,173,169,1)",
+          // borderRight: 0,
+          // borderTopLeftRadius: 16,
+          // borderBottomLeftRadius: 16,
+        }}
+        href={"#step-" + index}
+      ></a> */}
+    </div>
+  )
+}
 function StepLink({ index, progress }) {
   return (
     <a
@@ -120,12 +159,13 @@ function StepLink({ index, progress }) {
         top: 0,
         opacity: Math.max(1 - Math.abs(index - progress), 0.2),
         display: "block",
-        background: "rgba(175,173,169,0.5)",
+        // background: "rgba(175,173,169,0.5)",
         textAlign: "center",
         color: "rgba(175,173,169,1)",
         paddingTop: 10,
         boxSizing: "border-box",
-        border: "2px solid rgba(175,173,169,1)",
+        border: "solid rgba(175,173,169,1)",
+        borderWidth: "2px 2px 3px 2px",
         // borderRight: 0,
         // borderTopLeftRadius: 16,
         // borderBottomLeftRadius: 16,
@@ -143,6 +183,30 @@ function StepLink({ index, progress }) {
       >
         <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
       </svg>
+      <div
+        style={{
+          width: "0",
+          height: "0",
+          position: "absolute",
+          bottom: 1,
+          left: -2,
+          borderLeft: "15px solid transparent",
+          borderRight: "15px solid transparent",
+          borderBottom: "25px solid rgba(175,173,169,1)",
+        }}
+      ></div>
+      <div
+        style={{
+          width: "0",
+          height: "0",
+          position: "absolute",
+          bottom: -3,
+          left: -2,
+          borderLeft: "15px solid transparent",
+          borderRight: "15px solid transparent",
+          borderBottom: "25px solid #FAF9F5",
+        }}
+      ></div>
     </a>
   )
 }

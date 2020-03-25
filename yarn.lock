@@ -785,6 +785,21 @@
     rebound "^0.1.0"
     shell-quote "^1.6.1"
 
+"@code-surfer/standalone@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@code-surfer/standalone/-/standalone-3.1.0.tgz#10b1f4a9f34da44af966574d9bffe662bc10be3a"
+  integrity sha512-F/24ALEsafNlovSBTi1h09gjClR3EMH0ruE4HDKMZYrySYV7TdHxCVnNFvgDh0aXDuc0hCTBsYSAcfvTu514Dg==
+  dependencies:
+    "@code-surfer/step-parser" "3.1.0"
+    "@code-surfer/themes" "3.1.0"
+    "@types/table" "^4.0.7"
+    "@types/theme-ui" "^0.2.2"
+    array.prototype.flat "^1.2.1"
+    diff "^4.0.1"
+    prismjs "^1.16.0"
+    rebound "^0.1.0"
+    shell-quote "^1.6.1"
+
 "@code-surfer/step-parser@3.0.0-alpha.3":
   version "3.0.0-alpha.3"
   resolved "https://registry.yarnpkg.com/@code-surfer/step-parser/-/step-parser-3.0.0-alpha.3.tgz#22b81addfa14f34fb82cb06858abc3cb2a354c3f"
@@ -805,10 +820,25 @@
     prismjs "^1.16.0"
     shell-quote "^1.6.1"
 
+"@code-surfer/step-parser@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@code-surfer/step-parser/-/step-parser-3.1.0.tgz#4c068d6d42209e9cd6f6fd60ba1656a1415cac19"
+  integrity sha512-bcI64mZAAYPRQwvcow7ec+rMTDgO6aPV6jSKWniF7Il/Ijbka5q53/i41UUDsAJRKwcaONrzmA0yMlOvkFBqng==
+  dependencies:
+    array.prototype.flat "^1.2.1"
+    diff "^4.0.1"
+    prismjs "^1.16.0"
+    shell-quote "^1.6.1"
+
 "@code-surfer/themes@3.0.0-beta.1":
   version "3.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/@code-surfer/themes/-/themes-3.0.0-beta.1.tgz#2284e77c7b5a14063e01101c3c976e9046e95100"
   integrity sha512-vS32tmnLTPVHdsAiVe0ou7qku3nsAZXSmpLeV3ADM+9a8xS2wp7ov8In252q0tX5a0jSK1B/pV7gP8i2T9n7hQ==
+
+"@code-surfer/themes@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@code-surfer/themes/-/themes-3.1.0.tgz#fd05db12f99f8bc771d6f7ca03dfdc7d1bc963e0"
+  integrity sha512-2QCxEHWzUWfbn5vaqq0tJFuuHhddlBAzEP6gJlO7dCoNrn4GnPpVfsnxOioqJtzoMy8gAv6ecMZlnZvnQ1u8Og==
 
 "@emotion/babel-plugin-jsx-pragmatic@^0.1.3":
   version "0.1.3"

@@ -149,23 +149,27 @@ function StepLink1({ index, progress }) {
   )
 }
 function StepLink({ index, progress }) {
+  const color = "rgba(175,173,169,0.4)"
   return (
     <a
       style={{
         position: "absolute",
         height: "100%",
         width: 30,
-        left: -45,
+        left: -50,
         top: 0,
         opacity: Math.max(1 - Math.abs(index - progress), 0.2),
         display: "block",
         // background: "rgba(175,173,169,0.5)",
         textAlign: "center",
-        color: "rgba(175,173,169,1)",
+        color,
         paddingTop: 10,
         boxSizing: "border-box",
-        border: "solid rgba(175,173,169,1)",
+        border: `solid ${color}`,
         borderWidth: "2px 2px 3px 2px",
+
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
         // borderRight: 0,
         // borderTopLeftRadius: 16,
         // borderBottomLeftRadius: 16,
@@ -188,11 +192,11 @@ function StepLink({ index, progress }) {
           width: "0",
           height: "0",
           position: "absolute",
-          bottom: 1,
+          bottom: 0,
           left: -2,
           borderLeft: "15px solid transparent",
           borderRight: "15px solid transparent",
-          borderBottom: "25px solid rgba(175,173,169,1)",
+          borderBottom: `18px solid ${color}`,
         }}
       ></div>
       <div
@@ -204,7 +208,7 @@ function StepLink({ index, progress }) {
           left: -2,
           borderLeft: "15px solid transparent",
           borderRight: "15px solid transparent",
-          borderBottom: "25px solid #FAF9F5",
+          borderBottom: "18px solid #FAF9F5",
         }}
       ></div>
     </a>

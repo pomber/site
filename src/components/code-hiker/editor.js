@@ -167,7 +167,7 @@ function TerminalPanel({ code, height }) {
           boxSizing: "border-box",
         }}
       >
-        <Terminal code={code} />
+        <Terminal code={code} running={true} />
       </div>
     </div>
   )

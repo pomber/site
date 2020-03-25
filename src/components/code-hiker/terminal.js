@@ -1,6 +1,6 @@
 import React from "react"
 import { useSpring } from "use-spring"
-const STARTING_OFFSET = 20
+const STARTING_OFFSET = 10
 export function Terminal({ code, running }) {
   const [{ steps, notMeasured, target }, setState] = React.useState({
     steps: [{ height: STARTING_OFFSET, code: "" }],
@@ -44,7 +44,7 @@ export function Terminal({ code, running }) {
   return (
     <div
       style={{
-        fontSize: "14px",
+        fontSize: "13px",
         height: "100%",
         boxSizing: "border-box",
         background: "rgb(30, 30, 30)",
@@ -58,6 +58,7 @@ export function Terminal({ code, running }) {
       <div
         style={{
           transform: `translateY(-${current}px)`,
+          lineHeight: "1.2rem",
         }}
       >
         <div style={{ height: STARTING_OFFSET }}></div>
@@ -78,7 +79,7 @@ export function Terminal({ code, running }) {
 }
 
 export function InnerTerminal({ code, progress }) {
-  const p = useSpring(progress)
+  const [p] = useSpring(progress)
   const currentCode = code && code.substring(0, code.length * p)
   const commands = codeToCommands(currentCode)
   return commands.map((c, i) => (
@@ -102,11 +103,11 @@ function codeToCommands(code) {
 function Command({ command, output = [] }) {
   return (
     <>
-      <div style={{ paddingTop: 3, color: "" }}>
+      <div style={{ paddingTop: 2, color: "" }}>
         <span style={{ color: "rgb(86,156,214)", userSelect: "none" }}>$ </span>
         {command}
       </div>
-      <div style={{ paddingTop: 1 }}>
+      <div style={{ paddingTop: 0 }}>
         {output.map((line, i) => (
           <div
             key={i}

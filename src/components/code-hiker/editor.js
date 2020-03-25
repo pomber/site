@@ -10,6 +10,7 @@ function EditorFrame({
   terminal,
   terminalHeight,
   height,
+  link,
 }) {
   return (
     <div
@@ -26,7 +27,7 @@ function EditorFrame({
           "Ubuntu,Droid Sans,-apple-system,BlinkMacSystemFont,Segoe WPC,Segoe UI,sans-serif",
       }}
     >
-      <TabsContainer files={files} active={active} />
+      <TabsContainer files={files} active={active} link={link} />
       <EditorContainer>{children}</EditorContainer>
       <TerminalPanel code={terminal} height={terminalHeight} />
     </div>
@@ -98,7 +99,7 @@ function Tab({ enabled, children }) {
   )
 }
 
-function TabsContainer({ files, active }) {
+function TabsContainer({ files, active, link }) {
   return (
     <div
       style={{
@@ -116,7 +117,7 @@ function TabsContainer({ files, active }) {
       ))}
       <div style={{ flex: 1 }} />
       {/* <CopyAllButton /> */}
-      <GitHubLink href="#" />
+      {link && <GitHubLink href={link} />}
     </div>
   )
 }
@@ -175,7 +176,13 @@ function TerminalPanel({ code, height }) {
 
 function GitHubLink({ href }) {
   return (
-    <a href={href} title="Open on GitHub" style={{ display: "block" }}>
+    <a
+      href={href}
+      title="Open on GitHub"
+      style={{ display: "block" }}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <img
         src={GitHubIcon}
         title="Open on GitHub"

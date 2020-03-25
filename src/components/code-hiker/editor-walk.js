@@ -35,6 +35,7 @@ function EditorWalk({ progress, steps, backwards, height }) {
       terminal={activeStep.terminal}
       terminalHeight={terminalHeight}
       height={height}
+      link={activeStep.link}
     >
       {activeSteps.length > 0 && (
         <CodeSurfer

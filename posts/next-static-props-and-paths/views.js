@@ -1,17 +1,19 @@
 import { Browser, Editor } from "../../src/components/code-hiker/code-hiker"
 import React from "react"
 
+const pr = id => `https://github.com/pomber/use-spring/pull/${id}/files`
+
 // prettier-ignore
 const files = {
-  "01.package.json":{code:require("raw-loader!./code/01.package.jsonx"),lang:"json",file:"package.json"},
-  "02.package.json":{code:require("raw-loader!./code/02.package.jsonx"),lang:"json",file:"package.json"},
-  "03.index.js":{code:require("!!raw-loader!./code/03.index.js"),lang:"jsx",file:"pages/index.js"},
-  "04.index.js":{code:require("!!raw-loader!./code/04.index.js"),lang:"jsx",file:"pages/index.js"},
+  "01.package.json":{code:require("raw-loader!./code/01.package.jsonx"),lang:"json",file:"package.json", link: pr(4)},
+  "02.package.json":{code:require("raw-loader!./code/02.package.jsonx"),lang:"json",file:"package.json", link: pr(4)},
+  "03.index.js":{code:require("!!raw-loader!./code/03.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
+  "04.index.js":{code:require("!!raw-loader!./code/04.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "05.index.js":{code:require("!!raw-loader!./code/05.index.js"),lang:"jsx",file:"pages/index.js"},
-  "06.index.js":{code:require("!!raw-loader!./code/06.index.js"),lang:"jsx",file:"pages/index.js"},
-  "07.index.js":{code:require("!!raw-loader!./code/07.index.js"),lang:"jsx",file:"pages/index.js"},
-  "08.index.js":{code:require("!!raw-loader!./code/08.index.js"),lang:"jsx",file:"pages/index.js"},
-  "09.index.js":{code:require("!!raw-loader!./code/09.index.js"),lang:"jsx",file:"pages/index.js"}, 
+  "06.index.js":{code:require("!!raw-loader!./code/06.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
+  "07.index.js":{code:require("!!raw-loader!./code/07.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
+  "08.index.js":{code:require("!!raw-loader!./code/08.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
+  "09.index.js":{code:require("!!raw-loader!./code/09.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
 }
 
 const yarnCommands = `$ yarn install

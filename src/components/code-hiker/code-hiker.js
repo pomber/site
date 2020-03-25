@@ -102,11 +102,11 @@ function Sticker({ views, progress, backwards }) {
     </div>
   )
 }
-export function Editor({ children, progress, steps, ...props }) {
-  return <EditorFrame steps={steps} progress={progress} {...props} />
+export function Editor(props) {
+  return <EditorFrame {...props} />
 }
-export function Browser({ height, url }) {
-  return <BrowserIframe url={url} height={height} />
+export function Browser(props) {
+  return <BrowserIframe {...props} />
 }
 
 function StepLink1({ index, progress }) {

@@ -22,7 +22,13 @@ $ yarn dev
 Running on localhost:8000`
 
 const views = [
-  [{ type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" }],
+  [
+    {
+      type: Browser,
+      url: "https://x1-5p8jjgqz9.now.sh/",
+      showUrl: "https://next-static-props-demo.now.sh/",
+    },
+  ],
   [{ type: Editor, ...files["01.package.json"] }],
   [{ type: Editor, ...files["02.package.json"] }],
   [{ type: Editor, ...files["03.index.js"] }],
@@ -55,7 +61,7 @@ const views = [
 
 const editorSteps = views.map(xs => xs.find(x => x.type === Editor) || {})
 const defaultProps = {
-  [Browser]: { height: 300 },
+  [Browser]: { height: 300, showUrl: "http://localhost:3000" },
   [Editor]: { height: 350, steps: editorSteps },
 }
 

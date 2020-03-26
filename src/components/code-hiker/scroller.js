@@ -8,6 +8,9 @@ export function Scroller({ onStepChange, children }) {
 
   const vh = useWindowHeight()
 
+  // const [rootRect, setRootRect] = useState({})
+  // const [intersections, setIntersections] = useState([])
+
   useLayoutEffect(() => {
     const handleIntersect = entries => {
       entries.forEach(entry => {
@@ -16,6 +19,8 @@ export function Scroller({ onStepChange, children }) {
           onStepChange(entry.target.stepInfo)
         }
       })
+      // setRootRect(entries[0].rootBounds)
+      // setIntersections(entries.map(e => e.intersectionRect))
     }
     const observer = new IntersectionObserver(handleIntersect, {
       rootMargin: `-${vh / 2 - 2}px 0px`,
@@ -29,6 +34,31 @@ export function Scroller({ onStepChange, children }) {
   return (
     <ObserverContext.Provider value={observer}>
       {children}
+      {/* <div
+        style={{
+          position: "fixed",
+          background: "blue",
+          opacity: 0.3,
+          height: rootRect.height,
+          width: rootRect.width,
+          top: rootRect.top,
+          left: rootRect.left,
+        }}
+      />
+      {intersections.map((rect, i) => (
+        <div
+          key={i}
+          style={{
+            position: "fixed",
+            background: "green",
+            opacity: 0.5,
+            height: rect.height,
+            width: rect.width,
+            top: rect.top,
+            left: rect.left,
+          }}
+        />
+      ))} */}
     </ObserverContext.Provider>
   )
 }
@@ -60,7 +90,7 @@ export function StepContainer({ children, id, ...props }) {
 function useWindowHeight() {
   const isClient = typeof window === "object"
   function getHeight() {
-    return isClient ? window.innerHeight : undefined
+    return isClient ? document.documentElement.clientHeight : undefined
   }
   const [windowHeight, setWindowHeight] = useState(getHeight)
   React.useEffect(() => {

@@ -109,45 +109,6 @@ export function Browser(props) {
   return <BrowserIframe {...props} />
 }
 
-function StepLink1({ index, progress }) {
-  const p = 1 - Math.max(1 - Math.abs(index - progress), 0)
-  const width = 30
-  const left = -85
-  return (
-    <div
-      style={{
-        transform: `translateX(-${p * 100}%)`,
-        height: "100%",
-        width: "100%",
-        left: 0,
-        position: "absolute",
-        top: 0,
-        background: "#eee",
-      }}
-    >
-      {/* <a
-        style={{
-          position: "absolute",
-          height: "100%",
-          width: "100%",
-          left: 0,
-          top: 0,
-          display: "block",
-          background: "#202226",
-          textAlign: "center",
-          color: "rgba(175,173,169,1)",
-          paddingTop: 10,
-          boxSizing: "border-box",
-          // border: "2px solid rgba(175,173,169,1)",
-          // borderRight: 0,
-          // borderTopLeftRadius: 16,
-          // borderBottomLeftRadius: 16,
-        }}
-        href={"#step-" + index}
-      ></a> */}
-    </div>
-  )
-}
 function StepLink({ index, progress }) {
   const color = "rgba(175,173,169,0.4)"
   return (

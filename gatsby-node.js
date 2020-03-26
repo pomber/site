@@ -133,6 +133,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }) => {
 
     const fieldData = {
       title: node.frontmatter.title,
+      responsive: node.frontmatter.responsive,
       tags: node.frontmatter.tags || [],
       slug,
       date: node.frontmatter.date,

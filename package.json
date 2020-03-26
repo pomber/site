@@ -7,7 +7,7 @@
   "author": "Rodrigo Pombo",
   "license": "MIT",
   "dependencies": {
-    "@code-surfer/standalone": "^3.1.0",
+    "@code-surfer/standalone": "^3.1.1",
     "@emotion/core": "^10.0.7",
     "@mdx-js/mdx": "^1.2.2",
     "@mdx-js/react": "^1.0.6",
@@ -28,20 +28,20 @@
     "gatsby-remark-import-code": "^0.1.1",
     "gatsby-remark-smartypants": "^2.1.2",
     "gatsby-source-filesystem": "^2.1.8",
-    "gatsby-theme-waves": "^0.1.5",
+    "gatsby-theme-waves": "^0.1.6",
     "gatsby-transformer-sharp": "^2.2.5",
     "mdx-utils": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-toggle": "^4.0.2",
-    "rehype-waves": "^0.1.4",
+    "rehype-waves": "^0.1.6",
     "remark-slug": "^5.1.2",
     "theme-ui": "^0.2.31",
     "typeface-merriweather": "^0.0.72",
     "typeface-montserrat": "^0.0.75",
     "typography-theme-wordpress-2016": "^0.16.19",
-    "use-spring": "^0.2.1"
+    "use-spring": "^0.2.2"
   },
   "scripts": {
     "start": "gatsby develop",

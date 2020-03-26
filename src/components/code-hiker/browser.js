@@ -19,20 +19,6 @@ export function BrowserFrame({ children, height = 220, url, showUrl }) {
         <Bar url={showUrl || url} link={url} />
         <Page>{children}</Page>
       </div>
-      {/* <div
-        style={{
-          height: "50px",
-          marginTop: "20px",
-          overflow: "hidden",
-          display: "flex",
-          alignItems: "center"
-        }}
-      >
-        <p>Try:</p>
-        <button style={{ ...buttonStyle, flex: 1 }}>Invalid Card</button>
-        <button style={{ ...buttonStyle, flex: 1 }}>Valid Card</button>
-        <button style={buttonStyle}>▼ More</button>
-      </div> */}
     </div>
   )
 }

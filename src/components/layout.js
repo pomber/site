@@ -1,22 +1,29 @@
 /** @jsx jsx */
 import { jsx, Styled } from "theme-ui"
-import { Global } from "@emotion/core"
+import { Global, css } from "@emotion/core"
 import { useTwitterEffect } from "./twitter-effect"
 
-function Layout({ children }) {
+function Layout({ children, responsive }) {
   useTwitterEffect()
   return (
     <Styled.root
       sx={{
         display: "flex",
-        // overflowX: "hidden",
-        width: "100vw",
+        width: ["100vw", "auto"],
+        minWidth: ["auto", "1020px"],
       }}
     >
       <Global
-        styles={{
-          body: { margin: 0, overflowX: "hidden" },
-        }}
+        styles={css`
+          body {
+            margin: 0;
+          }
+          @media (max-width: 1020px) {
+            body {
+              overflow-x: ${responsive ? "hidden" : "visible"};
+            }
+          }
+        `}
       />
       <aside
         sx={{

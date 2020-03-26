@@ -1,5 +1,6 @@
 import { Browser, Editor } from "../../src/components/code-hiker/code-hiker"
 import React from "react"
+import demoLegend from "./demo-legend.png"
 
 const pr = id => `https://github.com/pomber/use-spring/pull/${id}/files`
 
@@ -23,6 +24,13 @@ Running on localhost:8000`
 
 const views = [
   [
+    {
+      type: "img",
+      height: 100,
+      width: "100%",
+      src: demoLegend,
+      style: { objectFit: "contain" },
+    },
     {
       type: Browser,
       url: "https://x1-5p8jjgqz9.now.sh/",

@@ -7,11 +7,11 @@ responsive: false
 import { Hike, View } from "../../src/components/mdx-hiker"
 import views from "./views"
 
-In this post we are going to build a small NextJS app using some of its newest game-changing features: `getStaticProps` and `getStaticPaths`.
-
 <Hike views={views}>
 
 <View />
+
+In this post we are going to build a small NextJS app using some of its newest game-changing features: `getStaticProps` and `getStaticPaths`.
 
 The app downloads a JSON file with some Coronavirus stats from a public URL, it shows an `index` page with a chart and a table using the data from the last day. The table has links to pages for each country showing a timeseries chart for that country.
 

@@ -128,6 +128,7 @@ const editorStyle = {
   color: "#cccccc",
   fontSize: "13px",
   padding: "5px 10px",
+  lineHeight: "1.1rem",
 }
 function EditorContainer({ children }) {
   return <div style={editorStyle}>{children}</div>

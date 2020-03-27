@@ -26,13 +26,6 @@ const Post = ({ data: { post, card }, location }) => {
   return (
     <ThemeProvider theme={theme}>
       <Layout location={location} responsive={post.responsive}>
-        <Global
-          styles={_ => ({
-            html: {
-              scrollBehavior: "smooth",
-            },
-          })}
-        />
         <SEO
           title={post.title}
           description={post.excerpt}

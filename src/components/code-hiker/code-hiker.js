@@ -8,6 +8,7 @@ import EditorFrame from "./editor-walk"
 export function CodeHike({ steps, views }) {
   const [currentIndex, setCurrentIndex] = React.useState(null)
   const [springIndex] = useSpring(currentIndex, {
+    decimals: 3,
     stiffness: 24,
     damping: 12,
   })

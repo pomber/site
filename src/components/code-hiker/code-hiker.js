@@ -9,7 +9,7 @@ export function CodeHike({ steps, views }) {
   const [currentIndex, setCurrentIndex] = React.useState(null)
   const [springIndex] = useSpring(currentIndex, {
     stiffness: 25,
-    damping: 9,
+    damping: 10,
   })
   const progress = Math.min(steps.length - 1, Math.max(0, springIndex))
   const backwards = currentIndex < progress

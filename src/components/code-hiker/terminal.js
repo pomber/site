@@ -18,7 +18,7 @@ export function Terminal({ code, running }) {
     })
   }, [code])
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (notMeasured != null) {
       setState({
         steps: [

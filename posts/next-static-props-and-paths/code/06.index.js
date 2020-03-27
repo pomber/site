@@ -1,7 +1,7 @@
-import fetch from "node-fetch"
-
 const api = "https://pomber.github.io/covid19/"
 const DATA = api + "timeseries.json"
+
+import fetch from "node-fetch"
 
 export async function getStaticProps() {
   const response = await fetch(DATA)

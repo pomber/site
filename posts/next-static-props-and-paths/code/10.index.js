@@ -1,11 +1,7 @@
-import fetch from "node-fetch"
-import {
-  TreeMap,
-  TreeMapDefaultProps,
-} from "@nivo/treemap"
-
 const api = "https://pomber.github.io/covid19/"
 const DATA = api + "timeseries.json"
+
+import fetch from "node-fetch"
 
 export async function getStaticProps() {
   const response = await fetch(DATA)
@@ -27,6 +23,8 @@ export default function HomePage({
     </>
   )
 }
+
+import { TreeMap } from "@nivo/treemap"
 
 function Chart({ rows }) {
   return (

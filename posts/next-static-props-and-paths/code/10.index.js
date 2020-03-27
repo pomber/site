@@ -6,7 +6,22 @@ import fetch from "node-fetch"
 export async function getStaticProps() {
   const response = await fetch(DATA)
   const data = await response.json()
-  const { lastDate, rows } = transform(data)
+  const countries = Object.keys(data)
+  const firstCountry = data[countries[0]]
+  const lastDate =
+    firstCountry[firstCountry.length - 1].date
+  const rows = countries
+    .map(country => {
+      const lastDay = data[country].find(
+        x => x.date === lastDate
+      )
+      return {
+        country,
+        confirmed: lastDay.confirmed,
+        deaths: lastDay.deaths,
+      }
+    })
+    .filter(r => r.deaths > 8)
   return {
     props: { lastDate, rows },
   }
@@ -37,24 +52,4 @@ function Chart({ rows }) {
       innerPadding={1}
     />
   )
-}
-
-function transform(data) {
-  const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  const lastDate =
-    firstCountry[firstCountry.length - 1].date
-  const rows = countries
-    .map(country => {
-      const lastDay = data[country].find(
-        x => x.date === lastDate
-      )
-      return {
-        country,
-        confirmed: lastDay.confirmed,
-        deaths: lastDay.deaths,
-      }
-    })
-    .filter(r => r.deaths > 8)
-  return { lastDate, rows }
 }

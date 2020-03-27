@@ -9,7 +9,24 @@ export async function getStaticProps() {
     fetch(DATA).then(r => r.json()),
     fetch(FLAGS).then(r => r.json()),
   ])
-  const { lastDate, rows } = transform(data, flags)
+  const data = await response.json()
+  const countries = Object.keys(data)
+  const firstCountry = data[countries[0]]
+  const lastDate =
+    firstCountry[firstCountry.length - 1].date
+  const rows = countries
+    .map(country => {
+      const lastDay = data[country].find(
+        x => x.date === lastDate
+      )
+      return {
+        country,
+        confirmed: lastDay.confirmed,
+        deaths: lastDay.deaths,
+        flag: flags[country]?.flag || "❓",
+      }
+    })
+    .filter(r => r.deaths > 8)
   return {
     props: { lastDate, rows },
   }
@@ -51,9 +68,6 @@ function Chart({ rows }) {
   return (
     <TreeMap
       nodeComponent={Node}
-      onClick={({ data }) =>
-        Router.push(`/country/${data.country}`)
-      }
       tile="binary"
       colorBy="flag"
       colors={{ scheme: "pastel1" }}
@@ -77,25 +91,4 @@ function Chart({ rows }) {
       innerPadding={1}
     />
   )
-}
-
-function transform(data, flags) {
-  const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  const lastDate =
-    firstCountry[firstCountry.length - 1].date
-  const rows = countries
-    .map(country => {
-      const lastDay = data[country].find(
-        x => x.date === lastDate
-      )
-      return {
-        country,
-        confirmed: lastDay.confirmed,
-        deaths: lastDay.deaths,
-        flag: flags[country]?.flag || "❓",
-      }
-    })
-    .filter(r => r.deaths > 8)
-  return { lastDate, rows }
 }

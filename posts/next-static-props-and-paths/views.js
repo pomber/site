@@ -10,7 +10,8 @@ const files = {
   "03.index.js":{code:require("!!raw-loader!./code/03.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "04.index.js":{code:require("!!raw-loader!./code/04.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "05.index.js":{code:require("!!raw-loader!./code/05.index.js"),lang:"jsx",file:"pages/index.js"},
-  "06.index.js":{code:require("!!raw-loader!./code/06.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
+  "06.0.index.js":{code:require("!!raw-loader!./code/06.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
+  "06.1.index.js":{code:require("!!raw-loader!./code/06.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "07.index.js":{code:require("!!raw-loader!./code/07.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "08.index.js":{code:require("!!raw-loader!./code/08.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "09.0.index.js":{code:require("!!raw-loader!./code/09.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
@@ -71,15 +72,15 @@ const views = [
     { type: Browser, url: "https://x1-q04u5abja.now.sh/" },
   ],
   [
-    { type: Editor, ...files["06.index.js"] },
+    { type: Editor, ...files["06.0.index.js"] },
     { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
   ],
   [
-    { type: Editor, ...files["06.index.js"], focus: "16[1],25:30" },
+    { type: Editor, ...files["06.1.index.js"] },
     { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
   ],
   [
-    { type: Editor, ...files["07.index.js"], focus: "11,15[34:45]" },
+    { type: Editor, ...files["07.index.js"] },
     { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
   ],
   [
@@ -95,7 +96,7 @@ const views = [
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["10.index.js"], focus: "31:42" },
+    { type: Editor, ...files["10.index.js"] },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [

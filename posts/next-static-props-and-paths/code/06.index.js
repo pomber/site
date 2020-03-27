@@ -1,9 +1,10 @@
 import fetch from "node-fetch"
 
+const api = "https://pomber.github.io/covid19/"
+const DATA = api + "timeseries.json"
+
 export async function getStaticProps() {
-  const response = await fetch(
-    "https://pomber.github.io/covid19/data.json"
-  )
+  const response = await fetch(DATA)
   const data = await response.json()
   const { lastDate } = transform(data)
   return {
@@ -11,33 +12,29 @@ export async function getStaticProps() {
   }
 }
 
-export default function HomePage() {
+function useData() {
   const [data, setData] = React.useState()
   React.useEffect(() => {
-    fetch(
-      "https://pomber.github.io/covid19/data.json"
-    )
+    fetch(DATA)
       .then(response => response.json())
       .then(data => setData(data))
   }, [])
+  return data
+}
 
+export default function HomePage() {
+  const data = useData()
   if (!data) {
     return <h1>Loading...</h1>
   }
-
   const { lastDate } = transform(data)
-  return (
-    <>
-      <h3>Coronavirus {lastDate}</h3>
-    </>
-  )
+  return <h2>Coronavirus {lastDate}</h2>
 }
 
 function transform(data) {
   const countries = Object.keys(data)
   const firstCountry = data[countries[0]]
-  return {
-    lastDate:
-      firstCountry[firstCountry.length - 1].date,
-  }
+  const lastDate =
+    firstCountry[firstCountry.length - 1].date
+  return { lastDate }
 }

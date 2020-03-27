@@ -23,7 +23,57 @@ If you want, try to think how would you build this site and then continue readin
 
 <View />
 
-We first initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). If you are coding along run this on an empty folder.
+To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
+
+If you are coding along run this on an empty folder.
+
+```bash
+yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
+```
+
+Then add the scripts section to the `package.json`
+
+<View />
+
+To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
+
+If you are coding along run this on an empty folder.
+
+```bash
+yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
+```
+
+Then add the scripts section to the `package.json`
+
+<View />
+
+To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
+
+If you are coding along run this on an empty folder.
+
+```bash
+yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
+```
+
+Then add the scripts section to the `package.json`
+
+<View />
+
+To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
+
+If you are coding along run this on an empty folder.
+
+```bash
+yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
+```
+
+Then add the scripts section to the `package.json`
+
+<View />
+
+To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
+
+If you are coding along run this on an empty folder.
 
 ```bash
 yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
@@ -128,35 +178,11 @@ export default function HomePage() {
     const data = await response.json()
     setData(data)
   }, [])
-
-  if (!data) {
-    return (
-      <>
-        <h1>Loading...</h1>
-      </>
-    )
-  }
-
-  const { lastDate } = transform(data)
-
-  return (
-    <>
-      <h1>Coronavirus {lastDate}</h1>
-    </>
-  )
-}
-
-function transform(data) {
-  const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  return {
-    lastDate:
-      firstCountry[firstCountry.length - 1].date,
-  }
 }
 ```
 
 > https://x1-q04u5abja.now.sh/
+
 
 <View />
 
@@ -179,23 +205,6 @@ export async function getStaticProps() {
     props: { lastDate },
   }
 }
-
-export default function HomePage({ lastDate }) {
-  return (
-    <>
-      <h1>Coronavirus {lastDate}</h1>
-    </>
-  )
-}
-
-function transform(data) {
-  const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  return {
-    lastDate:
-      firstCountry[firstCountry.length - 1].date,
-  }
-}
 ```
 
 > https://x1-hpye19f6q.now.sh/
@@ -205,6 +214,32 @@ function transform(data) {
 // do something more interesting, render the table
 
 > https://x1-5p8jjgqz9.now.sh/
+
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
+
+> https://x1-bx780mpxy.now.sh/
+
+```jsx
+```
+
+Cool thing is, the chart is rendered even if we disable javascript.
+
+
+<View />
+
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
+
+> https://x1-bx780mpxy.now.sh/
+
+```jsx
+```
+
+Cool thing is, the chart is rendered even if we disable javascript.
+
 
 <View />
 
@@ -228,6 +263,22 @@ So far we haven't done anything impressive. A script that download the JSON and 
 
 Let's show a chart with some stats.
 
+
+<View />
+
+Let's make the add links
+
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
+
+<View />
+
+Let's make the add links
+
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
 
 <View />
 

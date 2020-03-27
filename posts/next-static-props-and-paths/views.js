@@ -7,14 +7,20 @@ const pr = id => `https://github.com/pomber/use-spring/pull/${id}/files`
 // prettier-ignore
 const files = {
   "01.package.json":{code:require("raw-loader!./code/01.package.jsonx"),lang:"json",file:"package.json", link: pr(4)},
-  "02.package.json":{code:require("raw-loader!./code/02.package.jsonx"),lang:"json",file:"package.json", link: pr(4)},
   "03.index.js":{code:require("!!raw-loader!./code/03.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "04.index.js":{code:require("!!raw-loader!./code/04.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "05.index.js":{code:require("!!raw-loader!./code/05.index.js"),lang:"jsx",file:"pages/index.js"},
   "06.index.js":{code:require("!!raw-loader!./code/06.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "07.index.js":{code:require("!!raw-loader!./code/07.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "08.index.js":{code:require("!!raw-loader!./code/08.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
-  "09.index.js":{code:require("!!raw-loader!./code/09.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "09.0.index.js":{code:require("!!raw-loader!./code/09.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "09.1.index.js":{code:require("!!raw-loader!./code/09.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "10.index.js":{code:require("!!raw-loader!./code/10.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "11.index.js":{code:require("!!raw-loader!./code/11.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "12.index.js":{code:require("!!raw-loader!./code/12.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "13.index.js":{code:require("!!raw-loader!./code/13.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "14.index.js":{code:require("!!raw-loader!./code/14.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "15.index.js":{code:require("!!raw-loader!./code/15.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
 }
 
 const yarnCommands = `$ yarn install
@@ -33,16 +39,27 @@ const views = [
     },
     {
       type: Browser,
-      url: "https://x1-5p8jjgqz9.now.sh/",
+      url: "http://localhost:3000/",
       showUrl: "https://next-static-props-demo.now.sh/",
     },
   ],
   [{ type: Editor, ...files["01.package.json"] }],
-  [{ type: Editor, ...files["02.package.json"] }],
   [{ type: Editor, ...files["03.index.js"] }],
-  [{ type: Editor, ...files["03.index.js"], terminal: yarnCommands }],
   [
-    { type: Editor, ...files["03.index.js"], terminal: yarnCommands },
+    {
+      type: Editor,
+      ...files["03.index.js"],
+      terminal: yarnCommands,
+      focus: "2[1]",
+    },
+  ],
+  [
+    {
+      type: Editor,
+      ...files["03.index.js"],
+      terminal: yarnCommands,
+      focus: "2[1]",
+    },
     { type: Browser, url: "https://x1-965tkyiws.now.sh/" },
   ],
   [
@@ -50,7 +67,7 @@ const views = [
     { type: Browser, url: "https://x1-i6qvdxal6.now.sh/" },
   ],
   [
-    { type: Editor, ...files["05.index.js"] },
+    { type: Editor, ...files["05.index.js"], focus: "13[80],18:28" },
     { type: Browser, url: "https://x1-q04u5abja.now.sh/" },
   ],
   [
@@ -58,11 +75,47 @@ const views = [
     { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
   ],
   [
-    { type: Editor, ...files["07.index.js"], focus: "2:19" },
+    { type: Editor, ...files["06.index.js"], focus: "16[1],25:30" },
+    { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["07.index.js"], focus: "11,15[34:45]" },
     { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
   ],
   [
     { type: Editor, ...files["08.index.js"] },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["09.0.index.js"] },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["09.1.index.js"] },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["10.index.js"], focus: "31:42" },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["11.index.js"] },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["12.index.js"] },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["13.index.js"] },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["14.index.js"] },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["15.index.js"] },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
 ]

@@ -6,13 +6,16 @@ const DATA = api + "timeseries.json"
 export async function getStaticProps() {
   const response = await fetch(DATA)
   const data = await response.json()
-  const { lastDate } = transform(data)
+  const { lastDate, rows } = transform(data)
   return {
-    props: { lastDate },
+    props: { lastDate, rows },
   }
 }
 
-export default function HomePage({ lastDate }) {
+export default function HomePage({
+  lastDate,
+  rows,
+}) {
   return <h2>Coronavirus {lastDate}</h2>
 }
 
@@ -21,5 +24,17 @@ function transform(data) {
   const firstCountry = data[countries[0]]
   const lastDate =
     firstCountry[firstCountry.length - 1].date
-  return { lastDate }
+  const rows = countries
+    .map(country => {
+      const lastDay = data[country].find(
+        x => x.date === lastDate
+      )
+      return {
+        country,
+        confirmed: lastDay.confirmed,
+        deaths: lastDay.deaths,
+      }
+    })
+    .filter(r => r.deaths > 8)
+  return { lastDate, rows }
 }

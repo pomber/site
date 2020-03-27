@@ -8,7 +8,6 @@ import EditorFrame from "./editor-walk"
 export function CodeHike({ steps, views }) {
   const [currentIndex, setCurrentIndex] = React.useState(null)
   const [springIndex] = useSpring(currentIndex, {
-    decimals: 3,
     stiffness: 25,
     damping: 9,
   })
@@ -75,7 +74,7 @@ export function CodeHike({ steps, views }) {
 function Sticker({ views, progress, backwards }) {
   const prevKids = views[Math.floor(progress)]
   const nextKids = views[Math.floor(progress) + 1] || prevKids
-  const padding = 30
+  const padding = 40
   const { frame, height } = getFrame(prevKids, nextKids, progress % 1, padding)
   return (
     <div

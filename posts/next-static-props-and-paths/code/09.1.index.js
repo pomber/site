@@ -6,14 +6,26 @@ const DATA = api + "timeseries.json"
 export async function getStaticProps() {
   const response = await fetch(DATA)
   const data = await response.json()
-  const { lastDate } = transform(data)
+  const { lastDate, rows } = transform(data)
   return {
-    props: { lastDate },
+    props: { lastDate, rows },
   }
 }
 
-export default function HomePage({ lastDate }) {
-  return <h2>Coronavirus {lastDate}</h2>
+export default function HomePage({
+  lastDate,
+  rows,
+}) {
+  return (
+    <>
+      <h2>Coronavirus {lastDate}</h2>
+      <Chart rows={rows} />
+    </>
+  )
+}
+
+function Chart({ rows }) {
+  return "TODO: Chart"
 }
 
 function transform(data) {

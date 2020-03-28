@@ -11,27 +11,20 @@ import views from "./views"
 
 <View />
 
-In this post we are going to build a small NextJS app using some of its newest game-changing features: `getStaticProps` and `getStaticPaths`.
+A few weeks ago, [Zeit released Next.js 9.3](https://nextjs.org/blog/next-9-3). This new version introduces two of the frameworks coolest APIs: `getStaticProps` and `getStaticPaths`.
 
-The app downloads a JSON file with some Coronavirus stats from a public URL, it shows an `index` page with a chart and a table using the data from the last day. The table has links to pages for each country showing a timeseries chart for that country.
+With `getStaticProps` and `getStaticPaths` we have more control on what the app renders to HTML at build time. 
 
-> Disclaimer: It isn't the purpose of this post to build accurate charts and data
+To show how to use this new feature, let's build an app.
 
-The JSON file has data for each country and for each day from the last months. The file is updated once per day.
+The app downloads a JSON file with some Coronavirus stats from a public URL, it shows an `index` page with a chart using the data from the last day. The table has links to pages for each country showing a timeseries chart for that country.
+
+
+The JSON has data for each country and for each day from the last months. The file is updated once per day.
 
 If you want, try to think how would you build this site and then continue reading this post.
 
-<View />
-
-To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
-
-If you are coding along run this on an empty folder.
-
-```bash
-yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
-```
-
-Then add the scripts section to the `package.json`
+> Disclaimer: It isn't the purpose of this post to build accurate charts and data
 
 <View />
 
@@ -39,23 +32,25 @@ To start, we initialize a new project using NextJS and React (and a few more dep
 
 If you are coding along run this on an empty folder.
 
-```bash
-yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
-```
-
 Then add the scripts section to the `package.json`
 
 <View />
 
-To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
+Then create a `pages` folder and a `index.js` file in it. 
 
-If you are coding along run this on an empty folder.
+In Next.js, every js file in the `pages` folder will become a page. You need to add a React component as the default export.
 
-```bash
-yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
-```
+For now, let's export a component that renders `<h1>Hello</h1>`.
 
-Then add the scripts section to the `package.json`
+<View />
+
+
+Then create a `pages` folder and a `index.js` file in it. 
+
+In Next.js, every js file in the `pages` folder will become a page. You need to add a React component as the default export.
+
+For now, let's export a component that renders `<h1>Hello</h1>`.
+
 
 <View />
 

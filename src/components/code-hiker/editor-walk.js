@@ -43,6 +43,7 @@ function EditorWalk({ progress, steps, backwards, height }) {
           progress={activeProgress}
           steps={activeSteps}
           theme={vsDark}
+          nonblocking={true}
         />
       )}
     </EditorFrame>

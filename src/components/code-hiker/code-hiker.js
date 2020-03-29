@@ -59,8 +59,9 @@ export function CodeHike({ steps, views }) {
                 id={"step-" + i}
                 style={{
                   position: "absolute",
-                  height: "100vh",
-                  top: "calc(50% - max(50vh, 51%))",
+                  height: "50vh",
+                  minHeight: "calc(50% + 20px)",
+                  bottom: "50%",
                   visibility: "hidden",
                 }}
               />

@@ -1,7 +1,7 @@
 import React from "react"
 import { Scroller, StepContainer } from "./scroller"
 import { useSpring } from "use-spring"
-import { getFrame } from "./vertical-queue"
+import { useFrame } from "./vertical-queue"
 import { BrowserIframe } from "./browser"
 import EditorFrame from "./editor-walk"
 
@@ -76,7 +76,7 @@ function Sticker({ views, progress, backwards }) {
   const prevKids = views[Math.floor(progress)]
   const nextKids = views[Math.floor(progress) + 1] || prevKids
   const padding = 40
-  const { frame, height } = getFrame(prevKids, nextKids, progress % 1, padding)
+  const { frame, height } = useFrame(prevKids, nextKids, progress % 1, padding)
   return (
     <div
       style={{

@@ -44,165 +44,82 @@ For now, let's export a component that renders `<h1>Hello</h1>`.
 
 <View />
 
+Now that we have a minimal project using NextJS, run it to check that everything is working.
 
-Then create a `pages` folder and a `index.js` file in it. 
+We need to install the dependencies, we can do that we `yarn` or `npm`: `yarn install`.
 
-In Next.js, every js file in the `pages` folder will become a page. You need to add a React component as the default export.
+After all the dependencies are installed, we run the development version of our site with `yarn dev`.
 
-For now, let's export a component that renders `<h1>Hello</h1>`.
-
-
-<View />
-
-To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
-
-If you are coding along run this on an empty folder.
-
-```bash
-yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
-```
-
-Then add the scripts section to the `package.json`
 
 <View />
 
-To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
+Our app is live at https://localhost:3000.
 
-If you are coding along run this on an empty folder.
+Let's add more things to this minimal website one by one. We start by downloading the json when the site loads.
 
-```bash
-yarn add next react react-dom @nivo/stream@0.59 @nivo/treemap@0.59
-```
+<View />
 
-Then add the scripts section to the `package.json`
+We wrap the fetch code inside a `useData` hook that returns `undefined` until the JSON is downloaded.
+
+In our `HomePage` component we call the `useData` hook and show "Loading..." until we have the data.
+
+Now let's use the data for something. 
+
+<View />
+
+One quick thing we can do with the data is extract the last date from the time-series and show it. 
+
+Stop for a moment here. What have we done?
+
+Everytime a user visit our site we show they a "Loading..." text until the site downloads a big JSON, which it then transform to less than 10 bytes of information. Not to mention all the javascript downloaded to use React and NextJS.
+
+Our site may be an extreme example, but this problem is relevant to many types of websites were most of the content don't change frequently.    
+
+<View />
+
+`getStaticProps` to the rescue.
+
+Instead of fetching the data from the browser every time a user visits our site, we are going to fetch it during build-time (this is when you or a build server run `yarn build`).
+
+With NextJS, we can define `getStaticProps`...
+
+In our example, we fetch the JSON in `getStaticProps` and return it as the `data` prop. Then the `HomePage` component receive that `data` prop. We don't need the `useData` hook, nor we need to show the "Loading..." text anymore.
+
+Note that we are using `node-fetch` instead of the browser's `fetch`. That's because `getStaticProps` doesn't run on the browser, it runs on Node. This means you could, for example, access the file system inside `getStaticProps`.
+
+<View />
+
+We are not showing the "Loading..." text anymore and the date is already in the HTML when a user visits our site. That's an improvement, but NextJS is still sending all the `data` to the browser.
+
+Instead of passing the whole data object to the `HomePage` component, we can extract only the things we need during build-time on `getStaticProps`.
+
+Now, when a user visit our site, it will be as fast as the minimal Hello World site we had at the beginning.
+
+<View />
+
+Let's do something more interesting and plot part of the data from the JSON.
+
+We will need the last stats from each country, so we extract that on `getStaticProps` and pass it to the `HomePage` as props.
+
+`rows` is an array like the following:
 
 ```json
-{
-  "dependencies": {
-    "@nivo/stream": "0.59.0",
-    "@nivo/treemap": "0.59.0",
-    "next": "^9.3.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+[
+  {
+    country: 'France',
+    deaths: 10,
   },
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
-  }
-}
+  {
+    country: 'France',
+    deaths: 10,
+  },
+  ...
+]
 ```
 
 <View />
 
-Let's create a `pages/index.js` and run the dev server
-
-```jsx
-export default function HomePage() {
-  return (
-    <>
-      <h1>Hello</h1>
-    </>
-  )
-}
-```
-
-> Make sure you have yarn installed
-
-```bash
-yarn
-yarn dev
-```
-
-> https://x1-965tkyiws.now.sh/
-
-<View />
-
-Build a naive version first. A client side rendered page. We download the html and js, then React runs and download the JSON, and when the download finished we show something.
-
-```jsx
-export default function HomePage() {
-  const [data, setData] = React.useState()
-  React.useEffect(() => {
-    fetch(
-      "https://pomber.github.io/covid19/timeseries.json"
-    )
-      .then(response => response.json())
-      .then(data => setData(data))
-  }, [])
-
-  if (!data) {
-    return <h1>Loading...</h1>
-  }
-
-  return (
-    <>
-      <h1>Loaded</h1>
-    </>
-  )
-}
-```
-
-> https://x1-i6qvdxal6.now.sh/
-
-
-<View />
-
-
-The JSON we are downloading looks like this:
-
-```json
-{
-  China: [
-    {},
-    ...,
-    {}
-  ]
-}
-```
-
-<View />
-
-Let's start by displaying the last date from the JSON:
-
-```jsx
-export default function HomePage() {
-  const [data, setData] = React.useState()
-  React.useEffect(async () => {
-    const response = await fetch("")
-    const data = await response.json()
-    setData(data)
-  }, [])
-}
-```
-
-> https://x1-q04u5abja.now.sh/
-
-
-<View />
-
-// move from client side to ssg
-// tell about ssr (better SEO, less "loading...") but we are still downlading and transforming the json for everyrequest (now on the server)
-
-// note that getStaticProps doesn't run on the browser, it runs on Node at build time. So we can't use the browser fetch
-
-```jsx
-import fetch from "node-fetch"
-
-export async function getStaticProps() {
-  const response = await fetch(
-    "https://pomber.github.io/covid19/timeseries.json"
-  )
-  const data = await response.json()
-  const { lastDate } = transform(data)
-
-  return {
-    props: { lastDate },
-  }
-}
-```
-
-> https://x1-hpye19f6q.now.sh/
+We will plot the rows in the `Chart` component. So we add the `Chart` element to the `HomePage` and pass the `rows` props.
 
 <View />
 

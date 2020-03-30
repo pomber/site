@@ -31,5 +31,14 @@ export default function HomePage({
   lastDate,
   rows,
 }) {
-  return <h2>Coronavirus {lastDate}</h2>
+  return (
+    <>
+      <h2>Coronavirus {lastDate}</h2>
+      <Chart rows={rows} />
+    </>
+  )
+}
+
+function Chart({ rows }) {
+  return "TODO: Chart"
 }

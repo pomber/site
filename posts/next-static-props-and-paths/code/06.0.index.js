@@ -11,21 +11,7 @@ export async function getStaticProps() {
   }
 }
 
-function useData() {
-  const [data, setData] = React.useState()
-  React.useEffect(() => {
-    fetch(DATA)
-      .then(response => response.json())
-      .then(data => setData(data))
-  }, [])
-  return data
-}
-
-export default function HomePage() {
-  const data = useData()
-  if (!data) {
-    return <h1>Loading...</h1>
-  }
+export default function HomePage({ data }) {
   const countries = Object.keys(data)
   const firstCountry = data[countries[0]]
   const lastDate =

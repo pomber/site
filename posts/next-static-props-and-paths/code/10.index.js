@@ -12,20 +12,18 @@ export async function getStaticProps() {
     firstCountry[firstCountry.length - 1].date
   const rows = countries
     .map(country => {
-      const lastDay = data[country].find(
-        x => x.date === lastDate
+      const { deaths } = data[country].find(
+        r => r.date === lastDate
       )
-      return {
-        country,
-        confirmed: lastDay.confirmed,
-        deaths: lastDay.deaths,
-      }
+      return { country, deaths }
     })
     .filter(r => r.deaths > 8)
   return {
     props: { lastDate, rows },
   }
 }
+
+import { TreeMap } from "@nivo/treemap"
 
 export default function HomePage({
   lastDate,
@@ -34,22 +32,14 @@ export default function HomePage({
   return (
     <>
       <h2>Coronavirus {lastDate}</h2>
-      <Chart rows={rows} />
+      <TreeMap
+        root={{ children: rows }}
+        identity="country"
+        value="deaths"
+        width={402}
+        height={192}
+        innerPadding={1}
+      />
     </>
-  )
-}
-
-import { TreeMap } from "@nivo/treemap"
-
-function Chart({ rows }) {
-  return (
-    <TreeMap
-      root={{ children: rows }}
-      identity="country"
-      value="deaths"
-      width={402}
-      height={192}
-      innerPadding={1}
-    />
   )
 }

@@ -88,10 +88,6 @@ const views = [
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["10.index.js"] },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
-  ],
-  [
     { type: Editor, ...files["11.index.js"] },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
@@ -100,7 +96,7 @@ const views = [
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["13.index.js"] },
+    { type: Editor, ...files["13.index.js"], focus: "34:45,52" },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [

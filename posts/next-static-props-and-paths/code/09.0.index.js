@@ -7,38 +7,35 @@ export async function getStaticProps() {
   const response = await fetch(DATA)
   const data = await response.json()
   const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  const lastDate =
-    firstCountry[firstCountry.length - 1].date
+  const aCountry = data[countries[0]]
+  const { date } = aCountry[aCountry.length - 1]
   const rows = countries
     .map(country => {
-      const lastDay = data[country].find(
-        x => x.date === lastDate
+      const { deaths } = data[country].find(
+        r => r.date === lastDate
       )
-      return {
-        country,
-        confirmed: lastDay.confirmed,
-        deaths: lastDay.deaths,
-      }
+      return { country, deaths }
     })
     .filter(r => r.deaths > 8)
   return {
-    props: { lastDate, rows },
+    props: { date, rows },
   }
 }
 
-export default function HomePage({
-  lastDate,
-  rows,
-}) {
+import { TreeMap } from "@nivo/treemap"
+
+export default function HomePage({ date, rows }) {
   return (
     <>
-      <h2>Coronavirus {lastDate}</h2>
-      <Chart rows={rows} />
+      <h2>Coronavirus {date}</h2>
+      <TreeMap
+        root={{ children: rows }}
+        identity="country"
+        value="deaths"
+        width={402}
+        height={192}
+        innerPadding={1}
+      />
     </>
   )
-}
-
-function Chart({ rows }) {
-  return "TODO: Chart"
 }

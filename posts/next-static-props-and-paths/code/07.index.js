@@ -7,14 +7,13 @@ export async function getStaticProps() {
   const response = await fetch(DATA)
   const data = await response.json()
   const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  const lastDate =
-    firstCountry[firstCountry.length - 1].date
+  const aCountry = data[countries[0]]
+  const { date } = aCountry[aCountry.length - 1]
   return {
-    props: { lastDate },
+    props: { date },
   }
 }
 
-export default function HomePage({ lastDate }) {
-  return <h2>Coronavirus {lastDate}</h2>
+export default function HomePage({ date }) {
+  return <h2>Coronavirus {date}</h2>
 }

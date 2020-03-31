@@ -11,50 +11,48 @@ export async function getStaticProps() {
   ])
   const data = await response.json()
   const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  const lastDate =
-    firstCountry[firstCountry.length - 1].date
+  const aCountry = data[countries[0]]
+  const { date } = aCountry[aCountry.length - 1]
   const rows = countries
     .map(country => {
-      const lastDay = data[country].find(
-        x => x.date === lastDate
+      const { deaths } = data[country].find(
+        r => r.date === lastDate
       )
-      return {
-        country,
-        confirmed: lastDay.confirmed,
-        deaths: lastDay.deaths,
-        flag: flags[country]?.flag || "❓",
-      }
+      return { country, deaths }
     })
     .filter(r => r.deaths > 8)
   return {
-    props: { lastDate, rows },
+    props: { date, rows },
   }
-}
-
-export default function HomePage({
-  lastDate,
-  rows,
-}) {
-  return (
-    <>
-      <h2>Coronavirus {lastDate}</h2>
-      <Chart rows={rows} />
-    </>
-  )
 }
 
 import { TreeMap } from "@nivo/treemap"
 
-function Chart({ rows }) {
+export default function HomePage({ date, rows }) {
   return (
-    <TreeMap
-      root={{ children: rows }}
-      identity="country"
-      value="deaths"
-      width={402}
-      height={192}
-      innerPadding={1}
-    />
+    <>
+      <h2>Coronavirus {date}</h2>
+      <TreeMap
+        tile="binary"
+        colorBy="flag"
+        colors={{ scheme: "pastel1" }}
+        labelSkipSize={9}
+        label={({ value, flag }) => (
+          <tspan
+            style={{ fontSize: 10 + value / 200 }}
+            children={flag}
+          />
+        )}
+        tooltip={r =>
+          `${r.value} deaths in ${r.id}`
+        }
+        root={{ children: rows }}
+        identity="country"
+        value="deaths"
+        width={402}
+        height={192}
+        innerPadding={1}
+      />
+    </>
   )
 }

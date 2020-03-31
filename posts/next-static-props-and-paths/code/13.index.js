@@ -11,65 +11,65 @@ export async function getStaticProps() {
   ])
   const data = await response.json()
   const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  const lastDate =
-    firstCountry[firstCountry.length - 1].date
+  const aCountry = data[countries[0]]
+  const { date } = aCountry[aCountry.length - 1]
   const rows = countries
     .map(country => {
-      const lastDay = data[country].find(
-        x => x.date === lastDate
+      const { deaths } = data[country].find(
+        r => r.date === lastDate
       )
-      return {
-        country,
-        confirmed: lastDay.confirmed,
-        deaths: lastDay.deaths,
-        flag: flags[country]?.flag || "❓",
-      }
+      return { country, deaths }
     })
     .filter(r => r.deaths > 8)
   return {
-    props: { lastDate, rows },
+    props: { date, rows },
   }
 }
 
-export default function HomePage({
-  lastDate,
-  rows,
-}) {
+import { TreeMap } from "@nivo/treemap"
+import {
+  TreeMap,
+  TreeMapDefaultProps as TreeMapDefault,
+} from "@nivo/treemap"
+import Link from "next/link"
+
+function Node(props) {
+  const { country } = props.node.data
   return (
-    <>
-      <h2>Coronavirus {lastDate}</h2>
-      <Chart rows={rows} />
-    </>
+    <Link href={`country/${country}`}>
+      <a>
+        <TreeMapDefault.nodeComponent {...props} />
+      </a>
+    </Link>
   )
 }
 
-import { TreeMap } from "@nivo/treemap"
-
-function Chart({ rows }) {
+export default function HomePage({ date, rows }) {
   return (
-    <TreeMap
-      tile="binary"
-      colorBy="flag"
-      colors={{ scheme: "pastel1" }}
-      tooltip={r => `${r.value} deaths in ${r.id}`}
-      labelSkipSize={10}
-      label={({ value, flag }) => (
-        <tspan
-          style={{ fontSize: 10 + value / 200 }}
-          children={flag}
-        />
-      )}
-      theme={{
-        margin: "0 auto",
-        display: "block",
-      }}
-      root={{ children: rows }}
-      identity="country"
-      value="deaths"
-      width={402}
-      height={192}
-      innerPadding={1}
-    />
+    <>
+      <h2>Coronavirus {date}</h2>
+      <TreeMap
+        nodeComponent={Node}
+        tile="binary"
+        colorBy="flag"
+        colors={{ scheme: "pastel1" }}
+        labelSkipSize={9}
+        label={({ value, flag }) => (
+          <tspan
+            style={{ fontSize: 10 + value / 200 }}
+            children={flag}
+          />
+        )}
+        tooltip={r =>
+          `${r.value} deaths in ${r.id}`
+        }
+        root={{ children: rows }}
+        identity="country"
+        value="deaths"
+        width={402}
+        height={192}
+        innerPadding={1}
+      />
+    </>
   )
 }

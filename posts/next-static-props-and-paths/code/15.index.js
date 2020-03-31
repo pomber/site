@@ -16,15 +16,10 @@ export async function getStaticProps() {
     firstCountry[firstCountry.length - 1].date
   const rows = countries
     .map(country => {
-      const lastDay = data[country].find(
-        x => x.date === lastDate
+      const { deaths } = data[country].find(
+        r => r.date === lastDate
       )
-      return {
-        country,
-        confirmed: lastDay.confirmed,
-        deaths: lastDay.deaths,
-        flag: flags[country]?.flag || "❓",
-      }
+      return { country, deaths }
     })
     .filter(r => r.deaths > 8)
   return {

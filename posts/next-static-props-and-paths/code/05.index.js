@@ -17,8 +17,7 @@ export default function HomePage() {
     return <h1>Loading...</h1>
   }
   const countries = Object.keys(data)
-  const firstCountry = data[countries[0]]
-  const lastDate =
-    firstCountry[firstCountry.length - 1].date
-  return <h2>Coronavirus {lastDate}</h2>
+  const aCountry = data[countries[0]]
+  const { date } = aCountry[aCountry.length - 1]
+  return <h2>Coronavirus {date}</h2>
 }

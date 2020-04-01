@@ -30,7 +30,7 @@ function EditorWalk({ progress, steps, backwards, height }) {
 
   return (
     <EditorFrame
-      files={files}
+      files={activeStep.tabs || files}
       active={activeFile}
       terminal={activeStep.terminal}
       terminalHeight={terminalHeight}

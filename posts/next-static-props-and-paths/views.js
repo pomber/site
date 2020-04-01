@@ -20,14 +20,18 @@ const files = {
   "11.index.js":{code:require("!!raw-loader!./code/11.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
   "12.index.js":{code:require("!!raw-loader!./code/12.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
   "13.index.js":{code:require("!!raw-loader!./code/13.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
-  "14.index.js":{code:require("!!raw-loader!./code/14.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
-  "15.index.js":{code:require("!!raw-loader!./code/15.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
+  "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
+  "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
 }
 
 const yarnCommands = `$ yarn install
 Installing dependencies...
 $ yarn dev
 Running on localhost:8000`
+
+const tabs0 = { tabs: ["package.json"] }
+const tabs1 = { tabs: ["package.json", "pages/index.js"] }
+const tabs2 = { tabs: ["pages/index.js", "pages/country/[name].js"] }
 
 const views = [
   [
@@ -44,14 +48,15 @@ const views = [
       showUrl: "https://next-static-props-demo.now.sh/",
     },
   ],
-  [{ type: Editor, ...files["01.package.json"] }],
-  [{ type: Editor, ...files["03.index.js"] }],
+  [{ type: Editor, ...files["01.package.json"], ...tabs0 }],
+  [{ type: Editor, ...files["03.index.js"], ...tabs1 }],
   [
     {
       type: Editor,
       ...files["03.index.js"],
       terminal: yarnCommands,
       focus: "2[1]",
+      ...tabs1,
     },
   ],
   [
@@ -60,51 +65,52 @@ const views = [
       ...files["03.index.js"],
       terminal: yarnCommands,
       focus: "2[1]",
+      ...tabs1,
     },
     { type: Browser, url: "https://x1-965tkyiws.now.sh/" },
   ],
   [
-    { type: Editor, ...files["04.index.js"] },
+    { type: Editor, ...files["04.index.js"], ...tabs1 },
     { type: Browser, url: "https://x1-i6qvdxal6.now.sh/" },
   ],
   [
-    { type: Editor, ...files["05.index.js"], focus: "13[80],18:28" },
+    { type: Editor, ...files["05.index.js"], ...tabs1, focus: "13[80],18:28" },
     { type: Browser, url: "https://x1-q04u5abja.now.sh/" },
   ],
   [
-    { type: Editor, ...files["06.0.index.js"] },
+    { type: Editor, ...files["06.0.index.js"], ...tabs1 },
     { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
   ],
   [
-    { type: Editor, ...files["07.index.js"] },
+    { type: Editor, ...files["07.index.js"], ...tabs1 },
     { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
   ],
   [
-    { type: Editor, ...files["08.index.js"] },
+    { type: Editor, ...files["08.index.js"], ...tabs1 },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["09.0.index.js"] },
+    { type: Editor, ...files["09.0.index.js"], ...tabs1 },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["11.index.js"] },
+    { type: Editor, ...files["11.index.js"], ...tabs1 },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["12.index.js"] },
+    { type: Editor, ...files["12.index.js"], ...tabs1 },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["13.index.js"], focus: "34:45,52" },
+    { type: Editor, ...files["13.index.js"], ...tabs1, focus: "34:45,52" },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["14.index.js"] },
+    { type: Editor, ...files["14.country.js"], ...tabs2 },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
   [
-    { type: Editor, ...files["15.index.js"] },
+    { type: Editor, ...files["15.country.js"], ...tabs2 },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
 ]

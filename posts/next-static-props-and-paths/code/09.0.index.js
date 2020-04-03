@@ -12,7 +12,7 @@ export async function getStaticProps() {
   const rows = countries
     .map(country => {
       const { deaths } = data[country].find(
-        r => r.date === lastDate
+        r => r.date === date
       )
       return { country, deaths }
     })

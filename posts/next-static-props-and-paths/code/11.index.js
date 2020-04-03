@@ -9,16 +9,16 @@ export async function getStaticProps() {
     fetch(DATA).then(r => r.json()),
     fetch(FLAGS).then(r => r.json()),
   ])
-  const data = await response.json()
   const countries = Object.keys(data)
   const aCountry = data[countries[0]]
   const { date } = aCountry[aCountry.length - 1]
   const rows = countries
     .map(country => {
       const { deaths } = data[country].find(
-        r => r.date === lastDate
+        r => r.date === date
       )
-      return { country, deaths }
+      const flag = flags[country]?.flag || "❓"
+      return { country, deaths, flag }
     })
     .filter(r => r.deaths > 8)
   return {

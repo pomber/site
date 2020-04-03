@@ -18,15 +18,29 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { name } = context.params
-  return { props: { name } }
+  const response = await fetch(DATA)
+  const data = await response.json()
+  const rows = data[name]
+  return { props: { name, rows } }
 }
 
-export default function Country({ name }) {
+import { Stream } from "@nivo/stream"
+
+export default function Country({ name, rows }) {
   return (
     <>
       <h1 style={{ textAlign: "center" }}>
         {name}
       </h1>
+      <Stream
+        data={rows}
+        width={390}
+        height={160}
+        keys={["deaths", "confirmed"]}
+        offsetType="diverging"
+        colors={{ scheme: "pastel1" }}
+        enableGridX={false}
+      />
       <Link href="/">
         <a>Go Back</a>
       </Link>

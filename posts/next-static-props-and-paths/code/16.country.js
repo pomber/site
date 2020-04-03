@@ -18,10 +18,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { name } = context.params
-  return { props: { name } }
+  const response = await fetch(DATA)
+  const data = await response.json()
+  const rows = data[name]
+  return { props: { name, rows } }
 }
 
-export default function Country({ name }) {
+export default function Country({ name, rows }) {
   return (
     <>
       <h1 style={{ textAlign: "center" }}>

@@ -4,7 +4,10 @@ date: 2020-03-22
 responsive: false
 ---
 
-import { Hike, View } from "../../src/components/mdx-hiker"
+import {
+  Hike,
+  View,
+} from "../../src/components/mdx-hiker"
 import views from "./views"
 
 <Hike views={views}>
@@ -13,12 +16,11 @@ import views from "./views"
 
 A few weeks ago, [Zeit released Next.js 9.3](https://nextjs.org/blog/next-9-3). This new version introduces two of the frameworks coolest APIs: `getStaticProps` and `getStaticPaths`.
 
-With `getStaticProps` and `getStaticPaths` we have more control on what the app renders to HTML at build time. 
+With `getStaticProps` and `getStaticPaths` we have more control on what the app renders to HTML at build time.
 
 To show how to use this new feature, let's build an app.
 
 The app downloads a JSON file with some Coronavirus stats from a public URL, it shows an `index` page with a chart using the data from the last day. The table has links to pages for each country showing a timeseries chart for that country.
-
 
 The JSON has data for each country and for each day from the last months. The file is updated once per day.
 
@@ -28,7 +30,7 @@ If you want, try to think how would you build this site and then continue readin
 
 <View />
 
-To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later). 
+To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later).
 
 If you are coding along run this on an empty folder.
 
@@ -36,7 +38,7 @@ Then add the scripts section to the `package.json`
 
 <View />
 
-Then create a `pages` folder and a `index.js` file in it. 
+Then create a `pages` folder and a `index.js` file in it.
 
 In Next.js, every js file in the `pages` folder will become a page. You need to add a React component as the default export.
 
@@ -50,7 +52,6 @@ We need to install the dependencies, we can do that we `yarn` or `npm`: `yarn in
 
 After all the dependencies are installed, we run the development version of our site with `yarn dev`.
 
-
 <View />
 
 Our app is live at https://localhost:3000.
@@ -63,17 +64,17 @@ We wrap the fetch code inside a `useData` hook that returns `undefined` until th
 
 In our `HomePage` component we call the `useData` hook and show "Loading..." until we have the data.
 
-Now let's use the data for something. 
+Now let's use the data for something.
 
 <View />
 
-One quick thing we can do with the data is extract the last date from the time-series and show it. 
+One quick thing we can do with the data is extract the last date from the time-series and show it.
 
 Stop for a moment here. What have we done?
 
 Everytime a user visit our site we show they a "Loading..." text until the site downloads a big JSON, which it then transform to less than 10 bytes of information. Not to mention all the javascript downloaded to use React and NextJS.
 
-Our site may be an extreme example, but this problem is relevant to many types of websites were most of the content don't change frequently.    
+Our site may be an extreme example, but this problem is relevant to many types of websites were most of the content don't change frequently.
 
 <View />
 
@@ -140,7 +141,6 @@ Let's show a chart with some stats.
 
 Cool thing is, the chart is rendered even if we disable javascript.
 
-
 <View />
 
 So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
@@ -153,7 +153,6 @@ Let's show a chart with some stats.
 ```
 
 Cool thing is, the chart is rendered even if we disable javascript.
-
 
 <View />
 
@@ -184,6 +183,21 @@ So far we haven't done anything impressive. A script that download the JSON and 
 
 Let's show a chart with some stats.
 
+<View />
+
+Let's make the add links
+
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
+
+<View />
+
+Let's make the add links
+
+So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
+
+Let's show a chart with some stats.
 
 ---
 

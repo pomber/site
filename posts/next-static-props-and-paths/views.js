@@ -2,7 +2,7 @@ import { Browser, Editor } from "../../src/components/code-hiker/code-hiker"
 import React from "react"
 import demoLegend from "./demo-legend.png"
 
-const pr = id => `https://github.com/pomber/use-spring/pull/${id}/files`
+const pr = (id) => `https://github.com/pomber/use-spring/pull/${id}/files`
 
 // prettier-ignore
 const files = {
@@ -22,6 +22,8 @@ const files = {
   "13.index.js":{code:require("!!raw-loader!./code/13.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
   "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
   "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
+  "16.country.js":{code:require("!!raw-loader!./code/16.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
+  "17.country.js":{code:require("!!raw-loader!./code/17.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
 }
 
 const yarnCommands = `$ yarn install
@@ -103,7 +105,7 @@ const views = [
   ],
   [
     { type: Editor, ...files["13.index.js"], ...tabs1, focus: "34:45,52" },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    { type: Browser, url: "http://localhost:3000/" },
   ],
   [
     { type: Editor, ...files["14.country.js"], ...tabs2 },
@@ -113,15 +115,23 @@ const views = [
     { type: Editor, ...files["15.country.js"], ...tabs2 },
     { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
   ],
+  [
+    { type: Editor, ...files["16.country.js"], ...tabs2 },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["17.country.js"], ...tabs2 },
+    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+  ],
 ]
 
-const editorSteps = views.map(xs => xs.find(x => x.type === Editor) || {})
+const editorSteps = views.map((xs) => xs.find((x) => x.type === Editor) || {})
 const defaultProps = {
   [Browser]: { height: 300, showUrl: "http://localhost:3000" },
   [Editor]: { height: 350, steps: editorSteps },
 }
 
-export default views.map(stepViews =>
+export default views.map((stepViews) =>
   stepViews.map(({ type, ...stepProps }) => {
     const props = { ...defaultProps[type], ...stepProps }
     return React.createElement(type, props)

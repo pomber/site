@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   const data = await response.json()
   const countries = Object.keys(data)
   return {
-    paths: countries.map((name) => ({
+    paths: countries.map(name => ({
       params: { name },
     })),
     fallback: false,

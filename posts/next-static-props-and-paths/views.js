@@ -2,28 +2,25 @@ import { Browser, Editor } from "../../src/components/code-hiker/code-hiker"
 import React from "react"
 import demoLegend from "./demo-legend.png"
 
-const pr = (id) => `https://github.com/pomber/use-spring/pull/${id}/files`
+const pr = (id) => `https://github.com/pomber/ssg-demo/pull/${id}/files`
 
 // prettier-ignore
 const files = {
-  "01.package.json":{code:require("raw-loader!./code/01.package.jsonx"),lang:"json",file:"package.json", link: pr(4)},
-  "03.index.js":{code:require("!!raw-loader!./code/03.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
-  "04.index.js":{code:require("!!raw-loader!./code/04.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
-  "05.index.js":{code:require("!!raw-loader!./code/05.index.js"),lang:"jsx",file:"pages/index.js"},
+  "01.package.json":{code:require("raw-loader!./code/01.package.jsonx"),lang:"json",file:"package.json", link: pr("1/files#diff-b9cfc7f2cdf78a7f4b91a753d10865a2")},
+  "03.index.js":{code:require("!!raw-loader!./code/03.index.js"),lang:"jsx",file:"pages/index.js", link: pr("1/files#diff-e14ec8fd2b038fbccea5f8090d26ace4")},
+  "04.index.js":{code:require("!!raw-loader!./code/04.index.js"),lang:"jsx",file:"pages/index.js", link: pr(2)},
+  "05.index.js":{code:require("!!raw-loader!./code/05.index.js"),lang:"jsx",file:"pages/index.js", link: pr(3)},
   "06.0.index.js":{code:require("!!raw-loader!./code/06.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
-  "06.1.index.js":{code:require("!!raw-loader!./code/06.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
-  "07.index.js":{code:require("!!raw-loader!./code/07.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
-  "08.index.js":{code:require("!!raw-loader!./code/08.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
-  "09.0.index.js":{code:require("!!raw-loader!./code/09.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
-  "09.1.index.js":{code:require("!!raw-loader!./code/09.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
-  "10.index.js":{code:require("!!raw-loader!./code/10.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
-  "11.index.js":{code:require("!!raw-loader!./code/11.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
-  "12.index.js":{code:require("!!raw-loader!./code/12.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
-  "13.index.js":{code:require("!!raw-loader!./code/13.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)}, 
-  "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
-  "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
-  "16.country.js":{code:require("!!raw-loader!./code/16.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
-  "17.country.js":{code:require("!!raw-loader!./code/17.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(4)}, 
+  "07.index.js":{code:require("!!raw-loader!./code/07.index.js"),lang:"jsx",file:"pages/index.js", link: pr(5)},
+  "08.index.js":{code:require("!!raw-loader!./code/08.index.js"),lang:"jsx",file:"pages/index.js", link: pr(6)},
+  "09.0.index.js":{code:require("!!raw-loader!./code/09.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(7)}, 
+  "11.index.js":{code:require("!!raw-loader!./code/11.index.js"),lang:"jsx",file:"pages/index.js", link: pr(8)}, 
+  "12.index.js":{code:require("!!raw-loader!./code/12.index.js"),lang:"jsx",file:"pages/index.js", link: pr(9)}, 
+  "13.index.js":{code:require("!!raw-loader!./code/13.index.js"),lang:"jsx",file:"pages/index.js", link: pr(10)}, 
+  "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(11)}, 
+  "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(12)}, 
+  "16.country.js":{code:require("!!raw-loader!./code/16.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(13)}, 
+  "17.country.js":{code:require("!!raw-loader!./code/17.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(14)}, 
 }
 
 const yarnCommands = `$ yarn install
@@ -46,8 +43,8 @@ const views = [
     },
     {
       type: Browser,
-      url: "http://localhost:3000/",
-      showUrl: "https://next-static-props-demo.now.sh/",
+      url: "https://ssg-demo-4l0ox8wn3.now.sh/",
+      showUrl: "https://ssg-demo-4l0ox8wn3.now.sh/",
     },
   ],
   [{ type: Editor, ...files["01.package.json"], ...tabs0 }],
@@ -69,59 +66,75 @@ const views = [
       focus: "2[1]",
       ...tabs1,
     },
-    { type: Browser, url: "https://x1-965tkyiws.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-6546je7we.now.sh/" },
   ],
   [
     { type: Editor, ...files["04.index.js"], ...tabs1 },
-    { type: Browser, url: "https://x1-i6qvdxal6.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-6t2d6smox.now.sh/" },
   ],
   [
     { type: Editor, ...files["05.index.js"], ...tabs1, focus: "13[80],18:28" },
-    { type: Browser, url: "https://x1-q04u5abja.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-6840hkb70.now.sh/" },
   ],
   [
     { type: Editor, ...files["06.0.index.js"], ...tabs1 },
-    { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-98dxl0cve.now.sh/" },
   ],
   [
     { type: Editor, ...files["07.index.js"], ...tabs1 },
-    { type: Browser, url: "https://x1-hpye19f6q.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-hhhht6een.now.sh/" },
   ],
   [
     { type: Editor, ...files["08.index.js"], ...tabs1 },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-hhhht6een.now.sh/" },
   ],
   [
     { type: Editor, ...files["09.0.index.js"], ...tabs1 },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-k1xwtf8h0.now.sh/" },
   ],
   [
     { type: Editor, ...files["11.index.js"], ...tabs1 },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-k1xwtf8h0.now.sh/" },
   ],
   [
     { type: Editor, ...files["12.index.js"], ...tabs1 },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-dc5hqg9dg.now.sh/" },
   ],
   [
-    { type: Editor, ...files["13.index.js"], ...tabs1, focus: "34:45,52" },
-    { type: Browser, url: "http://localhost:3000/" },
+    { type: Editor, ...files["13.index.js"], ...tabs1, focus: "33:44,51" },
+    { type: Browser, url: "https://ssg-demo-kxqsqtph5.now.sh/" },
   ],
   [
     { type: Editor, ...files["14.country.js"], ...tabs2 },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    {
+      type: Browser,
+      url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",
+      showUrl: "http://localhost:3000/country/Iran",
+    },
   ],
   [
     { type: Editor, ...files["15.country.js"], ...tabs2 },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    {
+      type: Browser,
+      url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",
+      showUrl: "http://localhost:3000/country/Iran",
+    },
   ],
   [
     { type: Editor, ...files["16.country.js"], ...tabs2 },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    {
+      type: Browser,
+      url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",
+      showUrl: "http://localhost:3000/country/Iran",
+    },
   ],
   [
     { type: Editor, ...files["17.country.js"], ...tabs2 },
-    { type: Browser, url: "https://x1-5p8jjgqz9.now.sh/" },
+    {
+      type: Browser,
+      url: "https://ssg-demo-4l0ox8wn3.now.sh/country/Iran",
+      showUrl: "http://localhost:3000/country/Iran",
+    },
   ],
 ]
 

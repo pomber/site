@@ -120,15 +120,32 @@ We will need the last stats from each country, so we extract that on `getStaticP
 
 <View />
 
-We will plot the rows in the `Chart` component. So we add the `Chart` element to the `HomePage` and pass the `rows` props.
+We use `TreeMap` from [nivo](https://nivo.rocks/) to display the rows.
 
-We will plot the rows in the `Chart` component. So we add the `Chart` element to the `HomePage` and pass the `rows` props.
+The tree map is ugly by default, let's customize it to make it look better.
 
 <View />
 
-// do something more interesting, render the table
+Instead of showing the name for each country, I want to show the country's flag. Luckily, there's another JSON with exactly that, the emoji flag for each country.
 
-> https://x1-5p8jjgqz9.now.sh/
+So, we fetch that JSON and add the country's flag to each row.
+
+<View />
+
+Then we change a few things in the chart:
+
+- layout algorithm
+- color scheme
+- labels
+- tooltips
+
+<View />
+
+It would be nice to be able to click on different countries to go to a details page.
+
+So I wrap the map nodes inside `Link` components.
+
+`Link`
 
 So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
 
@@ -143,29 +160,19 @@ Cool thing is, the chart is rendered even if we disable javascript.
 
 <View />
 
+Let's make the add links
+
 So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
 
 Let's show a chart with some stats.
-
-> https://x1-bx780mpxy.now.sh/
-
-```jsx
-```
-
-Cool thing is, the chart is rendered even if we disable javascript.
 
 <View />
 
+Let's make the add links
+
 So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
 
 Let's show a chart with some stats.
-
-> https://x1-bx780mpxy.now.sh/
-
-```jsx
-```
-
-Cool thing is, the chart is rendered even if we disable javascript.
 
 <View />
 

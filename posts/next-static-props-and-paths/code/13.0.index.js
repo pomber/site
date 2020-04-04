@@ -30,16 +30,13 @@ import {
   TreeMap,
   TreeMapDefaultProps as TreeMapDefault,
 } from "@nivo/treemap"
-import Link from "next/link"
 
 function Node(props) {
   const { country } = props.node.data
   return (
-    <Link href={`country/${country}`}>
-      <a>
-        <TreeMapDefault.nodeComponent {...props} />
-      </a>
-    </Link>
+    <a href={`country/${country}`}>
+      <TreeMapDefault.nodeComponent {...props} />
+    </a>
   )
 }
 

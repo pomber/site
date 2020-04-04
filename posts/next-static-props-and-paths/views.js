@@ -16,7 +16,8 @@ const files = {
   "09.0.index.js":{code:require("!!raw-loader!./code/09.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(7)}, 
   "11.index.js":{code:require("!!raw-loader!./code/11.index.js"),lang:"jsx",file:"pages/index.js", link: pr(8)}, 
   "12.index.js":{code:require("!!raw-loader!./code/12.index.js"),lang:"jsx",file:"pages/index.js", link: pr(9)}, 
-  "13.index.js":{code:require("!!raw-loader!./code/13.index.js"),lang:"jsx",file:"pages/index.js", link: pr(10)}, 
+  "13.0.index.js":{code:require("!!raw-loader!./code/13.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(10)}, 
+  "13.1.index.js":{code:require("!!raw-loader!./code/13.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(10)}, 
   "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(11)}, 
   "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(12)}, 
   "16.country.js":{code:require("!!raw-loader!./code/16.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(13)}, 
@@ -101,7 +102,11 @@ const views = [
     { type: Browser, url: "https://ssg-demo-dc5hqg9dg.now.sh/" },
   ],
   [
-    { type: Editor, ...files["13.index.js"], ...tabs1, focus: "33:44,51" },
+    { type: Editor, ...files["13.0.index.js"], ...tabs1, focus: "34:41,48" },
+    { type: Browser, url: "https://ssg-demo-kxqsqtph5.now.sh/" },
+  ],
+  [
+    { type: Editor, ...files["13.1.index.js"], ...tabs1 },
     { type: Browser, url: "https://ssg-demo-kxqsqtph5.now.sh/" },
   ],
   [
@@ -113,7 +118,15 @@ const views = [
     },
   ],
   [
-    { type: Editor, ...files["15.country.js"], ...tabs2 },
+    { type: Editor, ...files["15.country.js"], ...tabs2, focus: "2:17" },
+    {
+      type: Browser,
+      url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",
+      showUrl: "http://localhost:3000/country/Iran",
+    },
+  ],
+  [
+    { type: Editor, ...files["15.country.js"], ...tabs2, focus: "13,19:24" },
     {
       type: Browser,
       url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",

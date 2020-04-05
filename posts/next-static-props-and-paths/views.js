@@ -16,12 +16,12 @@ const files = {
   "09.0.index.js":{code:require("!!raw-loader!./code/09.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(7)}, 
   "11.index.js":{code:require("!!raw-loader!./code/11.index.js"),lang:"jsx",file:"pages/index.js", link: pr(8)}, 
   "12.index.js":{code:require("!!raw-loader!./code/12.index.js"),lang:"jsx",file:"pages/index.js", link: pr(9)}, 
-  "13.0.index.js":{code:require("!!raw-loader!./code/13.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(10)}, 
-  "13.1.index.js":{code:require("!!raw-loader!./code/13.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(10)}, 
-  "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(11)}, 
-  "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(12)}, 
-  "16.country.js":{code:require("!!raw-loader!./code/16.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(13)}, 
-  "17.country.js":{code:require("!!raw-loader!./code/17.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(14)}, 
+  "13.0.index.js":{code:require("!!raw-loader!./code/13.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(15)}, 
+  "13.1.index.js":{code:require("!!raw-loader!./code/13.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(16)}, 
+  "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(17)}, 
+  "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(18)}, 
+  "16.country.js":{code:require("!!raw-loader!./code/16.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(19)}, 
+  "17.country.js":{code:require("!!raw-loader!./code/17.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(20)}, 
 }
 
 const yarnCommands = `$ yarn install
@@ -44,8 +44,8 @@ const views = [
     },
     {
       type: Browser,
-      url: "https://ssg-demo-4l0ox8wn3.now.sh/",
-      showUrl: "https://ssg-demo-4l0ox8wn3.now.sh/",
+      url: "https://ssg-demo-6l4f9lqip.now.sh/",
+      showUrl: "https://ssg-demo-6l4f9lqip.now.sh/",
     },
   ],
   [{ type: Editor, ...files["01.package.json"], ...tabs0 }],
@@ -103,17 +103,17 @@ const views = [
   ],
   [
     { type: Editor, ...files["13.0.index.js"], ...tabs1, focus: "34:41,48" },
-    { type: Browser, url: "https://ssg-demo-kxqsqtph5.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-9fl4t8gvr.now.sh/" },
   ],
   [
     { type: Editor, ...files["13.1.index.js"], ...tabs1 },
-    { type: Browser, url: "https://ssg-demo-kxqsqtph5.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-9fl4t8gvr.now.sh/" },
   ],
   [
     { type: Editor, ...files["14.country.js"], ...tabs2 },
     {
       type: Browser,
-      url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",
+      url: "https://ssg-demo-fnqndl6fp.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],
@@ -121,7 +121,7 @@ const views = [
     { type: Editor, ...files["15.country.js"], ...tabs2, focus: "2:17" },
     {
       type: Browser,
-      url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",
+      url: "https://ssg-demo-fnqndl6fp.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],
@@ -129,7 +129,7 @@ const views = [
     { type: Editor, ...files["15.country.js"], ...tabs2, focus: "13,19:24" },
     {
       type: Browser,
-      url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",
+      url: "https://ssg-demo-fnqndl6fp.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],
@@ -137,7 +137,7 @@ const views = [
     { type: Editor, ...files["16.country.js"], ...tabs2 },
     {
       type: Browser,
-      url: "https://ssg-demo-ili22hzcm.now.sh/country/Iran",
+      url: "https://ssg-demo-fnqndl6fp.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],
@@ -145,7 +145,7 @@ const views = [
     { type: Editor, ...files["17.country.js"], ...tabs2 },
     {
       type: Browser,
-      url: "https://ssg-demo-4l0ox8wn3.now.sh/country/Iran",
+      url: "https://ssg-demo-6l4f9lqip.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],

@@ -5,7 +5,7 @@ module.exports = [
     description:
       "Moving things from runtime to build time with getStaticProps and getStaticPaths",
     date: "2020/03/22",
-    url: "/next-static-props/",
+    url: "/nextjs-static-props/",
   },
   {
     type: "blog post",

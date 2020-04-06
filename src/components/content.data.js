@@ -1,11 +1,11 @@
 module.exports = [
   {
     type: "blog post",
-    title: "NextJS Static Props",
+    title: "Next.js Static Props",
     description:
-      "A small NextJS app using some of its newest game-changing features",
+      "Moving things from runtime to build time with getStaticProps and getStaticPaths",
     date: "2020/03/22",
-    url: "/next-static-props-and-paths/",
+    url: "/next-static-props/",
   },
   {
     type: "blog post",

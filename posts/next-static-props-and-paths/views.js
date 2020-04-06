@@ -25,9 +25,10 @@ const files = {
 }
 
 const yarnCommands = `$ yarn install
-Installing dependencies...
+Fetching packages...
+Done.
 $ yarn dev
-Running on localhost:8000`
+Compiled successfully - ready on http://localhost:3000`
 
 const tabs0 = { tabs: ["package.json"] }
 const tabs1 = { tabs: ["package.json", "pages/index.js"] }
@@ -106,7 +107,12 @@ const views = [
     { type: Browser, url: "https://ssg-demo-9fl4t8gvr.now.sh/" },
   ],
   [
-    { type: Editor, ...files["13.1.index.js"], ...tabs1 },
+    {
+      type: Editor,
+      ...files["13.1.index.js"],
+      ...tabs1,
+      focus: "33,38:42,44,45",
+    },
     { type: Browser, url: "https://ssg-demo-9fl4t8gvr.now.sh/" },
   ],
   [

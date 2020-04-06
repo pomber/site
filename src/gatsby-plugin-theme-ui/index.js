@@ -76,12 +76,13 @@ const theme = merge.all([
         marginTop: 4,
       },
       inlineCode: {
-        borderRadius: `0.3em`,
+        color: "rgb(60, 120, 120)",
+        // borderRadius: `0.3em`,
         // color: `secondary`,
         // bg: `highlight`,
-        paddingTop: `0.15em`,
-        paddingBottom: `0.05em`,
-        paddingX: `0.2em`,
+        // paddingTop: `0.15em`,
+        // paddingBottom: `0.05em`,
+        // paddingX: `0.2em`,
       },
       hr: {
         borderColor: `muted`,

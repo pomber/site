@@ -1,6 +1,6 @@
 ---
 title: Next.js Static Props
-date: 2020-03-22
+date: 2020-04-07
 responsive: false
 ---
 
@@ -14,151 +14,172 @@ import views from "./views"
 
 <View />
 
-A few weeks ago, [Zeit released Next.js 9.3](https://nextjs.org/blog/next-9-3). This new version introduces two of the frameworks coolest APIs: `getStaticProps` and `getStaticPaths`.
+A few weeks ago, [Zeit released Next.js 9.3](https://nextjs.org/blog/next-9-3). This new version introduces `getStaticProps` and `getStaticPaths`, two of the framework's coolest APIs. Why do I think these APIs are so cool? Let me show you with code.
 
-With `getStaticProps` and `getStaticPaths` we have more control on what the app renders to HTML at build time.
+Suppose you want to build a web site that displays Coronavirus stats. The home page shows information for each country with links to more details. All data comes from a [JSON file](https://github.com/pomber/covid19/) you can download from a public URL. The file is updated once per day.
 
-To show how to use this new feature, let's build an app.
-
-The app downloads a JSON file with some Coronavirus stats from a public URL, it shows an `index` page with a chart using the data from the last day. The table has links to pages for each country showing a timeseries chart for that country.
-
-The JSON has data for each country and for each day from the last months. The file is updated once per day.
-
-If you want, try to think how would you build this site and then continue reading this post.
-
-> Disclaimer: It isn't the purpose of this post to build accurate charts and data
+Try to think about how would you build that site and then keep reading to see my approach using Next.js 9.3.
 
 <View />
 
-To start, we initialize a new project using NextJS and React (and a few more dependencies that we're going to use later).
+To start, in an empty folder, create a `package.json` file and add the dependencies: React, Next.js and a few more we'll need later.
 
-If you are coding along run this on an empty folder.
+> I'm assuming you have some experience with React. I'll introduce the features we are using from Next.js one by one, but it would be better if you already know what the framework does.
 
-Then add the scripts section to the `package.json`
-
-<View />
-
-Then create a `pages` folder and a `index.js` file in it.
-
-In Next.js, every js file in the `pages` folder will become a page. You need to add a React component as the default export.
-
-For now, let's export a component that renders `<h1>Hello</h1>`.
+Also, add the scripts section.
 
 <View />
 
-Now that we have a minimal project using NextJS, run it to check that everything is working.
+### Pages
 
-We need to install the dependencies, we can do that we `yarn` or `npm`: `yarn install`.
+Next.js projects need a `pages/` folder. There you put JavaScript files that Next.js will turn into pages for your site. You only need to choose a filename and export a React component. The filename becomes the route to that page.
 
-After all the dependencies are installed, we run the development version of our site with `yarn dev`.
+To try this, create `pages/index.js` file. In that file, export a React component. For now something that renders `<h1>Hello</h1>` will be enough.
 
-<View />
-
-Our app is live at https://localhost:3000.
-
-Let's add more things to this minimal website one by one. We start by downloading the json when the site loads.
+Next.js will pre-render `pages/index.js` into `index.html`.
 
 <View />
 
-We wrap the fetch code inside a `useData` hook that returns `undefined` until the JSON is downloaded.
+Before continuing, run the site and make sure everything is working.
 
-In our `HomePage` component we call the `useData` hook and show "Loading..." until we have the data.
+Install the dependencies with `yarn install`.
 
-Now let's use the data for something.
-
-<View />
-
-One quick thing we can do with the data is extract the last date from the time-series and show it.
-
-Stop for a moment here. What have we done?
-
-Everytime a user visit our site we show they a "Loading..." text until the site downloads a big JSON, which it then transform to less than 10 bytes of information. Not to mention all the javascript downloaded to use React and NextJS.
-
-Our site may be an extreme example, but this problem is relevant to many types of websites were most of the content don't change frequently.
+And run Next.js in development mode with `yarn dev`.
 
 <View />
 
-`getStaticProps` to the rescue.
+The site should be live at http://localhost:3000. Open it on a new browser tab.
 
-Instead of fetching the data from the browser every time a user visits our site, we are going to fetch it during build-time (this is when you or a build server run `yarn build`).
-
-With NextJS, we can define `getStaticProps`...
-
-In our example, we fetch the JSON in `getStaticProps` and return it as the `data` prop. Then the `HomePage` component receive that `data` prop. We don't need the `useData` hook, nor we need to show the "Loading..." text anymore.
-
-Note that we are using `node-fetch` instead of the browser's `fetch`. That's because `getStaticProps` doesn't run on the browser, it runs on Node. This means you could, for example, access the file system inside `getStaticProps`.
+Now that you have the site running, add the features one by one. Start by downloading the JSON file with the Coronavirus data when the site loads.
 
 <View />
 
-We are not showing the "Loading..." text anymore and the date is already in the HTML when a user visits our site. That's an improvement, but NextJS is still sending all the `data` to the browser.
+### Client-side data fetching
 
-Instead of passing the whole data object to the `HomePage` component, we can extract only the things we need during build-time on `getStaticProps`.
+Fetch `timeseries.json` from `https://pomber.github.io/covid19/`.
 
-Now, when a user visit our site, it will be as fast as the minimal Hello World site we had at the beginning.
+Wrap the fetch code inside a `useData` hook that returns `undefined` until the JSON file is downloaded.
+
+In the `HomePage` component, call the `useData` hook and show "Loading..." until the data is ready.
+
+Now, use the data for something.
 
 <View />
 
-Let's do something more interesting and plot part of the data from the JSON.
+The JSON file has the following content:
 
-We will need the last stats from each country, so we extract that on `getStaticProps` and pass it to the `HomePage` as props.
+```json
+{
+  "China": [
+    {
+      "date": "2020-1-22",
+      "confirmed": 548,
+      "deaths": 17,
+      "recovered": 28
+    },
+    {
+      "date": "2020-1-23",
+      "confirmed": 643,
+      "deaths": 18,
+      "recovered": 30
+    },
+    ...
+  ],
+  "Spain": [...],
+  ...
+}
+```
 
-`rows` is an array like the following:
+Extract the last date from any of the time-series and show it.
+
+---
+
+Stop for a moment here. What have we done so far?
+
+Everytime a user visit the site, it shows a loading screen until it downloads a big JSON, which is then transformed to less than 10 bytes of information.
+
+<View />
+
+### Build-time data fetching
+
+You can remove the loading screen and the time needed to download the JSON file. How? By moving all the work to build time (build time is when you or a build server run `yarn build`).
+
+**Inside any Next.js page, you can export an async [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) function. There, you can put any work that can be done at build time and pass the result as props to the page component.**
+
+Instead of fetching the data when the browser loads the site using the `useData` hook, move the code to `getStaticProps` and pass `data` as a prop to the `HomePage` component.
+
+Note that `getStaticProps` on Node and not on the browser. That's why you can't use the browser's fetch and you need to use some library like `node-fetch`.
+
+<View />
+
+The site isn't showing the loading screen anymore. That's an improvement, but Next.js is still sending all the `data` to the browser, even when only a date is needed.
+
+Instead of passing the whole `data` object to the `HomePage` component, move the code that extracts the date to `getStaticProps` and return `date` as a prop.
+
+Now, when a user visit the site, it will be as fast as the minimal site we had at the beginning.
+
+<View />
+
+Let's do something more interesting and plot part of the data from the JSON file.
+
+Extract the last stats from each country, and pass it to the `HomePage` component as the `rows` prop.
+
+`rows` should look like the following:
 
 ```json
 [
-  {
-    country: 'France',
-    deaths: 10,
-  },
-  {
-    country: 'France',
-    deaths: 10,
-  },
+  { "country": "Albania", "deaths": 20 },
+  { "country": "Algeria", "deaths": 96 },
   ...
 ]
 ```
 
 <View />
 
-We use `TreeMap` from [nivo](https://nivo.rocks/) to display the rows.
+Then use `TreeMap` from [nivo](https://nivo.rocks/) to display the rows.
 
-The tree map is ugly by default, let's customize it to make it look better.
+`TreeMap` divides an area into rectangles, each rectangle size is proportional to the node's value.
 
-<View />
-
-Instead of showing the name for each country, I want to show the country's flag. Luckily, there's another JSON with exactly that, the emoji flag for each country.
-
-So, we fetch that JSON and add the country's flag to each row.
+By default it looks kind of ugly, but there are a few things that can be done to make it look better.
 
 <View />
 
-Then we change a few things in the chart:
+Instead of showing the name for each country, you can show the country's flag. Luckily, there's another JSON with exactly that, the emoji flag for each country.
 
-- layout algorithm
-- color scheme
-- labels
-- tooltips
+Fetch `countries.json` and add the country's flag to each row.
 
 <View />
 
-It would be nice to be able to click on different countries to go to a details page.
+Then change a few things in the chart:
 
-So I wrap the map nodes inside `Link` components.
-
-`Link`
-
-So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
-
-Let's show a chart with some stats.
-
-> https://x1-bx780mpxy.now.sh/
-
-```jsx
-```
-
-Cool thing is, the chart is rendered even if we disable javascript.
+- the layout algorithm
+- the color scheme
+- the labels
+- the tooltips
 
 <View />
+
+### Links
+
+It would be nice to be able to click on different countries to go to a page with more details.
+
+For now, wrap each country rectangle inside a link to a country page. A click on Italy will go to `/country/Italy`, a click on Spain to `/country/Spain`, and so on.
+
+You don't need to write a page for each country manually. Next.js a feature called [dynamic routes](https://nextjs.org/docs/routing/dynamic-routes) that solves this for you.
+
+<View />
+
+But before creating the country page, there's another Next.js feature you need to know: the [Link component](https://nextjs.org/docs/api-reference/next/link) from the `next/link` package.
+
+Sin Links, cuando el usuario cliquea en el link, el browser reloads and descarga html, scripts and everything for the new page. Usando Links, Next.js handles the link click, and lazy-loads the next page, downloading only what's needed to render it.
+
+Even better, en nuestro ejemplo, cuando el usuario hovers one of the rectangles, next.js will preload the code and data that the linked page needs, and when the user clicks in the link after reading the tooltip, the page will be ready to be rendered.
+
+<View />
+
+### Dynamic Routes
+
+[dynamic routes](https://nextjs.org/docs/routing/dynamic-routes)
 
 Let's make the add links
 
@@ -168,13 +189,7 @@ Let's show a chart with some stats.
 
 <View />
 
-Let's make the add links
-
-So far we haven't done anything impressive. A script that download the JSON and builds the html could do the same without the need of any framework.
-
-Let's show a chart with some stats.
-
-<View />
+### getStaticPaths
 
 Let's make the add links
 

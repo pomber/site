@@ -140,7 +140,7 @@ const views = [
     },
   ],
   [
-    { type: Editor, ...files["16.country.js"], ...tabs2 },
+    { type: Editor, ...files["16.country.js"], ...tabs2, focus: "19:27" },
     {
       type: Browser,
       url: "https://ssg-demo-fnqndl6fp.now.sh/country/Iran",
@@ -158,8 +158,14 @@ const views = [
 ]
 
 const editorSteps = views.map((xs) => xs.find((x) => x.type === Editor) || {})
+const browserSteps = views
+  .map((xs) => xs.find((x) => x.type === Browser) || {})
+  .map((props) => ({
+    showUrl: "http://localhost:3000",
+    ...props,
+  }))
 const defaultProps = {
-  [Browser]: { height: 300, showUrl: "http://localhost:3000" },
+  [Browser]: { height: 300, steps: browserSteps },
   [Editor]: { height: 350, steps: editorSteps },
 }
 

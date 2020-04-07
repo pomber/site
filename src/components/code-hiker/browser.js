@@ -22,7 +22,9 @@ export function BrowserFrame({ children, height = 220, url, showUrl }) {
     </div>
   )
 }
-export function BrowserIframe({ url, showUrl, height }) {
+export function BrowserIframe({ height, progress, steps, backwards }) {
+  const index = backwards ? Math.floor(progress) : Math.ceil(progress)
+  const { url, showUrl } = steps[index]
   return (
     <BrowserFrame url={url} showUrl={showUrl} height={height}>
       <iframe src={url} height="100%" width="100%" style={{ border: "none" }} />

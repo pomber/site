@@ -4,7 +4,7 @@ module.exports = [
     title: "Next.js Static Props",
     description:
       "Moving things from runtime to build time with getStaticProps and getStaticPaths",
-    date: "2020/03/22",
+    date: "2020/04/04",
     url: "/nextjs-static-props/",
   },
   {

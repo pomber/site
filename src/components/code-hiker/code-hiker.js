@@ -36,7 +36,7 @@ export function CodeHike({ steps, views }) {
       >
         <Sticker views={views} progress={progress} backwards={backwards} />
       </div>
-      <Scroller onStepChange={index => setCurrentIndex(index)}>
+      <Scroller onStepChange={(index) => setCurrentIndex(index)}>
         <div
           style={{
             paddingTop: 0,
@@ -45,27 +45,31 @@ export function CodeHike({ steps, views }) {
           }}
         >
           {steps.map((child, i) => (
-            <StepContainer
-              style={{
-                position: "relative",
-                marginBottom: 50,
-              }}
-              id={i}
-              key={i}
-            >
-              <StepLink index={i} progress={progress} />
-              {child}
-              <div
-                id={"step-" + i}
+            <>
+              <div style={{ height: 0, marginTop: -1, paddingTop: 1 }} />
+              <StepContainer
                 style={{
-                  position: "absolute",
-                  height: "50vh",
-                  minHeight: "calc(50% + 20px)",
-                  bottom: "50%",
-                  visibility: "hidden",
+                  position: "relative",
+                  marginBottom: 50,
+                  marginTop: 20,
                 }}
-              />
-            </StepContainer>
+                id={i}
+                key={i}
+              >
+                <StepLink index={i} progress={progress} />
+                {child}
+                <div
+                  id={"step-" + i}
+                  style={{
+                    position: "absolute",
+                    height: "50vh",
+                    minHeight: "calc(50% + 20px)",
+                    bottom: "50%",
+                    visibility: "hidden",
+                  }}
+                />
+              </StepContainer>
+            </>
           ))}
         </div>
       </Scroller>
@@ -116,10 +120,10 @@ function StepLink({ index, progress }) {
     <a
       style={{
         position: "absolute",
-        height: "100%",
+        height: "calc(100% + 30px)",
         width: 30,
         left: -50,
-        top: 0,
+        top: -11,
         opacity: Math.max(1 - Math.abs(index - progress), 0.2),
         display: "block",
         // background: "rgba(175,173,169,0.5)",

@@ -108,13 +108,11 @@ You can remove the loading screen and the time needed to download the JSON file.
 
 Instead of fetching the data when the browser loads the site using the `useData` hook, move the code to `getStaticProps` and pass `data` as a prop to the `HomePage` component.
 
-Note that `getStaticProps` on Node and not on the browser. That's why you can't use the browser's fetch and you need to use some library like `node-fetch`.
-
-TODO explain that you can do anyhing you can do in Node here
+Note that `getStaticProps` runs on Node and not on the browser. That's why you can't use the browser's fetch and you need to use some library like `node-fetch`. This also means you can do whatever you want with Node: read the filesystem, query a database, launch a headless Chrome using Puppeteer.
 
 <View />
 
-The site isn't showing the loading screen anymore. That's an improvement, but Next.js is still sending all the `data` to the browser, even when only a date is needed.
+The site isn't showing the loading screen anymore. That's an improvement, but Next.js is still sending all the `data` to the browser, even when are only using the date.
 
 Instead of passing the whole `data` object to the `HomePage` component, move the code that extracts the date to `getStaticProps` and return `date` as a prop.
 
@@ -212,10 +210,24 @@ Inside `getStaticProps` you can access the page `params` using the `context` par
 
 In `getStaticProps` using the country name from the `context`, you can get the stats from that country from the JSON file.
 
+> Next.js will run `getStaticProps` for each country, so it will fetch the JSON file like 200 times. If you use something like this on a real app make sure you put the JSON response in a cache.
+
 Pass the country stats to the page component using another prop.
 
 <View />
 
 Finally, render the country stats using a `Stream` chart.
 
+<View />
+
+It even works with JavaScript disabled.
+
 </Hike>
+
+---
+
+Thanks for reading!
+
+And if you want to comment, like or share this post you can use this tweet:
+
+https://twitter.com/skipper/status/1155536990743474179

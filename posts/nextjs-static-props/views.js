@@ -45,8 +45,8 @@ const views = [
     },
     {
       type: Browser,
-      url: "https://ssg-demo-6l4f9lqip.now.sh/",
-      showUrl: "https://ssg-demo-6l4f9lqip.now.sh/",
+      url: "https://nextjs-static-props.now.sh/",
+      showUrl: "https://nextjs-static-props.now.sh/",
     },
   ],
   [{ type: Editor, ...files["01.package.json"], ...tabs0 }],
@@ -68,7 +68,7 @@ const views = [
       focus: "2[1]",
       ...tabs1,
     },
-    { type: Browser, url: "https://ssg-demo-6546je7we.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-lcyw9q4p0.now.sh/" },
   ],
   [
     { type: Editor, ...files["04.index.js"], ...tabs1 },
@@ -153,6 +153,20 @@ const views = [
       type: Browser,
       url: "https://ssg-demo-6l4f9lqip.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
+    },
+  ],
+  [
+    {
+      type: Browser,
+      url: "https://nextjs-static-props.now.sh/",
+      showUrl: "https://nextjs-static-props.now.sh/",
+    },
+    {
+      type: "img",
+      height: 100,
+      width: "100%",
+      src: demoLegend,
+      style: { objectFit: "contain" },
     },
   ],
 ]

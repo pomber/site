@@ -46,28 +46,29 @@ export function CodeHike({ steps, views }) {
         >
           {steps.map((child, i) => (
             <>
-              <div style={{ height: 0, marginTop: -1, paddingTop: 1 }} />
-              <StepContainer
-                style={{
-                  position: "relative",
-                  marginBottom: 50,
-                  marginTop: 20,
-                }}
-                id={i}
-                key={i}
-              >
-                <StepLink index={i} progress={progress} />
-                {child}
+              <StepContainer style={{ position: "relative" }} id={i} key={i}>
+                <div style={{ height: 0, marginTop: -1, paddingTop: 1 }} />
                 <div
-                  id={"step-" + i}
                   style={{
-                    position: "absolute",
-                    height: "50vh",
-                    minHeight: "calc(50% + 20px)",
-                    bottom: "50%",
-                    visibility: "hidden",
+                    marginBottom: i === steps.length - 1 ? 0 : 60,
+                    marginTop: i === 0 ? 0 : 60,
+                    position: "relative",
                   }}
-                />
+                >
+                  <StepLink index={i} progress={progress} />
+                  {child}
+                  <div
+                    id={"step-" + i}
+                    style={{
+                      position: "absolute",
+                      height: "50vh",
+                      minHeight: "calc(50% + 20px)",
+                      bottom: "50%",
+                      visibility: "hidden",
+                    }}
+                  />
+                </div>
+                <div style={{ height: 0, marginTop: -1, paddingTop: 1 }} />
               </StepContainer>
             </>
           ))}

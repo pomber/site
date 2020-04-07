@@ -16,7 +16,7 @@ import views from "./views"
 
 A few weeks ago, [Zeit released Next.js 9.3](https://nextjs.org/blog/next-9-3). This new version introduces `getStaticProps` and `getStaticPaths`, two of the framework's coolest APIs. Why do I think these APIs are so cool? Let me show you with code.
 
-Suppose you want to build a web site that displays Coronavirus stats. The home page shows information for each country with links to more details. All data comes from a [JSON file](https://github.com/pomber/covid19/) you can download from a public URL. The file is updated once per day.
+Suppose you want to build a web site that displays Coronavirus stats. The home page shows information for each country with links to more details. All the data comes from a [JSON file](https://github.com/pomber/covid19/) that you can download from a public URL. The file is updated once per day.
 
 Try to think about how would you build that site and then keep reading to see my approach using Next.js 9.3.
 
@@ -24,9 +24,9 @@ Try to think about how would you build that site and then keep reading to see my
 
 To start, in an empty folder, create a `package.json` file and add the dependencies: React, Next.js and a few more we'll need later.
 
-> I'm assuming you have some experience with React. I'll introduce the features we are using from Next.js one by one, but it would be better if you already know what the framework does.
-
 Also, add the scripts section.
+
+> I'm assuming you have some experience with React. I'll introduce the features we are using from Next.js one by one, but it would be better if you already know what the framework does.
 
 <View />
 
@@ -62,7 +62,7 @@ Wrap the fetch code inside a `useData` hook that returns `undefined` until the J
 
 In the `HomePage` component, call the `useData` hook and show "Loading..." until the data is ready.
 
-Now, use the data for something.
+Now, let's use the data for something.
 
 <View />
 
@@ -152,10 +152,10 @@ Fetch `countries.json` and add the country's flag to each row.
 
 Then change a few things in the chart:
 
-- the layout algorithm
-- the color scheme
-- the labels
-- the tooltips
+- change the layout algorithm to `binary`
+- use the `pastel1` color scheme
+- show the flags as labels
+- customize the tooltip
 
 <View />
 
@@ -204,7 +204,9 @@ For that, you can export a `getStaticPaths` function which returns a list of pat
 
 If you use `getStaticPaths` for a page you also need to use `getStaticProps`.
 
-Inside `getStaticProps` you can access the page `params` using the `context` parameter.
+Inside `getStaticProps` you can access the page `params` using the `context` parameter. And then use the `params` to send some props to the page component.
+
+For now, just pass the country `name` as a prop to the `Country` component.
 
 <View />
 
@@ -216,7 +218,9 @@ Pass the country stats to the page component using another prop.
 
 <View />
 
-Finally, render the country stats using a `Stream` chart. And that's all.
+Finally, render the country stats using a `Stream` chart.
+
+And that's all.
 
 Try running `yarn build` and `yarn start` to run the production version of the site (or use https://nextjs-static-props.now.sh). Make sure to open the network panel to see what is downloaded and when.
 
@@ -226,7 +230,7 @@ For example, hover over a country, let's say Spain. Notice how Next.js downloads
 
 Another advantage of pre-rendering every page during build time is that the site may even work without JavaScript.
 
-Since we used a charting library that works on server-side, you can turn off JavaScript and still see the charts and navigate the site. You won't have tooltips, interactions or client-side navigation but the site is still usable.
+Since we used a charting library that works server-side, you can turn off JavaScript and still see the charts and navigate the site. You won't have tooltips, interactions or client-side navigation but the site will still be usable.
 
 </Hike>
 

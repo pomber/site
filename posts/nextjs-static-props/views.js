@@ -1,6 +1,7 @@
 import { Browser, Editor } from "../../src/components/code-hiker/code-hiker"
 import React from "react"
 import demoLegend from "./demo-legend.png"
+import noJsLegend from "./no-js.png"
 
 const pr = (id) => `https://github.com/pomber/ssg-demo/pull/${id}/files`
 
@@ -41,6 +42,7 @@ const views = [
       height: 100,
       width: "100%",
       src: demoLegend,
+      alt: "The app we are building",
       style: { objectFit: "contain" },
     },
     {
@@ -160,12 +162,13 @@ const views = [
       type: Browser,
       url: "https://nextjs-static-props.now.sh/",
       showUrl: "https://nextjs-static-props.now.sh/",
+      sandbox: "",
     },
     {
       type: "img",
-      height: 100,
+      height: 75,
       width: "100%",
-      src: demoLegend,
+      src: noJsLegend,
       style: { objectFit: "contain" },
     },
   ],

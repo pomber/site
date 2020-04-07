@@ -21,6 +21,7 @@ export function CodeHike({ steps, views }) {
         marginLeft: -590,
         display: "flex",
         position: "relative",
+        marginBottom: 70,
       }}
     >
       <div
@@ -50,7 +51,7 @@ export function CodeHike({ steps, views }) {
                 <div style={{ height: 0, marginTop: -1, paddingTop: 1 }} />
                 <div
                   style={{
-                    marginBottom: i === steps.length - 1 ? 0 : 60,
+                    marginBottom: i === steps.length - 1 ? 30 : 60,
                     marginTop: i === 0 ? 0 : 60,
                     position: "relative",
                   }}

@@ -96,7 +96,7 @@ Extract the last date from any of the time-series and show it.
 
 Stop for a moment here. What have we done so far?
 
-Everytime a user visit the site, it shows a loading screen until it downloads a big JSON, which is then transformed to less than 10 bytes of information.
+Every time a user visits the site, it shows a loading screen until it downloads a big JSON, which is then transformed to less than 10 bytes of information.
 
 <View />
 
@@ -112,11 +112,11 @@ Note that `getStaticProps` runs on Node and not on the browser. That's why you c
 
 <View />
 
-The site isn't showing the loading screen anymore. That's an improvement, but Next.js is still sending all the `data` to the browser, even when are only using the date.
+The site isn't showing the loading screen anymore. That's an improvement, but Next.js is still sending all the `data` to the browser, even when we are only using the date.
 
 Instead of passing the whole `data` object to the `HomePage` component, move the code that extracts the date to `getStaticProps` and return `date` as a prop.
 
-Now, when a user visit the site, it will be as fast as the minimal site we had at the beginning.
+Now, when a user visits the site, it will be as fast as the minimal site we had at the beginning.
 
 <View />
 
@@ -140,7 +140,7 @@ Then use `TreeMap` from [nivo](https://nivo.rocks/) to display the rows.
 
 `TreeMap` divides an area into rectangles, each rectangle size is proportional to the node's value.
 
-By default it looks kind of ugly, but there are a few things that can be done to make it look better.
+By default, it looks kind of ugly, but there are a few things that can be done to make it look better.
 
 <View />
 
@@ -181,7 +181,7 @@ Even better, Next.js starts downloading the resources for the next page when the
 
 ### Dynamic Routes
 
-If you want to use the same React component for different routs you can use [dynamic routes](https://nextjs.org/docs/routing/dynamic-routes). How? Add brackets to a page filename.
+If you want to use the same React component for different routes you can use [dynamic routes](https://nextjs.org/docs/routing/dynamic-routes). How? Add brackets to a page filename.
 
 For example, if you create the file `pages/country/[name].js`, Next.js will use that page for any route matching that pattern: `/country/Spain`, `/country/Iran`, etc.
 
@@ -198,7 +198,7 @@ const { name } = router.query
 
 If you want the country pages to be rendered at build time, you need to tell Next.js what's the list of countries.
 
-For that, you can export a `getStaticPaths` function wich returns a list of paths. Those paths define the parameters of the route, for the country page that would be the country name, for example, `{ params: { name: "Spain" } }`.
+For that, you can export a `getStaticPaths` function which returns a list of paths. Those paths define the parameters of the route, for the country page that would be the country name, for example, `{ params: { name: "Spain" } }`.
 
 <View />
 
@@ -216,15 +216,19 @@ Pass the country stats to the page component using another prop.
 
 <View />
 
-Finally, render the country stats using a `Stream` chart.
+Finally, render the country stats using a `Stream` chart. And that's all.
+
+Try running `yarn build` and `yarn start` to run the production version of the site (or use https://nextjs-static-props.now.sh). Make sure to open the network panel to see what is downloaded and when.
+
+For example, hover over a country, let's say Spain. Notice how Next.js downloads `/country/Spain.json` and `/country/[name].js`. Then, if you hover over Italy, it will only download `/country/Italy.json`. Now, if you click on Italy or Spain the transition will be instantaneous.
 
 <View />
 
-It even works with JavaScript disabled.
+Another advantage of pre-rendering every page during build time is that the site may even work without JavaScript.
+
+Since we used a charting library that works on server-side, you can turn off JavaScript and still see the charts and navigate the site. You won't have tooltips, interactions or client-side navigation but the site is still usable.
 
 </Hike>
-
----
 
 Thanks for reading!
 

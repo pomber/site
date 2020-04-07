@@ -1,9 +1,11 @@
 import React from "react"
 
 function getGetFrame(prevKids, nextKids, padding) {
-  const current = prevKids.filter(e => nextKids.some(p => p.type === e.type))
-  const exit = prevKids.filter(e => !nextKids.some(p => p.type === e.type))
-  const enter = nextKids.filter(e => !prevKids.some(p => p.type === e.type))
+  const current = prevKids.filter((e) =>
+    nextKids.some((p) => p.type === e.type)
+  )
+  const exit = prevKids.filter((e) => !nextKids.some((p) => p.type === e.type))
+  const enter = nextKids.filter((e) => !prevKids.some((p) => p.type === e.type))
 
   const currentHeights = getHeights(current)
   const exitHeights = getHeights(exit)
@@ -22,17 +24,23 @@ function getGetFrame(prevKids, nextKids, padding) {
     padding
   )
 
-  const height = sum(prevKids.map(k => (k && k.props && k.props.height) || 0))
+  const prevHeight = sum(
+    prevKids.map((k) => (k && k.props && k.props.height) || 0)
+  )
+  const nextHeight = sum(
+    nextKids.map((k) => (k && k.props && k.props.height) || 0)
+  )
+  const height = Math.min(prevHeight, nextHeight)
 
   const allKids = [...exit, ...current, ...enter]
 
   const state = [
-    ...exit.map(_ => "exit"),
-    ...current.map(_ => "stay"),
-    ...enter.map(_ => "enter"),
+    ...exit.map((_) => "exit"),
+    ...current.map((_) => "stay"),
+    ...enter.map((_) => "enter"),
   ]
 
-  return progress => {
+  return (progress) => {
     return {
       height,
       frame: allKids.map((kid, i) => ({
@@ -66,7 +74,7 @@ function tweenTranslate(p, n, t) {
 }
 
 function getHeights(kids) {
-  return kids.map(kid => {
+  return kids.map((kid) => {
     if (!kid || !kid.props || kid.props.height == null) {
       console.warn("View children should have a height prop")
       return 0
@@ -80,7 +88,7 @@ function translates(current, exit, enter, padding) {
   const total = sum(current) + (current.length - 1) * padding
   const middle = total / 2
   let acc = -middle
-  const currentTops = current.map(h => {
+  const currentTops = current.map((h) => {
     const top = acc
     acc += h + padding
     return top
@@ -88,14 +96,14 @@ function translates(current, exit, enter, padding) {
 
   const exitTotal = sum(exit) + exit.length * padding
   acc = (currentTops[0] || -200) - exitTotal
-  const exitTops = exit.map(h => {
+  const exitTops = exit.map((h) => {
     const top = acc * 1.4
     acc += h + padding
     return top
   })
 
   acc = (middle || 200) + padding
-  const enterTops = enter.map(h => {
+  const enterTops = enter.map((h) => {
     const top = acc * 1.4
     acc += h + padding
     return top

@@ -24,10 +24,16 @@ export function BrowserFrame({ children, height = 220, url, showUrl }) {
 }
 export function BrowserIframe({ height, progress, steps, backwards }) {
   const index = backwards ? Math.floor(progress) : Math.ceil(progress)
-  const { url, showUrl } = steps[index]
+  const { url, showUrl, sandbox } = steps[index]
   return (
     <BrowserFrame url={url} showUrl={showUrl} height={height}>
-      <iframe src={url} height="100%" width="100%" style={{ border: "none" }} />
+      <iframe
+        src={url}
+        height="100%"
+        width="100%"
+        style={{ border: "none" }}
+        sandbox={sandbox}
+      />
     </BrowserFrame>
   )
 }

@@ -7,7 +7,7 @@ let contentPath = `posts`
 // These templates are simply data-fetching wrappers that import components
 const PostTemplate = require.resolve(`./src/templates/post`)
 
-const mdxResolverPassthrough = fieldName => async (
+const mdxResolverPassthrough = (fieldName) => async (
   source,
   args,
   context,
@@ -134,6 +134,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }) => {
     const fieldData = {
       title: node.frontmatter.title,
       responsive: node.frontmatter.responsive,
+      description: node.frontmatter.description,
       tags: node.frontmatter.tags || [],
       slug,
       date: node.frontmatter.date,

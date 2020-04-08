@@ -28,7 +28,7 @@ const Post = ({ data: { post, card }, location }) => {
       <Layout location={location} responsive={post.responsive}>
         <SEO
           title={post.title}
-          description={post.excerpt}
+          description={post.description || post.excerpt}
           article={true}
           card={card}
           responsive={post.responsive}

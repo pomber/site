@@ -14,6 +14,7 @@ export const pageQuery = graphql`
       excerpt
       body
       responsive
+      description
     }
     card: file(
       name: { eq: "card" }

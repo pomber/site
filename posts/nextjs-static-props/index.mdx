@@ -14,19 +14,19 @@ import views from "./views"
 
 <View />
 
-A few weeks ago, [Zeit released Next.js 9.3](https://nextjs.org/blog/next-9-3). This new version introduces `getStaticProps` and `getStaticPaths`, two of the framework's coolest APIs. Why do I think these APIs are so cool? Let me show you with code.
+A few weeks ago, [ZEIT released Next.js 9.3](https://nextjs.org/blog/next-9-3). This new version introduces `getStaticProps` and `getStaticPaths`, two of the framework's coolest APIs. Why do I think these APIs are so cool? Let me show you with code.
 
 Suppose you want to build a web site that displays Coronavirus stats. The home page shows information for each country with links to more details. All the data comes from a [JSON file](https://github.com/pomber/covid19/) that you can download from a public URL. The file is updated once per day.
 
-Try to think about how would you build that site and then keep reading to see my approach using Next.js 9.3.
+Try to think about how you would build that site and then keep reading to see my approach using Next.js 9.3.
 
 <View />
 
-To start, in an empty folder, create a `package.json` file and add the dependencies: React, Next.js and a few more we'll need later.
+To start off, in an empty folder, create a `package.json` file and then add the following dependencies: `react`, `react-dom`, `next`, `node-fetch` and a few more we'll need later.
 
 Also, add the scripts section.
 
-> I'm assuming you have some experience with React. I'll introduce the features we are using from Next.js one by one, but it would be better if you already know what the framework does.
+> Throughout this post I will assume that you have some experience with React. I will also introduce the features that we are using from Next.js one by one, but ideally you should already be familiar with the framework's core concepts.
 
 <View />
 
@@ -34,13 +34,13 @@ Also, add the scripts section.
 
 Next.js projects need a `pages/` folder. There you put JavaScript files that Next.js will turn into pages for your site. You only need to choose a filename and export a React component. The filename becomes the route to that page.
 
-To try this, create `pages/index.js` file. In that file, export a React component. For now something that renders `<h1>Hello</h1>` will be enough.
+To try this, create a `pages/index.js` file. In that file, export a React component. For now something that renders `<h1>Hello</h1>` will be enough.
 
 Next.js will pre-render `pages/index.js` into `index.html`.
 
 <View />
 
-Before continuing, run the site and make sure everything is working.
+Before we continue, run the site and make sure that everything works.
 
 Install the dependencies with `yarn install`.
 
@@ -50,7 +50,7 @@ And run Next.js in development mode with `yarn dev`.
 
 The site should be live at http://localhost:3000. Open it on a new browser tab.
 
-Now that you have the site running, add the features one by one. Start by downloading the JSON file with the Coronavirus data when the site loads.
+Now that you have the site running, let's build our app by increasingly adding our features. Start by downloading the JSON file with the Coronavirus data when the site loads.
 
 <View />
 
@@ -62,7 +62,7 @@ Wrap the fetch code inside a `useData` hook that returns `undefined` until the J
 
 In the `HomePage` component, call the `useData` hook and show "Loading..." until the data is ready.
 
-Now, let's use the data for something.
+Now, let's use the data to display something on page.
 
 <View />
 
@@ -96,19 +96,19 @@ Extract the last date from any of the time-series and show it.
 
 Stop for a moment here. What have we done so far?
 
-Every time a user visits the site, it shows a loading screen until it downloads a big JSON, which is then transformed to less than 10 bytes of information.
+Every time a user visits the site, we show a loading screen until we have downloaded a big JSON file. Our page then uses a tiny fraction of the information that is contained in this file - roughly less than 10 bytes of information.
 
 <View />
 
 ### Build-time data fetching
 
-You can remove the loading screen and the time needed to download the JSON file. How? By moving all the work to build time (build time is when you or a build server run `yarn build`).
+What if I told you that you can get rid of the loading screen and spare the time needed to download the JSON file? Next.js makes this possible by allowing you to perform all this work at build time (build time is when you or a build server run `yarn build`).
 
-**Inside any Next.js page, you can export an async [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) function. There, you can put any work that can be done at build time and pass the result as props to the page component.**
+**Inside any Next.js page, you can export an async [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) function. There, you can perform any work that can be done at build time and pass the result as props to the page component.**
 
 Instead of fetching the data when the browser loads the site using the `useData` hook, move the code to `getStaticProps` and pass `data` as a prop to the `HomePage` component.
 
-Note that `getStaticProps` runs on Node and not on the browser. That's why you can't use the browser's fetch and you need to use some library like `node-fetch`. This also means you can do whatever you want with Node: read the filesystem, query a database, launch a headless Chrome using Puppeteer.
+Note that `getStaticProps` runs at build time in Node and not in the browser. That's why you can't use the browser's `fetch` API and you need a polyfill library like `node-fetch`. The upside of this is that with Node you can do a whole bunch of cool things: read the filesystem, query a database, launch a headless Chrome using Puppeteer.
 
 <View />
 
@@ -120,7 +120,7 @@ Now, when a user visits the site, it will be as fast as the minimal site we had 
 
 <View />
 
-Let's do something more interesting and plot part of the data from the JSON file.
+Let's do something more interesting and draw part of the data from the JSON file.
 
 Extract the last stats from each country, and pass it to the `HomePage` component as the `rows` prop.
 
@@ -169,7 +169,7 @@ You don't need to write a page for each country manually. Next.js has a feature 
 
 <View />
 
-Before creating the country page, there's another Next.js API you need to know: the [`Link` component](https://nextjs.org/docs/api-reference/next/link).
+Before creating the country page, there's another Next.js API you need to be aware of: the [`Link` component](https://nextjs.org/docs/api-reference/next/link).
 
 Without using `Link`, the browser will download everything from scratch every time the user navigates to another page.
 
@@ -228,7 +228,7 @@ For example, hover over a country, let's say Spain. Notice how Next.js downloads
 
 <View />
 
-Another advantage of pre-rendering every page during build time is that the site may even work without JavaScript.
+Another advantage of pre-rendering every page at build time is that the site may even work without JavaScript!
 
 Since we used a charting library that works server-side, you can turn off JavaScript and still see the charts and navigate the site. You won't have tooltips, interactions or client-side navigation but the site will still be usable.
 

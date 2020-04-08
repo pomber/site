@@ -22,18 +22,22 @@ export function BrowserFrame({ children, height = 220, url, showUrl }) {
     </div>
   )
 }
-export function BrowserIframe({ height, progress, steps, backwards }) {
+export function BrowserIframe({ height, progress, steps, backwards, video }) {
   const index = backwards ? Math.floor(progress) : Math.ceil(progress)
   const { url, showUrl, sandbox } = steps[index]
   return (
     <BrowserFrame url={url} showUrl={showUrl} height={height}>
-      <iframe
-        src={url}
-        height="100%"
-        width="100%"
-        style={{ border: "none" }}
-        sandbox={sandbox}
-      />
+      {video ? (
+        <video src={video} autoPlay loop muted playsInline type="video/mp4" />
+      ) : (
+        <iframe
+          src={url}
+          height="100%"
+          width="100%"
+          style={{ border: "none" }}
+          sandbox={sandbox}
+        />
+      )}
     </BrowserFrame>
   )
 }

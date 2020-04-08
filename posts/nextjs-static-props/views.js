@@ -2,6 +2,7 @@ import { Browser, Editor } from "../../src/components/code-hiker/code-hiker"
 import React from "react"
 import demoLegend from "./demo-legend.png"
 import noJsLegend from "./no-js.png"
+import demoVideo from "./demo.mp4"
 
 const pr = (id) => `https://github.com/pomber/ssg-demo/pull/${id}/files`
 
@@ -49,6 +50,7 @@ const views = [
       type: Browser,
       url: "https://nextjs-static-props.now.sh/",
       showUrl: "https://nextjs-static-props.now.sh/",
+      video: demoVideo,
     },
   ],
   [{ type: Editor, ...files["01.package.json"], ...tabs0 }],

@@ -173,7 +173,7 @@ Before creating the country page, there's another Next.js API you need to know: 
 
 Without using `Link`, the browser will download everything from scratch every time the user navigates to another page.
 
-Using `Link`, the transition between pages is handled by Next.js, downloading only the code and data needed to display the next page.
+Using `Link`, the transition between pages is handled by Next.js, which downloads only the code and data needed to display the next page.
 
 Even better, Next.js starts downloading the resources for the next page when the user hovers over a `Link`.
 
@@ -196,9 +196,9 @@ const { name } = router.query
 
 ### getStaticPaths
 
-If you want the country pages to be rendered at build time, you need to tell Next.js what's the list of countries.
+If you want the country pages to be rendered at build time you need to tell Next.js the list of countries.
 
-For that, you can export a `getStaticPaths` function which returns a list of paths. Those paths define the parameters of the route, for the country page that would be the country name, for example, `{ params: { name: "Spain" } }`.
+In order to do that you can export a `getStaticPaths` function which returns a list of paths. Those paths define the parameters of the route, for the country page, that would be the country name. For example, `{ params: { name: "Spain" } }`.
 
 <View />
 

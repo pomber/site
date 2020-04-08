@@ -12,8 +12,8 @@ export function Scroller({ onStepChange, children }) {
   // const [intersections, setIntersections] = useState([])
 
   useLayoutEffect(() => {
-    const handleIntersect = entries => {
-      entries.forEach(entry => {
+    const handleIntersect = (entries) => {
+      entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
           // ref.current = entry.target.stepInfo
           onStepChange(entry.target.stepInfo)
@@ -100,12 +100,16 @@ function useWindowHeight() {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
+  React.useLayoutEffect(() => {
+    // FIX when an horizontal scrollbar is added after the first layout
+    setWindowHeight(getHeight())
+  }, [])
   return windowHeight
 }
 
 function useKeywordNavigation(ref) {
   React.useEffect(() => {
-    const handleKeyDown = event => {
+    const handleKeyDown = (event) => {
       if (/^(?:input|textarea|select|button)$/i.test(event.target.tagName)) {
         return
       }

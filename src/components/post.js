@@ -31,6 +31,7 @@ const Post = ({ data: { post, card }, location }) => {
           description={post.excerpt}
           article={true}
           card={card}
+          responsive={post.responsive}
         />
         <main>
           <ContentWithAside

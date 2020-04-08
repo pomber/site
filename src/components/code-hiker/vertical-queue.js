@@ -24,12 +24,15 @@ function getGetFrame(prevKids, nextKids, padding) {
     padding
   )
 
-  const prevHeight = sum(
-    prevKids.map((k) => (k && k.props && k.props.height) || 0)
-  )
-  const nextHeight = sum(
-    nextKids.map((k) => (k && k.props && k.props.height) || 0)
-  )
+  const prevHeight =
+    sum(prevKids.map((k) => (k && k.props && k.props.height) || 0)) +
+    prevKids.length * padding -
+    padding
+  const nextHeight =
+    sum(nextKids.map((k) => (k && k.props && k.props.height) || 0)) +
+    nextKids.length * padding -
+    padding
+
   const height = Math.min(prevHeight, nextHeight)
 
   const allKids = [...exit, ...current, ...enter]

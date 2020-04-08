@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx } from "theme-ui"
 import React from "react"
 import { Scroller, StepContainer } from "./scroller"
 import { useSpring } from "use-spring"
@@ -86,9 +88,10 @@ function Sticker({ views, progress, backwards }) {
   const { frame, height } = useFrame(prevKids, nextKids, progress % 1, padding)
   return (
     <div
-      style={{
+      sx={{
         height,
         width: "100%",
+        // using theme-ui sx so sticky is also -webkit-sticky for ipad
         position: "sticky",
         top: `calc(50vh - ${height / 2}px)`,
       }}

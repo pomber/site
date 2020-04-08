@@ -2,7 +2,7 @@ import React from "react"
 import { Helmet } from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
 
-const SEO = ({ title, description, pathname, article, card }) => (
+const SEO = ({ title, description, pathname, article, card, responsive }) => (
   <StaticQuery
     query={query}
     render={({
@@ -36,6 +36,14 @@ const SEO = ({ title, description, pathname, article, card }) => (
               lang: "en",
             }}
           >
+            <meta
+              name="viewport"
+              content={
+                responsive
+                  ? "width=device-width, initial-scale=1, shrink-to-fit=no"
+                  : "width=1050"
+              }
+            />
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
             {seo.url && <meta property="og:url" content={seo.url} />}

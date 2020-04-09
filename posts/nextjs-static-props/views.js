@@ -15,15 +15,15 @@ const files = {
   "06.0.index.js":{code:require("!!raw-loader!./code/06.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(4)},
   "07.index.js":{code:require("!!raw-loader!./code/07.index.js"),lang:"jsx",file:"pages/index.js", link: pr(5)},
   "08.index.js":{code:require("!!raw-loader!./code/08.index.js"),lang:"jsx",file:"pages/index.js", link: pr(6)},
-  "09.0.index.js":{code:require("!!raw-loader!./code/09.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(7)}, 
-  "11.index.js":{code:require("!!raw-loader!./code/11.index.js"),lang:"jsx",file:"pages/index.js", link: pr(8)}, 
-  "12.index.js":{code:require("!!raw-loader!./code/12.index.js"),lang:"jsx",file:"pages/index.js", link: pr(9)}, 
-  "13.0.index.js":{code:require("!!raw-loader!./code/13.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(15)}, 
-  "13.1.index.js":{code:require("!!raw-loader!./code/13.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(16)}, 
-  "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(17)}, 
-  "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(18)}, 
-  "16.country.js":{code:require("!!raw-loader!./code/16.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(19)}, 
-  "17.country.js":{code:require("!!raw-loader!./code/17.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(20)}, 
+  "09.0.index.js":{code:require("!!raw-loader!./code/09.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(22)}, 
+  "11.index.js":{code:require("!!raw-loader!./code/11.index.js"),lang:"jsx",file:"pages/index.js", link: pr(23)}, 
+  "12.index.js":{code:require("!!raw-loader!./code/12.index.js"),lang:"jsx",file:"pages/index.js", link: pr(24)}, 
+  "13.0.index.js":{code:require("!!raw-loader!./code/13.0.index.js"),lang:"jsx",file:"pages/index.js", link: pr(25)}, 
+  "13.1.index.js":{code:require("!!raw-loader!./code/13.1.index.js"),lang:"jsx",file:"pages/index.js", link: pr(26)}, 
+  "14.country.js":{code:require("!!raw-loader!./code/14.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(27)}, 
+  "15.country.js":{code:require("!!raw-loader!./code/15.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(28)}, 
+  "16.country.js":{code:require("!!raw-loader!./code/16.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(29)}, 
+  "17.country.js":{code:require("!!raw-loader!./code/17.country.js"),lang:"jsx",file:"pages/country/[name].js", link: pr(30)}, 
 }
 
 const yarnCommands = `$ yarn install
@@ -96,19 +96,19 @@ const views = [
   ],
   [
     { type: Editor, ...files["09.0.index.js"], ...tabs1 },
-    { type: Browser, url: "https://ssg-demo-k1xwtf8h0.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-jaj3z785n.now.sh/" },
   ],
   [
     { type: Editor, ...files["11.index.js"], ...tabs1 },
-    { type: Browser, url: "https://ssg-demo-k1xwtf8h0.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-jaj3z785n.now.sh/" },
   ],
   [
     { type: Editor, ...files["12.index.js"], ...tabs1 },
-    { type: Browser, url: "https://ssg-demo-dc5hqg9dg.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-7o3u1aqb3.now.sh/" },
   ],
   [
     { type: Editor, ...files["13.0.index.js"], ...tabs1, focus: "34:41,48" },
-    { type: Browser, url: "https://ssg-demo-9fl4t8gvr.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-kgxev2x16.now.sh/" },
   ],
   [
     {
@@ -117,13 +117,13 @@ const views = [
       ...tabs1,
       focus: "33,38:42,44,45",
     },
-    { type: Browser, url: "https://ssg-demo-9fl4t8gvr.now.sh/" },
+    { type: Browser, url: "https://ssg-demo-kgxev2x16.now.sh/" },
   ],
   [
     { type: Editor, ...files["14.country.js"], ...tabs2 },
     {
       type: Browser,
-      url: "https://ssg-demo-fnqndl6fp.now.sh/country/Iran",
+      url: "https://ssg-demo-klnt3u1pr.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],
@@ -131,7 +131,7 @@ const views = [
     { type: Editor, ...files["15.country.js"], ...tabs2, focus: "2:17" },
     {
       type: Browser,
-      url: "https://ssg-demo-fnqndl6fp.now.sh/country/Iran",
+      url: "https://ssg-demo-klnt3u1pr.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],
@@ -147,7 +147,7 @@ const views = [
     { type: Editor, ...files["16.country.js"], ...tabs2, focus: "19:27" },
     {
       type: Browser,
-      url: "https://ssg-demo-fnqndl6fp.now.sh/country/Iran",
+      url: "https://ssg-demo-klnt3u1pr.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],
@@ -155,7 +155,7 @@ const views = [
     { type: Editor, ...files["17.country.js"], ...tabs2 },
     {
       type: Browser,
-      url: "https://ssg-demo-6l4f9lqip.now.sh/country/Iran",
+      url: "https://ssg-demo-nvk2rcogx.now.sh/country/Iran",
       showUrl: "http://localhost:3000/country/Iran",
     },
   ],

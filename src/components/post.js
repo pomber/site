@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from "react"
-import { Styled, jsx } from "theme-ui"
+import { Styled, jsx, ThemeProvider } from "theme-ui"
+import { Global } from "@emotion/core"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -20,36 +21,46 @@ const PostFooter = () => {
   )
 }
 
-const Post = ({ data: { post, card }, location }) => (
-  <Layout location={location}>
-    <SEO
-      title={post.title}
-      description={post.excerpt}
-      article={true}
-      card={card}
-    />
-    <main>
-      <ContentWithAside
-        main={
-          <Styled.h1 sx={{ paddingBottom: "80px" }}>{post.title}</Styled.h1>
-        }
-        aside={
-          <Styled.p sx={{ paddingTop: 1 }}>
-            <Styled.a
-              href="/"
-              sx={{ textDecoration: "none", color: "inherit", border: "none" }}
-            >
-              Rodrigo Pombo
-            </Styled.a>
-            <br />
-            <span sx={{ fontSize: 1 }}>{post.date}</span>
-          </Styled.p>
-        }
-      />
-      <MDXRenderer>{post.body}</MDXRenderer>
-      <PostFooter />
-    </main>
-  </Layout>
-)
+const Post = ({ data: { post, card }, location }) => {
+  const theme = post.responsive ? {} : { breakpoints: [0] }
+  return (
+    <ThemeProvider theme={theme}>
+      <Layout location={location} responsive={post.responsive}>
+        <SEO
+          title={post.title}
+          description={post.description || post.excerpt}
+          article={true}
+          card={card}
+          responsive={post.responsive}
+        />
+        <main>
+          <ContentWithAside
+            main={
+              <Styled.h1 sx={{ paddingBottom: "80px" }}>{post.title}</Styled.h1>
+            }
+            aside={
+              <Styled.p sx={{ paddingTop: 1 }}>
+                <Styled.a
+                  href="/"
+                  sx={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    border: "none",
+                  }}
+                >
+                  Rodrigo Pombo
+                </Styled.a>
+                <br />
+                <span sx={{ fontSize: 1 }}>{post.date}</span>
+              </Styled.p>
+            }
+          />
+          <MDXRenderer>{post.body}</MDXRenderer>
+          <PostFooter />
+        </main>
+      </Layout>
+    </ThemeProvider>
+  )
+}
 
 export default Post

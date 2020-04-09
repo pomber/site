@@ -3,6 +3,7 @@ import { jsx, Styled } from "theme-ui"
 import { Global } from "@emotion/core"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
+import { Helmet } from "react-helmet"
 
 // 1200 x 628
 // 600 x 314
@@ -30,6 +31,12 @@ function Page({ children }) {
         width: "100vw",
       }}
     >
+      <Helmet>
+        <meta
+          name="viewport"
+          content={"width=device-width, initial-scale=1, shrink-to-fit=no"}
+        />
+      </Helmet>
       <Global
         styles={{
           body: { margin: 0, overflowX: "hidden" },

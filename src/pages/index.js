@@ -27,8 +27,8 @@ function Navigation() {
 }
 
 export default ({ data }) => (
-  <Layout>
-    <SEO />
+  <Layout responsive={true}>
+    <SEO responsive={true} />
     <Header />
     {/* <Navigation /> */}
     {/* <Styled.thematicBreak /> */}

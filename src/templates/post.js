@@ -13,6 +13,8 @@ export const pageQuery = graphql`
       date(formatString: "MMMM DD, YYYY")
       excerpt
       body
+      responsive
+      description
     }
     card: file(
       name: { eq: "card" }

@@ -1,10 +1,19 @@
 module.exports = [
   {
     type: "blog post",
+    title: "Next.js Static Props",
+    description:
+      "Moving things from runtime to build time with getStaticProps and getStaticPaths",
+    date: "2020/04/09",
+    url: "/nextjs-static-props/",
+  },
+  {
+    type: "blog post",
     title: "Open Source Spotlight",
-    description: "I was interviewed in BrowserStack's blog",
+    description: "My interview with the BrowserStack team",
     date: "2020/02/17",
-    url: "https://www.browserstack.com/blog/open-source-spotlight-git-history-with-rodrigo-pombo/",
+    url:
+      "https://www.browserstack.com/blog/open-source-spotlight-git-history-with-rodrigo-pombo/",
   },
   {
     type: "project",

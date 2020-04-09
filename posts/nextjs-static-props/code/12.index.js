@@ -35,11 +35,12 @@ export default function HomePage({ date, rows }) {
       <TreeMap
         tile="binary"
         colorBy="flag"
-        colors={{ scheme: "pastel1" }}
+        colors={{ scheme: "pastel2" }}
         labelSkipSize={9}
         label={({ value, flag }) => (
           <tspan
             style={{ fontSize: 10 + value / 200 }}
+            dominantBaseline="central"
             children={flag}
           />
         )}
@@ -50,7 +51,7 @@ export default function HomePage({ date, rows }) {
         identity="country"
         value="deaths"
         width={402}
-        height={192}
+        height={190}
         innerPadding={1}
       />
     </>

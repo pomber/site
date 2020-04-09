@@ -37,7 +37,7 @@ export default function HomePage({ date, rows }) {
         identity="country"
         value="deaths"
         width={402}
-        height={192}
+        height={190}
         innerPadding={1}
       />
     </>

@@ -1,5 +1,12 @@
 module.exports = [
   {
+    type: "project",
+    title: "react-svg-curve",
+    description: "React components for drawing different types of curves with svg",
+    date: "2020/04/20",
+    url: "https://github.com/pomber/react-svg-curve",
+  },
+  {
     type: "blog post",
     title: "Next.js Static Props",
     description:

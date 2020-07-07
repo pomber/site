@@ -1,6 +1,13 @@
 module.exports = [
   {
     type: "project",
+    title: "Placeholdifier",
+    description: "Turn any website into a live wireframe",
+    date: "2020/07/07",
+    url: "https://github.com/pomber/placeholdifier",
+  },
+  {
+    type: "project",
     title: "react-svg-curve",
     description: "React components for drawing different types of curves with svg",
     date: "2020/04/20",

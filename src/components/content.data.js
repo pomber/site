@@ -1,5 +1,13 @@
 module.exports = [
   {
+    type: "blog post",
+    title: "Top 29 Developer Docs",
+    description:
+      "A list of the projects with the best developer documentation",
+    date: "2020/07/19",
+    url: "https://dev.to/pomber/top-29-developer-docs-44l0",
+  },
+  {
     type: "project",
     title: "Placeholdifier",
     description: "Turn any website into a live wireframe",

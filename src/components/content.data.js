@@ -1,5 +1,12 @@
 module.exports = [
   {
+    type: "talk",
+    title: "The X in MDX",
+    description: "— at MDX Conf 2020",
+    date: "2020/08/24",
+    url: "https://egghead.io/lessons/mdx-the-x-in-mdx",
+  },
+  {
     type: "blog post",
     title: "Top 29 Developer Docs",
     description:

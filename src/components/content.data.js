@@ -1,5 +1,12 @@
 module.exports = [
   {
+    type: "project",
+    title: "react-fit-to-viewport",
+    description: "Automatically scales the content to fit it inside the viewport",
+    date: "2020/08/28",
+    url: "https://github.com/pomber/react-fit-to-viewport",
+  },
+  {
     type: "talk",
     title: "The X in MDX",
     description: "— at MDX Conf 2020",

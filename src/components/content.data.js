@@ -1,6 +1,13 @@
 module.exports = [
   {
     type: "project",
+    title: "Intersection Observer Debugger",
+    description: "A visual debugger for the IntersectionObserver API",
+    date: "2020/09/02",
+    url: "https://github.com/pomber/intersection-observer-debugger",
+  },
+  {
+    type: "project",
     title: "react-fit-to-viewport",
     description: "Automatically scales the content to fit it inside the viewport",
     date: "2020/08/28",

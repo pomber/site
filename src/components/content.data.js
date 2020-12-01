@@ -1,5 +1,12 @@
 module.exports = [
   {
+    type: "talk",
+    title: "The X in MDX",
+    description: "— at NextJS Conf 2020",
+    date: "2020/10/27",
+    url: "https://youtu.be/xEu3t-KJVVg",
+  },
+  {
     type: "project",
     title: "Intersection Observer Debugger",
     description: "A visual debugger for the IntersectionObserver API",

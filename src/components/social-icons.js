@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 
-function Icon({ url, title, children, size = 24 }) {
+function Icon({ url, title, children, size = 24, ...props }) {
   return (
     <a href={url} sx={{ color: "inherit" }}>
       <svg
@@ -10,6 +10,7 @@ function Icon({ url, title, children, size = 24 }) {
         height="28"
         width="28"
         fill="currentColor"
+        {...props}
       >
         <title>{title}</title>
         {children}
@@ -54,6 +55,41 @@ function RSS() {
   )
 }
 
+function Twitch() {
+  return (
+    <Icon
+      url="https://twitch.tv/pomber__"
+      title="Twitch"
+      viewBox={`-200 0 2600 2800`}
+    >
+      <g>
+        <g>
+          <g>
+            <path
+              d="M500,0L0,500v1800h600v500l500-500h400l900-900V0H500z M2200,1300l-400,400h-400l-350,350v-350H600V200h1600
+				V1300z"
+            />
+            <rect x="1700" y="550" width="200" height="600" />
+            <rect x="1150" y="550" width="200" height="600" />
+          </g>
+        </g>
+      </g>
+    </Icon>
+  )
+}
+
+function YouTube() {
+  return (
+    <Icon
+      url="https://www.youtube.com/c/RodrigoPombo"
+      title="YouTube"
+      viewBox="0 0 1024 721"
+    >
+      <path d="M1013,156.3c0,0-10-70.4-40.6-101.4C933.6,14.2,890,14,870.1,11.6C727.1,1.3,512.7,1.3,512.7,1.3    h-0.4c0,0-214.4,0-357.4,10.3C135,14,91.4,14.2,52.6,54.9C22,85.9,12,156.3,12,156.3S1.8,238.9,1.8,321.6v77.5    C1.8,481.8,12,564.4,12,564.4s10,70.4,40.6,101.4c38.9,40.7,89.9,39.4,112.6,43.7c81.7,7.8,347.3,10.3,347.3,10.3    s214.6-0.3,357.6-10.7c20-2.4,63.5-2.6,102.3-43.3c30.6-31,40.6-101.4,40.6-101.4s10.2-82.7,10.2-165.3v-77.5    C1023.2,238.9,1013,156.3,1013,156.3z M407,493V206l276,144L407,493z" />
+    </Icon>
+  )
+}
+
 function SocialIcons() {
   return (
     <div
@@ -64,9 +100,10 @@ function SocialIcons() {
         "& > :not(:last-child)": { pr: 3 },
       }}
     >
-      <Twitter />
       <GitHub />
-      <Medium />
+      <Twitter />
+      <Twitch />
+      <YouTube />
       <RSS />
     </div>
   )

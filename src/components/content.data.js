@@ -1,5 +1,12 @@
 module.exports = [
   {
+    type: "video",
+    title: "Scrollycoding (preview)",
+    description: "A new tool for dev blogs and docs",
+    date: "2021/03/04",
+    url: "https://www.youtube.com/watch?v=7O2b7vfk-mo",
+  },
+  {
     type: "talk",
     title: "The X in MDX",
     description: "— at NextJS Conf 2020",
@@ -16,7 +23,8 @@ module.exports = [
   {
     type: "project",
     title: "react-fit-to-viewport",
-    description: "Automatically scales the content to fit it inside the viewport",
+    description:
+      "Automatically scales the content to fit it inside the viewport",
     date: "2020/08/28",
     url: "https://github.com/pomber/react-fit-to-viewport",
   },
@@ -30,8 +38,7 @@ module.exports = [
   {
     type: "blog post",
     title: "Top 29 Developer Docs",
-    description:
-      "A list of the projects with the best developer documentation",
+    description: "A list of the projects with the best developer documentation",
     date: "2020/07/19",
     url: "https://dev.to/pomber/top-29-developer-docs-44l0",
   },
@@ -45,7 +52,8 @@ module.exports = [
   {
     type: "project",
     title: "react-svg-curve",
-    description: "React components for drawing different types of curves with svg",
+    description:
+      "React components for drawing different types of curves with svg",
     date: "2020/04/20",
     url: "https://github.com/pomber/react-svg-curve",
   },
@@ -62,8 +70,7 @@ module.exports = [
     title: "Open Source Spotlight",
     description: "My interview with the BrowserStack team",
     date: "2020/02/17",
-    url:
-      "https://www.browserstack.com/blog/open-source-spotlight-git-history-with-rodrigo-pombo/",
+    url: "https://www.browserstack.com/blog/open-source-spotlight-git-history-with-rodrigo-pombo/",
   },
   {
     type: "project",
@@ -167,15 +174,13 @@ module.exports = [
     type: "blog post",
     title: "Lazy loading (and preloading) components in React 16.6",
     date: "2018/11/26",
-    url:
-      "https://medium.com/hackernoon/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d",
+    url: "https://medium.com/hackernoon/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d",
   },
   {
     type: "blog post",
     title: "Classes? Where we’re going, we don’t need classes — React 16.6",
     date: "2018/10/24",
-    url:
-      "https://blog.usejournal.com/classes-where-were-going-we-don-t-need-classes-react-16-6-e643ffc8c38d",
+    url: "https://blog.usejournal.com/classes-where-were-going-we-don-t-need-classes-react-16-6-e643ffc8c38d",
   },
   {
     type: "talk",
@@ -210,55 +215,48 @@ module.exports = [
     title: "Didact Fiber: Incremental reconciliation",
     description: "Build your own React, this time with fibers",
     date: "2017/10/19",
-    url:
-      "https://engineering.hexacta.com/didact-fiber-incremental-reconciliation-b2fe028dcaec",
+    url: "https://engineering.hexacta.com/didact-fiber-incremental-reconciliation-b2fe028dcaec",
   },
   {
     type: "blog post",
     title: "Why aren't you using Prettier?",
     description: "How Prettier made me a 10% happier programmer",
     date: "2017/06/30",
-    url:
-      "https://engineering.hexacta.com/why-arent-you-using-prettier-4fe0a77713e8",
+    url: "https://engineering.hexacta.com/why-arent-you-using-prettier-4fe0a77713e8",
   },
   {
     type: "blog post",
     title: "Didact: Components and State",
     description: "Build your own React series",
     date: "2017/05/24",
-    url:
-      "https://engineering.hexacta.com/didact-components-and-state-53ab4c900e37",
+    url: "https://engineering.hexacta.com/didact-components-and-state-53ab4c900e37",
   },
   {
     type: "blog post",
     title: "Didact: Instances, reconciliation and virtual DOM",
     description: "Build your own React series",
     date: "2017/05/09",
-    url:
-      "https://engineering.hexacta.com/didact-instances-reconciliation-and-virtual-dom-9316d650f1d0",
+    url: "https://engineering.hexacta.com/didact-instances-reconciliation-and-virtual-dom-9316d650f1d0",
   },
   {
     type: "blog post",
     title: "Didact: Element creation and JSX",
     description: "Build your own React series",
     date: "2017/05/02",
-    url:
-      "https://engineering.hexacta.com/didact-element-creation-and-jsx-d05171c55c56",
+    url: "https://engineering.hexacta.com/didact-element-creation-and-jsx-d05171c55c56",
   },
   {
     type: "blog post",
     title: "Didact: Rendering DOM elements",
     description: "Build your own React series",
     date: "2017/05/02",
-    url:
-      "https://engineering.hexacta.com/didact-rendering-dom-elements-91c9aa08323b",
+    url: "https://engineering.hexacta.com/didact-rendering-dom-elements-91c9aa08323b",
   },
   {
     type: "blog post",
     title: "Didact: a DIY guide to build your own React",
     description: "Build your own React series",
     date: "2017/04/30",
-    url:
-      "https://engineering.hexacta.com/didact-learning-how-react-works-by-building-it-from-scratch-51007984e5c5",
+    url: "https://engineering.hexacta.com/didact-learning-how-react-works-by-building-it-from-scratch-51007984e5c5",
   },
 ]

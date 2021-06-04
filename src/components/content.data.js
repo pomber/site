@@ -1,5 +1,12 @@
 module.exports = [
   {
+    type: "course",
+    title: "Web Frameworks in 60 Seconds",
+    description: "Each lesson is a 60-second mini tutorial of a different web framework",
+    date: "2021/06/04",
+    url: "https://egghead.io/courses/web-frameworks-in-60-seconds-964d25d0?af=dzcrp6",
+  },
+  {
     type: "video",
     title: "Scrollycoding (preview)",
     description: "A new tool for dev blogs and docs",

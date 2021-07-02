@@ -1,5 +1,19 @@
 module.exports = [
   {
+    type: "video",
+    title: "Write Coding Videos in Markdown",
+    description: "A web app you can clone to create programming tutorials",
+    date: "2021/07/02",
+    url: "https://www.youtube.com/watch?v=EYyw4oyAJgY",
+  },
+  {
+    type: "project",
+    title: "Stargazer",
+    description: "Generate a video with the stars from a GitHub repository",
+    date: "2021/07/01",
+    url: "https://github.com/pomber/stargazer",
+  },
+  {
     type: "course",
     title: "Web Frameworks in 60 Seconds",
     description: "Each lesson is a 60-second mini tutorial of a different web framework",

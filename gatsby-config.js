@@ -1,8 +1,7 @@
 const content = require("./src/components/content.data")
 
 const description = `
-Also known as pombo, pomber, pombus, pombex, or any /pomb[a-z]+/ match.
-I write code, write about writing code, sometimes talk about it, usually tweet about it.
+An overengineer building tools for better code reading comprehension
 `.trim()
 
 module.exports = {
@@ -78,7 +77,7 @@ module.exports = {
     description,
     url: "https://pomb.us",
     siteUrl: "https://pomb.us",
-    image: "/profile.jpg", // Path to your image you placed in the 'static' folder
+    image: "/profile.jpg", 
     twitterUsername: "@pomber",
   },
 }

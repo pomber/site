@@ -21,7 +21,7 @@ function HeaderAside() {
     }
   `)
   return (
-    <div sx={{ mb: [4, 0] }}>
+    <div sx={{ mb: [4, 0], mt:[0, -20] }}>
       <Img
         fixed={data.file.childImageSharp.fixed}
         style={{

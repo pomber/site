@@ -11,16 +11,8 @@ function Header() {
       main={
         <>
           <Styled.h1>I'm Rodrigo Pombo</Styled.h1>
-          <Styled.p>
-            Also known as pombo, pomber, pombus, pombex, pomberman, or any{" "}
-            <Styled.inlineCode sx={{ whiteSpace: "pre" }}>
-              /pomb[a-z]+/
-            </Styled.inlineCode>{" "}
-            match.
-          </Styled.p>
-          <Styled.p>
-            I write code, write about writing code, sometimes talk about it,
-            usually tweet about it.
+          <Styled.p style={{fontSize: "1.4em"}}>
+            An overengineer building tools for better code reading comprehension
           </Styled.p>
         </>
       }

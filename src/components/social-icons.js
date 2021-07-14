@@ -94,7 +94,7 @@ function SocialIcons() {
   return (
     <div
       sx={{
-        pt: 2,
+        pt: 12,
         mx: ["auto", 0],
         textAlign: "center",
         "& > :not(:last-child)": { pr: 3 },

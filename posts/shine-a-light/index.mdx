@@ -1,0 +1,244 @@
+---
+title: Shine a Light on CSS filters
+date: 2019-12-27
+---
+
+import { CodeWave } from "gatsby-theme-waves"
+
+
+I've been playing with applying lighting filters to HTML elements, so let me show you the basics of CSS filters, SVG filters, and physics of lights.
+
+> Browser support for some of these features isn't the best, so if you have trouble with the demos try using Chrome or Firefox.
+
+<CodeWave>
+
+```html
+<h1 style="filter: blur(3px)">
+  Hello World
+</h1>
+```
+
+We can apply a number of graphical effects to any HTML element using the `filter` CSS property.
+
+For example we can blur an `h1` like this:
+
+<h1 style="filter: blur(3px)">Hello World</h1>
+
+
+```html 1[5:49]
+<h1 style="filter: drop-shadow(2px 6px 2px pink)">
+  Hello World
+</h1>
+```
+
+Or add a shadow:
+
+<h1 style="filter: drop-shadow(2px 6px 2px pink)">Hello World</h1>
+
+`blur` and `drop-shadow` are two of ten different [CSS filter functions](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function). 
+
+
+```html 1[5:38]
+<h1 style="filter: url(#my-filter-id)">
+  Hello World
+</h1>
+```
+
+The most powerful of these CSS filter functions is `url`. 
+
+```html 1:5,6[5:38]
+<svg width="0" height="0">
+  <filter id="my-filter-id">
+    ...
+  </filter>
+</svg>
+<h1 style="filter: url(#my-filter-id)">
+  Hello World
+</h1>
+```
+
+With `url` we can use any SVG filter from CSS. 
+
+```html 1:13,14[12:37]
+<svg width="0" height="0">
+  <filter id="my-filter-id">
+    <feTurbulence
+      baseFrequency="0.03"
+      result="noise"
+    />
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="noise"
+      scale="20"
+    />
+  </filter>
+</svg>
+<h1 style="filter: url(#my-filter-id)">
+  Hello World
+</h1>
+```
+
+Besides the CSS predefined filter functions, we can use any SVG filter.
+
+By using SVG filters we have more power and flexibility.
+
+We can build our own filters using primitive effects like `feTurbulence` and `feDisplacementMap`:
+
+<svg style="display: none">
+  <filter id="my-filter-id">
+    <feTurbulence baseFrequency="0.03" result="noise" />
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" />
+  </filter>
+</svg>
+<h1 style="filter: url(#my-filter-id)">
+  Hello World
+</h1>
+
+There are more than twenty [SVG filter effects](https://developer.mozilla.org/en-US/docs/Web/SVG/Element#Filter_primitive_elements) that can be combined to build very complex stuff.
+
+//TODO link to complex example
+
+```html
+<h1 style="filter: url(#my-filter-id)">
+  Hello World
+</h1>
+```
+
+I'm writing this post because I'm interested in illumination effects.
+
+<svg width="0" height="0">
+<filter id="alpha">
+  <feColorMatrix in="SourceGraphic"
+    type="matrix"
+    values="0 0 0 1 0
+            0 0 0 -0.5 0.5
+            0 0 0 0 0.5
+            0 0 0 0 1" />
+</filter>
+<filter id="light1">
+	<feDiffuseLighting surfaceScale="60" in="SourceGraphic" lighting-color="#f00">
+    		<fePointLight z="80"/>
+  	</feDiffuseLighting>
+</filter>
+<filter id="light2"><feGaussianBlur stdDeviation="0"  in="SourceGraphic" result="blur"/>
+	<feDiffuseLighting surfaceScale="60" in="blur" lighting-color="#f00">
+    		<feDistantLight elevation="0" azimuth="0"/>
+  	</feDiffuseLighting>
+</filter>
+<filter id="light3">
+	<feSpecularLighting surfaceScale="60" in="SourceGraphic" lighting-color="#f00">
+    		<feDistantLight elevation="0" azimuth="0"/>
+  	</feSpecularLighting>
+</filter>
+</svg>
+<h1 style="color: rgba(1,1,1,0.5);background: rgba(1,1,1,0.1)">
+  Hello World
+</h1>
+<h1 style="filter: url(#alpha);color: rgba(1,1,1,0.5);background: rgba(1,1,1,0.1)">
+  Hello World
+</h1>
+<h1 style="filter: url(#light2);color: rgba(1,1,1,0.5);background: rgba(1,1,1,0.1)">
+  Hello World
+</h1>
+<h1 style="filter: url(#light1);color: rgba(1,1,1,0.5);background: rgba(1,1,1,0.1)">
+  Hello World
+</h1>
+<h1 style="filter: url(#light3);color: rgba(1,1,1,0.5);background: rgba(1,1,1,0.1)">
+  Hello World
+</h1>
+
+```html
+<svg width="0" height="0">
+  <filter id="distant">
+    <feDiffuseLighting
+      in="SourceGraphic"
+      surfaceScale="10"
+      lighting-color="#FDB813"
+    >
+      <feDistantLight elevation="5" azimuth="0" />
+    </feDiffuseLighting>
+  </filter>
+</svg>
+<h1 style="filter: url(#distant)">
+  Hello World
+</h1>
+```
+
+import DistantWidget from "./distant-widget.jsx"
+
+## Distant Light
+
+Distant light uses spherical coordinates to define the distant light position.
+
+The first attribute is `elevation`, an angle between `0` and `180`. Think of `elevation` as the time of the day:
+
+- when it's `0` it's dawn, the sun is coming out from the east
+- if it's `90` the light comes from the highest point, it's noon
+- and `180` is dusk
+
+<DistantWidget />
+
+```html
+<svg width="0" height="0">
+  <filter id="point-light">
+    <feDiffuseLighting
+      in="SourceGraphic"
+      surfaceScale="10"
+      lighting-color="#FDB813"
+    >
+      <fePointLight x="0.5" y="0" z="0.5" />
+    </feDiffuseLighting>
+  </filter>
+</svg>
+<h1 style="filter: url(#point-light)">
+  Hello
+</h1>
+```
+
+## Point Light
+
+Point lights work like light bulbs, they are close to the surface and shine light in all directions.
+
+import PointLightWidget from "./point-light.jsx"
+
+<PointLightWidget />
+
+```html
+<svg width="0" height="0">
+  <filter id="point-light">
+    <feDiffuseLighting
+      in="SourceGraphic"
+      surfaceScale="10"
+      lighting-color="#FDB813"
+    >
+      <feSpotLight x="0.5" y="0" z="0.5" />
+    </feDiffuseLighting>
+  </filter>
+</svg>
+<h1 style="filter: url(#point-light)">
+  Hello
+</h1>
+```
+
+## Spot Light
+
+Spotlights are like... well, spotlights. The difference with point lights is that the light is directed to a point on the surface.
+
+import SpotLightWidget from "./spot-light.jsx"
+
+<SpotLightWidget />
+
+</CodeWave>
+
+Notes:
+
+We are not solving indirect light (light coming from reflection in other surfaces) nor shadows.
+
+Diffuse light reflect rays in all directions, the amoutn of light is greater when the surfae is perpendicular to the light direction, and tends to zero when the light comes parallel to the surface.
+
+feDiffuseLighting use the alpha channel of the input as a bump map, that means it takes the opacity at each pixel as the elevation in a height map. This also means that the color from the source is lost, only the alpha is used.
+
+Specular light
+
+Light is additive so
+color = (base color) \* (ambient + diffuse + specular)

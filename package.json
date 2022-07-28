@@ -2,7 +2,7 @@
   "name": "site",
   "version": "1.0.0",
   "engines": {
-    "node": "12.22.12"
+    "node": "12.x"
   },
   "main": "index.js",
   "private": true,

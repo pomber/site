@@ -1,6 +1,9 @@
 {
   "name": "site",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.22.12"
+  },
   "main": "index.js",
   "private": true,
   "repository": "git@github.com:pomber/site.git",

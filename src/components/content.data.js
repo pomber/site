@@ -1,6 +1,35 @@
 module.exports = [
   {
     type: "video",
+    title: "Building a Stripe Docs clone with Code Hike",
+    description:
+      "We use Next.js, MDX, and Code Hike to build a copy of one of Stripe guides",
+    date: "2022/07/27",
+    url: "https://www.youtube.com/watch?v=W2rJ7p-G63c",
+  },
+  {
+    type: "project",
+    title: "CodeTV",
+    description: "Something between twitch and vs code live share (prototype)",
+    date: "2022/05/02",
+    url: "https://github.com/pomber/codetv",
+  },
+  {
+    type: "project",
+    title: "MDX Debugger",
+    description: "A dev tool to inspect AST transformations",
+    date: "2022/04/09",
+    url: "https://github.com/pomber/mdx-debugger",
+  },
+  {
+    type: "project",
+    title: "Docusaurus Theme MDX v2",
+    description: "A Docusaurus theme to add support for MDX v2",
+    date: "2022/04/08",
+    url: "https://github.com/pomber/docusaurus-mdx-2",
+  },
+  {
+    type: "video",
     title: "Write Coding Videos in Markdown",
     description: "A web app you can clone to create programming tutorials",
     date: "2021/07/02",
@@ -16,7 +45,8 @@ module.exports = [
   {
     type: "course",
     title: "Web Frameworks in 60 Seconds",
-    description: "Each lesson is a 60-second mini tutorial of a different web framework",
+    description:
+      "Each lesson is a 60-second mini tutorial of a different web framework",
     date: "2021/06/04",
     url: "https://egghead.io/courses/web-frameworks-in-60-seconds-964d25d0?af=dzcrp6",
   },

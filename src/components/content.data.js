@@ -1,6 +1,14 @@
 module.exports = [
   {
     type: "video",
+    title: "Tailwind's home page clone with Code Hike",
+    description:
+      "We use Next.js, MDX, and Code Hike to build a copy of Tailwind's home page",
+    date: "2022/08/18",
+    url: "https://www.youtube.com/watch?v=sPDvKlmUkC4",
+  },
+  {
+    type: "video",
     title: "Building a Stripe Docs clone with Code Hike",
     description:
       "We use Next.js, MDX, and Code Hike to build a copy of one of Stripe guides",

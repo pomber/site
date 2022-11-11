@@ -1,5 +1,20 @@
 module.exports = [
   {
+    type: "project",
+    title: "Code Explainers",
+    description:
+      "A comunity of developers interested in making progamming content more interactive",
+    date: "2022/10/02",
+    url: "https://codeexplainers.com/",
+  },
+  {
+    type: "talk",
+    title: "Stop Writing Dead Fish",
+    description: "— at React Alicante 2022",
+    date: "2022/10/01",
+    url: "https://www.youtube.com/watch?v=9BU1fLCumR8",
+  },
+  {
     type: "video",
     title: "Tailwind's home page clone with Code Hike",
     description:

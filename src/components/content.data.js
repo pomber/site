@@ -9,6 +9,14 @@ module.exports = [
   },
   {
     type: "project",
+    title: "Bright",
+    description:
+      "React Server Component for syntax highlighting",
+    date: "2023/01/14",
+    url: "https://bright.codehike.org/",
+  },
+  {
+    type: "project",
     title: "Code Explainers",
     description:
       "A comunity of developers interested in making progamming content more interactive",

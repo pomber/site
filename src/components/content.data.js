@@ -1,5 +1,13 @@
 module.exports = [
   {
+    type: "blog post",
+    title: "GPT API Unofficial Docs",
+    description:
+      "An alternative take on OpenAI's Chat Completion official guide and API reference",
+    date: "2023/07/04",
+    url: "https://gpt.pomb.us/",
+  },
+  {
     type: "project",
     title: "Code Explainers",
     description:

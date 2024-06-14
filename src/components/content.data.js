@@ -1,5 +1,12 @@
 module.exports = [
   {
+    type: "talk",
+    title: "Beyond Skeuomorphic Markdown",
+    description: "— at JSHeroes 2024",
+    date: "2024/05/23",
+    url: "https://www.youtube.com/watch?v=uYy2WXHSEqo",
+  },
+  {
     type: "blog post",
     title: "GPT API Unofficial Docs",
     description:

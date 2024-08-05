@@ -1,5 +1,29 @@
 module.exports = [
   {
+    type: "blog post",
+    title: "Fine-grained Markdown",
+    description:
+      "Flexible content, richer presentation",
+    date: "2024/07/17",
+    url: "https://v1.codehike.org/blog/fine-grained-markdown",
+  },
+  {
+    type: "blog post",
+    title: "Rich Content Website Lean Content Website",
+    description:
+      "And the curse of Markdown",
+    date: "2024/06/30",
+    url: "https://v1.codehike.org/blog/rich-content-websites",
+  },
+  {
+    type: "blog post",
+    title: "From Markdown to Video",
+    description:
+      "Animated code walkthroughs with Code Hike and Remotion",
+    date: "2024/06/25",
+    url: "https://v1.codehike.org/blog/remotion",
+  },
+  {
     type: "talk",
     title: "Beyond Skeuomorphic Markdown",
     description: "— at JSHeroes 2024",

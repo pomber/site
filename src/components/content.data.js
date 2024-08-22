@@ -5,7 +5,7 @@ module.exports = [
     description:
       "Flexible content, richer presentation",
     date: "2024/07/17",
-    url: "https://v1.codehike.org/blog/fine-grained-markdown",
+    url: "https://codehike.org/blog/fine-grained-markdown",
   },
   {
     type: "blog post",
@@ -13,7 +13,7 @@ module.exports = [
     description:
       "And the curse of Markdown",
     date: "2024/06/30",
-    url: "https://v1.codehike.org/blog/rich-content-websites",
+    url: "https://codehike.org/blog/rich-content-websites",
   },
   {
     type: "blog post",
@@ -21,7 +21,7 @@ module.exports = [
     description:
       "Animated code walkthroughs with Code Hike and Remotion",
     date: "2024/06/25",
-    url: "https://v1.codehike.org/blog/remotion",
+    url: "https://codehike.org/blog/remotion",
   },
   {
     type: "talk",

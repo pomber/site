@@ -1,6 +1,14 @@
 module.exports = [
   {
     type: "blog post",
+    title: "Announcing Code Hike 1.0",
+    description:
+      "A new approach to turn markdown into rich interactive experiences",
+    date: "2024/08/26",
+    url: "https://codehike.org/blog/v1",
+  },
+  {
+    type: "blog post",
     title: "Fine-grained Markdown",
     description:
       "Flexible content, richer presentation",

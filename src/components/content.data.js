@@ -1,6 +1,14 @@
 module.exports = [
   {
     type: "blog post",
+    title: "Build-time Components",
+    description:
+      "Why React Server Components are a leap forward for content-driven websites",
+    date: "2024/09/04",
+    url: "https://codehike.org/blog/build-time-components",
+  },
+  {
+    type: "blog post",
     title: "Announcing Code Hike 1.0",
     description:
       "A new approach to turn markdown into rich interactive experiences",

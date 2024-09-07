@@ -9,10 +9,10 @@ function Content() {
     <>
       <Item
         title="Code Hike"
-        date="2020/06/15"
+        date="2024/07/26"
         url="https://codehike.org"
         type="Project"
-        description="Marvellous code walkthroughs"
+        description="Build rich content websites with Markdown and React"
         pinned
       />
       {data.map((item, i) => (

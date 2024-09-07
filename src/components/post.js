@@ -13,8 +13,21 @@ const PostFooter = () => {
   return (
     <footer sx={{ paddingTop: 3, textAlign: "center" }}>
       <p sx={{ fontSize: "2rem", letterSpacing: "0.3em" }}>***</p>
-      <p>
-        Explore more on <Styled.a href="/">pomb.us</Styled.a>
+      <img
+        src="/profile.jpg"
+        alt="Rodrigo Pombo"
+        sx={{ width: "80px", borderRadius: "20px" }}
+      />
+      <p sx={{ textAlign: "left" }}>
+        <strong>Rodrigo Pombo</strong>, a.k.a.{" "}
+        <Styled.a href="https://x.com/pomber">@pomber</Styled.a>, is a software
+        overengineer working on{" "}
+        <strong>
+          <Styled.a href="https://codehike.org">Code Hike</Styled.a>
+        </strong>
+        , an open-source library that bridges the gap between Markdown and React
+        to help developers{" "}
+        <strong>create rich technical content for the modern web</strong>.
       </p>
       <SocialIcons />
     </footer>

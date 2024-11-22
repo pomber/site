@@ -1,6 +1,14 @@
 module.exports = [
   {
     type: "blog post",
+    title: "The Curse of Markdown",
+    description:
+      "And the content website wasteland",
+    date: "2024/11/21",
+    url: "https://codehike.org/blog/the-curse-of-markdown",
+  },
+  {
+    type: "blog post",
     title: "Build-time Components",
     description:
       "Why React Server Components are a leap forward for content-driven websites",

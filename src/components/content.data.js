@@ -1,5 +1,13 @@
 module.exports = [
   {
+    type: "podcast",
+    title: "Devtools FM",
+    description:
+      "Code Hike and the Future of Content Authoring",
+    date: "2025/04/07",
+    URL: "https://www.youtube.com/watch?v=wKfupjQSGns",
+  },
+  {
     type: "blog post",
     title: "The Curse of Markdown",
     description:

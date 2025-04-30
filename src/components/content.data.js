@@ -5,7 +5,7 @@ module.exports = [
     description:
       "Code Hike and the Future of Content Authoring",
     date: "2025/04/07",
-    URL: "https://www.youtube.com/watch?v=wKfupjQSGns",
+    url: "https://www.youtube.com/watch?v=wKfupjQSGns",
   },
   {
     type: "blog post",

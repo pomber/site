@@ -59,14 +59,21 @@ module.exports = {
               }
             }`,
             serialize: ({ query }) =>
-              content.map(post => ({
-                title: post.title,
-                description: post.description ? post.description : "",
-                categories: [post.type],
-                date: post.date,
-                url: makeAbsoluteUrl(post.url, query.site.siteMetadata.siteUrl),
-                guid: post.url,
-              })),
+              content.map(post => {
+                const postUrl = post.url || post.URL;
+                if (!postUrl) {
+                  console.warn(`Post "${post.title}" has no URL`);
+                  return null;
+                }
+                return {
+                  title: post.title,
+                  description: post.description ? post.description : "",
+                  categories: [post.type],
+                  date: post.date,
+                  url: makeAbsoluteUrl(postUrl, query.site.siteMetadata.siteUrl),
+                  guid: postUrl,
+                };
+              }).filter(Boolean),
           },
         ],
       },
